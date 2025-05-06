@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administracion</title>
+  <!-- Boxicons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/base.css" />
+
+    <link rel="stylesheet" href="css/inventario/registrar-medicamento.css" />
+    <link rel="stylesheet" href="css/inventario/ver-inventario.css" />
+
+</head>
+<body>
+  <div class="container">
+    <!-- En vez de incluir directamente -->
+    <!-- sidebar.html -->
+
+
+        <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; align-items: center;">
+            <img src="img/logo.png" alt="CS2 Investment" class="logo" />
+            <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+            </div>
+        </div>
+        <div class="sidebar-menu ">
+            
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+            <i class='bx bx-layer'></i>
+            <span>Inventario de Medicamentos</span>
+            </div>
+            <div class="submenu">
+            <a href="IN-ver-invetario.html" class="submenu-item">
+                <span>Ver Inventario</span>
+            </a>
+            <a href="IN-registrar-medicamento.html" class="submenu-item">
+                <span>Registrar Nuevo Medicamento</span>
+            </a>
+            <a href="IN-exportar.html" class="submenu-item">
+                <span>Exportar Stock</span>
+            </a>
+            </div>
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Tratamientos Médicos</span>
+                </div>
+                <div class="submenu">
+                <a href="TR-tratamiento.html" class="submenu-item">
+                    <span>Tratamientos por Residente</span>
+                </a>
+                <a href="TR-actualizar-tratamiento.html" class="submenu-item">
+                    <span>Actualizar Tratamiento</span>
+                </a>
+                <a href="TR-historial-medicaciones.html" class="submenu-item">
+                    <span>Historial de Medicación</span>
+                </a>
+            </div>
+            <!-- Sección de Pedidos y Ventas -->
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Informes</span>
+            </div>
+            <div class="submenu">
+                <a href="#" class="submenu-item">
+                    <span>Informe de Uso Semanal</span>
+                </a>
+                <a href="#" class="submenu-item">
+                    <span>Medicamentos Administrados</span>
+                </a>
+                <a href="INFO-alertas-stock.html" class="submenu-item">
+                    <span>Alertas de stock Bajo</span>
+                </a>
+            </div>
+        </div>
+
+
+        </div>
+        <script>
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            submenu.classList.toggle('expanded');
+            element.classList.toggle('expanded');
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (
+            window.innerWidth <= 768 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target) &&
+            sidebar.classList.contains('open')
+            ) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            if (window.innerWidth > 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        </script>
+
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="main-content">
+        <div class="app-header">
+            <div class="header-info-group">
+              <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+                <i class='bx bx-menu'></i>
+              </button>
+          
+          
+          
+              <div class="page-title-nav"> Administracion</div>
+              <span class="role-badge-nav">Jefe Enfermeria</span>
+            </div>
+            <!-- Acciones de la barra de navegación superior -->
+            <div class="header-action-list">
+                <!-- ========  Cerrar sesión (POST)  ======== -->
+                <form id="logout-form" action=""  method="post" style="display:inline;">
+
+                  <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <i class='bx bx-log-out'></i>
+                    <span>Cerrar sesión</span>
+                  </button>
+                </form>
+      
+
+              </div>
+        </div>
+          
+        <!-- Contenido Principal -->
+        <div class="content-area">
+            <div class="form-container register-med-container">
+                <h2 class="view-title"><i class='bx bxs-capsule'></i> Registrar Nuevo Medicamento</h2>
+            
+                <form id="register-med-form" action="/ruta/para/guardar" method="POST">
+                    <div class="form-grid">
+                        <!-- Fila 1: Nombre y Graduación -->
+                        <div class="form-group">
+                            <label for="med-nombre"><i class='bx bx-rename'></i> Nombre del Medicamento</label>
+                            <input type="text" id="med-nombre" name="nombre" class="form-input" placeholder="Ej: Paracetamol" required>
+                        </div>
+                        <!-- Graduación/Dosis Separada -->
+                        <div class="form-group">
+                            <label for="med-graduacion-valor"><i class='bx bx-ruler'></i> Graduación/Dosis</label>
+                            <div class="input-group-inline"> <!-- Contenedor para agrupar valor y unidad -->
+                                <input type="number" id="med-graduacion-valor" name="graduacion_valor" class="form-input" placeholder="Ej: 500" required min="0" step="any"> <!-- step="any" permite decimales -->
+                                <select id="med-graduacion-unidad" name="graduacion_unidad" class="form-select" required>
+                                    <option value="" disabled selected>Unidad</option>
+                                    <option value="mg">mg</option>
+                                    <option value="g">g</option>
+                                    <option value="mcg">mcg</option>
+                                    <option value="ml">ml</option>
+                                    <option value="UI">UI</option> <!-- Unidades Internacionales -->
+                                    <option value="%">%</option>
+                                    <!-- Agrega más unidades según sea necesario -->
+                                </select>
+                            </div>
+                        </div>
+            
+                        <!-- Fila 2: Código y Categoría -->
+                        <div class="form-group">
+                            <label for="med-codigo"><i class='bx bx-barcode'></i> Código Único (SKU)</label>
+                            <input type="text" id="med-codigo" name="codigo" class="form-input" placeholder="Ej: MED006">
+                        </div>
+                         <div class="form-group">
+                            <label for="med-categoria"><i class='bx bx-category-alt'></i> Categoría</label>
+                            <select id="med-categoria" name="categoria" class="form-select" required>
+                                <option value="" disabled selected>Seleccione una categoría...</option>
+                                <option value="analgesicos">Analgésicos</option>
+                                <option value="antiinflamatorios">Antiinflamatorios</option>
+                                <option value="antibioticos">Antibióticos</option>
+                                <option value="antihistaminicos">Antihistamínicos</option>
+                                <option value="gastricos">Gástricos</option>
+                                <option value="vitaminas">Vitaminas</option>
+                                <option value="otros">Otros</option>
+                            </select>
+                        </div>
+            
+                        <!-- Fila 3: Cantidad y Unidades de Presentación -->
+                        <div class="form-group">
+                            <label for="med-cantidad"><i class='bx bx-package'></i> Cantidad Inicial</label>
+                            <input type="number" id="med-cantidad" name="cantidad" class="form-input" placeholder="Número" min="0" required>
+                        </div>
+                         <div class="form-group">
+                            <label for="med-unidades-presentacion"><i class='bx bx-purchase-tag-alt'></i> Unidad de Presentación</label> <!-- Renombrado para claridad -->
+                            <select id="med-unidades-presentacion" name="unidades_presentacion" class="form-select" required>
+                                <option value="" disabled selected>Seleccione unidad...</option>
+                                <option value="unidades">Unidades</option>
+                                <option value="cajas">Cajas</option>
+                                <option value="blisters">Blisters</option>
+                                <option value="frascos">Frascos</option>
+                                <option value="tubos">Tubos</option>
+                                <option value="ampollas">Ampollas</option>
+                                <!-- Ya no necesitas ml/mg aquí si están en graduación -->
+                            </select>
+                        </div>
+            
+                        <!-- Fila 4: Vencimiento y Ubicación -->
+                         <div class="form-group">
+                            <label for="med-vencimiento"><i class='bx bx-calendar-x'></i> Fecha de Vencimiento</label>
+                            <input type="date" id="med-vencimiento" name="vencimiento" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="med-ubicacion"><i class='bx bx-map-pin'></i> Ubicación en Almacén</label>
+                            <select id="med-ubicacion" name="ubicacion" class="form-select" required>
+                                <option value="" disabled selected>Seleccione ubicación...</option>
+                                <option value="estante_a1">Estante A1</option>
+                                <option value="estante_a2">Estante A2</option>
+                                <option value="estante_b1">Estante B1</option>
+                                <option value="nevera_1">Nevera 1</option>
+                                <option value="cajon_c">Cajón C</option>
+                                <!-- Agrega más ubicaciones según sea necesario -->
+                            </select>
+                        </div>
+            
+                        <!-- Fila 5: Proveedor y Laboratorio -->
+                        <div class="form-group">
+                            <label for="med-proveedor"><i class='bx bxs-truck'></i> Proveedor (Opcional)</label>
+                             <select id="med-proveedor" name="proveedor" class="form-select">
+                                <option value="" selected>Seleccione un proveedor...</option>
+                                <option value="proveedor_a">Proveedor A</option>
+                                <option value="proveedor_b">Proveedor B</option>
+                                <option value="proveedor_c">Proveedor C</option>
+                                <!-- Agrega más proveedores según sea necesario -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="med-laboratorio"><i class='bx bxs-flask'></i> Laboratorio</label>
+                             <select id="med-laboratorio" name="laboratorio" class="form-select" required>
+                                <option value="" disabled selected>Seleccione laboratorio...</option>
+                                <option value="lab_pfizer">Lab Pfizer</option>
+                                <option value="lab_bayer">Lab Bayer</option>
+                                <option value="lab_roche">Lab Roche</option>
+                                <option value="lab_generico">Genérico</option>
+                                <option value="lab_otro">Otro</option>
+                                <!-- Agrega más laboratorios según sea necesario -->
+                            </select>
+                        </div>
+            
+                        <!-- Fila 6: Descripción (Ocupa toda la fila) -->
+                         <div class="form-group form-group-full">
+                            <label for="med-descripcion"><i class='bx bx-detail'></i> Descripción / Notas Adicionales</label>
+                            <textarea id="med-descripcion" name="descripcion" class="form-textarea" rows="3" placeholder="Indicaciones especiales, almacenamiento, etc."></textarea>
+                        </div>
+                    </div>
+            
+                    <!-- Acciones del Formulario -->
+                    <div class="form-actions">
+                        <button type="reset" class="btn btn-secondary"><i class='bx bx-reset'></i> Limpiar</button>
+                        <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Registrar Medicamento</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--====================================================================================================-->
+        <!--====================================================================================================-->
+        <!--====================================================================================================-->
+    </div>
+  </div>
+  
+</body>
+
+</html>

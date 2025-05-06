@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administracion</title>
+  <!-- Boxicons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/base.css" />
+
+
+    <link rel="stylesheet" href="css/tratamientos/historial-medicaciones.css" />
+
+</head>
+<body>
+  <div class="container">
+    <!-- En vez de incluir directamente -->
+    <!-- sidebar.html -->
+
+
+        <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; align-items: center;">
+            <img src="img/logo.png" alt="CS2 Investment" class="logo" />
+            <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+            </div>
+        </div>
+        <div class="sidebar-menu ">
+            
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+            <i class='bx bx-layer'></i>
+            <span>Inventario de Medicamentos</span>
+            </div>
+            <div class="submenu">
+            <a href="IN-ver-invetario.html" class="submenu-item">
+                <span>Ver Inventario</span>
+            </a>
+            <a href="IN-registrar-medicamento.html" class="submenu-item">
+                <span>Registrar Nuevo Medicamento</span>
+            </a>
+            <a href="IN-exportar.html" class="submenu-item">
+                <span>Exportar Stock</span>
+            </a>
+            </div>
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Tratamientos Médicos</span>
+                </div>
+                <div class="submenu">
+                <a href="TR-tratamiento.html" class="submenu-item">
+                    <span>Tratamientos por Residente</span>
+                </a>
+                <a href="TR-actualizar-tratamiento.html" class="submenu-item">
+                    <span>Actualizar Tratamiento</span>
+                </a>
+                <a href="TR-historial-medicaciones.html" class="submenu-item">
+                    <span>Historial de Medicación</span>
+                </a>
+            </div>
+            <!-- Sección de Pedidos y Ventas -->
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Informes</span>
+            </div>
+            <div class="submenu">
+                <a href="#" class="submenu-item">
+                    <span>Informe de Uso Semanal</span>
+                </a>
+                <a href="#" class="submenu-item">
+                    <span>Medicamentos Administrados</span>
+                </a>
+                <a href="INFO-alertas-stock.html" class="submenu-item">
+                    <span>Alertas de stock Bajo</span>
+                </a>
+            </div>
+        </div>
+
+
+        </div>
+        <script>
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            submenu.classList.toggle('expanded');
+            element.classList.toggle('expanded');
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (
+            window.innerWidth <= 768 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target) &&
+            sidebar.classList.contains('open')
+            ) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            if (window.innerWidth > 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        </script>
+
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="main-content">
+        <div class="app-header">
+            <div class="header-info-group">
+              <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+                <i class='bx bx-menu'></i>
+              </button>
+          
+          
+          
+              <div class="page-title-nav"> Administracion</div>
+              <span class="role-badge-nav">Jefe Enfermeria</span>
+            </div>
+            <!-- Acciones de la barra de navegación superior -->
+            <div class="header-action-list">
+                <!-- ========  Cerrar sesión (POST)  ======== -->
+                <form id="logout-form" action=""  method="post" style="display:inline;">
+
+                  <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <i class='bx bx-log-out'></i>
+                    <span>Cerrar sesión</span>
+                  </button>
+                </form>
+      
+
+              </div>
+        </div>
+          
+
+
+
+        <!-- Contenido Principal -->
+        <div class="content-area">
+            <div class="medication-history-view">
+                <!-- 1. Título y Contexto del Residente -->
+                <div class="history-header">
+                    <h2 class="view-title">
+                        <i class='bx bx-history'></i> Historial de Medicación
+                    </h2>
+                    <div class="resident-context">
+                        <span>Residente:</span>
+                        <!-- El nombre y habitación se cargarían dinámicamente -->
+                        <span class="highlighted-resident-name">Ana García López (Hab: 101A)</span>
+                        <!-- Enlace para volver a la vista anterior (ej. Tratamientos por Residente o Ficha del Residente) -->
+                        <a href="/ruta/a/vista/anterior" class="btn btn-link btn-back-context" title="Volver">
+                            <i class='bx bx-arrow-back'></i> Volver
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Barra de Controles (Filtros y Búsqueda) -->
+                <div class="controls-bar history-controls">
+                    <div class="filter-group date-filter-group">
+                        <label for="history-start-date"><i class='bx bx-calendar-event'></i> Desde:</label>
+                        <input type="date" id="history-start-date" name="start_date" class="form-input date-filter">
+                    </div>
+                    <div class="filter-group date-filter-group">
+                        <label for="history-end-date"><i class='bx bx-calendar-check'></i> Hasta:</label>
+                        <input type="date" id="history-end-date" name="end_date" class="form-input date-filter">
+                    </div>
+                    <div class="search-container history-search">
+                        <i class='bx bx-search search-icon'></i>
+                        <input type="search" placeholder="Buscar medicamento..." class="search-input" id="history-med-search">
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-filter-apply" title="Aplicar filtros y búsqueda">
+                        <i class='bx bx-filter-alt'></i> Filtrar
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-export" title="Exportar historial">
+                        <i class='bx bx-export'></i> Exportar
+                    </button>
+                </div>
+
+                <!-- 3. Tabla del Historial de Medicación -->
+                <div class="table-container history-table-container">
+                    <table class="data-table history-table">
+                        <thead>
+                            <tr>
+                                <th><i class='bx bx-calendar-alt'></i> Fecha y Hora</th>
+                                <th><i class='bx bxs-capsule'></i> Medicamento</th>
+                                <th><i class='bx bx-ruler'></i> Dosis Admin.</th>
+                                <th><i class='bx bx-injection'></i> Vía</th>
+                                <th><i class='bx bx-user-check'></i> Administrado por</th>
+                                <th><i class='bx bx-note'></i> Notas / Incidencias</th>
+                            </tr>
+                        </thead>
+                        <tbody id="medication-history-body">
+                            <!-- Filas de ejemplo (Se cargarían dinámicamente) -->
+                            <tr>
+                                <td>2024-05-15 08:05</td>
+                                <td>Losartán 50mg</td>
+                                <td>1 comp</td>
+                                <td>Oral</td>
+                                <td>Enf. María López</td>
+                                <td>TA: 130/80 mmHg. Sin incidencias.</td>
+                            </tr>
+                            <tr>
+                                <td>2024-05-15 14:10</td>
+                                <td>Paracetamol 500mg</td>
+                                <td>1 comp</td>
+                                <td>Oral</td>
+                                <td>Aux. Juan Pérez</td>
+                                <td> Refiere dolor leve de cabeza.</td> 
+                            <tr>
+                                <td>2024-05-14 20:00</td>
+                                <td>Insulina Rápida</td>
+                                <td>6 UI</td>
+                                <td>Subcutánea</td>
+                                <td>Enf. María López</td>
+                                <td>Glucemia pre-cena: 185 mg/dL.</td>
+                            </tr>
+                            <tr>
+                                <td>2024-05-14 08:00</td>
+                                <td>Losartán 50mg</td>
+                                <td>1 comp</td>
+                                <td>Oral</td>
+                                <td>Enf. Laura Sanz</td>
+                                <td>Administrado con desayuno.</td>
+                            </tr>
+                            <tr>
+                                <td>2024-05-13 20:05</td>
+                                <td>Insulina Rápida</td>
+                                <td>5 UI</td>
+                                <td>Subcutánea</td>
+                                <td>Enf. María López</td>
+                                <td>Glucemia pre-cena: 160 mg/dL.</td>
+                            </tr>
+                            <!-- Más filas del historial aquí -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 4. Mensaje si no hay resultados -->
+                <div class="no-results" id="no-history-message" style="display: none; text-align: center; padding: 40px; color: var(--text-muted);">
+                    <i class='bx bx-calendar-x' style="font-size: 3rem; display: block; margin-bottom: 10px;"></i>
+                    No hay registros de medicación que coincidan con los criterios seleccionados.
+                </div>
+
+                <!-- 5. Controles de Paginación (Opcional) -->
+                <div class="pagination-controls" style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-secondary btn-sm" disabled>< Anterior</button>
+                    <span style="margin: 0 10px; color: var(--text-muted); font-size: 0.9rem;">Página 1 de 5</span>
+                    <button class="btn btn-secondary btn-sm">Siguiente ></button>
+                </div>
+
+            </div> <!-- /medication-history-view -->
+        </div> <!-- /content-area -->
+
+        <!--====================================================================================================-->
+        <!--====================================================================================================-->
+        <!--====================================================================================================-->
+    </div>
+  </div>
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

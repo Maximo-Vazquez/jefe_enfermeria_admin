@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administracion</title>
+  <!-- Boxicons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/base.css" />
+
+
+    <link rel="stylesheet" href="css/tratamientos/actualizar-tratamiento.css" />
+
+</head>
+<body>
+  <div class="container">
+    <!-- En vez de incluir directamente -->
+    <!-- sidebar.html -->
+
+
+        <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; align-items: center;">
+            <img src="img/logo.png" alt="CS2 Investment" class="logo" />
+            <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+            </div>
+        </div>
+        <div class="sidebar-menu ">
+            
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+            <i class='bx bx-layer'></i>
+            <span>Inventario de Medicamentos</span>
+            </div>
+            <div class="submenu">
+            <a href="IN-ver-invetario.html" class="submenu-item">
+                <span>Ver Inventario</span>
+            </a>
+            <a href="IN-registrar-medicamento.html" class="submenu-item">
+                <span>Registrar Nuevo Medicamento</span>
+            </a>
+            <a href="IN-exportar.html" class="submenu-item">
+                <span>Exportar Stock</span>
+            </a>
+            </div>
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Tratamientos Médicos</span>
+                </div>
+                <div class="submenu">
+                <a href="TR-tratamiento.html" class="submenu-item">
+                    <span>Tratamientos por Residente</span>
+                </a>
+                <a href="TR-actualizar-tratamiento.html" class="submenu-item">
+                    <span>Actualizar Tratamiento</span>
+                </a>
+                <a href="TR-historial-medicaciones.html" class="submenu-item">
+                    <span>Historial de Medicación</span>
+                </a>
+            </div>
+            <!-- Sección de Pedidos y Ventas -->
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Informes</span>
+            </div>
+            <div class="submenu">
+                <a href="#" class="submenu-item">
+                    <span>Informe de Uso Semanal</span>
+                </a>
+                <a href="#" class="submenu-item">
+                    <span>Medicamentos Administrados</span>
+                </a>
+                <a href="INFO-alertas-stock.html" class="submenu-item">
+                    <span>Alertas de stock Bajo</span>
+                </a>
+            </div>
+        </div>
+
+
+        </div>
+        <script>
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            submenu.classList.toggle('expanded');
+            element.classList.toggle('expanded');
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (
+            window.innerWidth <= 768 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target) &&
+            sidebar.classList.contains('open')
+            ) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            if (window.innerWidth > 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        </script>
+
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="main-content">
+        <div class="app-header">
+            <div class="header-info-group">
+              <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+                <i class='bx bx-menu'></i>
+              </button>
+          
+          
+          
+              <div class="page-title-nav"> Administracion</div>
+              <span class="role-badge-nav">Jefe Enfermeria</span>
+            </div>
+            <!-- Acciones de la barra de navegación superior -->
+            <div class="header-action-list">
+                <!-- ========  Cerrar sesión (POST)  ======== -->
+                <form id="logout-form" action=""  method="post" style="display:inline;">
+
+                  <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <i class='bx bx-log-out'></i>
+                    <span>Cerrar sesión</span>
+                  </button>
+                </form>
+      
+
+              </div>
+        </div>
+          
+        <!-- Contenido Principal -->
+        <div class="content-area">
+            <div class="update-treatment-view">
+                <!-- Title remains the same -->
+                <h2 class="view-title"><i class='bx bx-edit'></i> Actualizar Tratamiento Médico</h2>
+            
+                <!-- Treatment Details Form (Visible by default now) -->
+                <div class="treatment-form-area form-container" id="treatment-details-form">
+                    <!-- Section title now includes the pre-selected resident's name -->
+                    <h3 class="section-title">
+                        <i class='bx bx-detail'></i> Detalles del Tratamiento para:
+                        <span id="selected-resident-name" class="highlighted-resident-name">Ana García López (Habitacion: 101A)</span>
+                    </h3>
+            
+                    <!-- General Treatment Info -->
+                    <form id="update-treatment-form" action="/ruta/para/actualizar/tratamiento" method="POST">
+
+            
+                        <div class="form-grid general-info-grid">
+                            <!-- se podria agregar el medico que tiene asignado, y demas inputs aca -->
+
+
+                            <div class="form-group">
+                                <label for="treatment-diagnosis"><i class='bx bx-first-aid'></i> Diagnóstico(s) Principal(es)</label>
+                                <input type="text" id="treatment-diagnosis" name="diagnostico" class="form-input" value="Hipertensión Arterial, Diabetes Mellitus Tipo 2" placeholder="Diagnósticos separados por coma">
+                            </div>
+                            <div class="form-group form-group-full">
+                                <label for="treatment-notes"><i class='bx bx-note'></i> Notas Generales del Tratamiento</label>
+                                <textarea id="treatment-notes" name="notas" class="form-textarea" rows="3" placeholder="Indicaciones especiales, observaciones, etc.">Paciente responde bien al tratamiento actual. Vigilar niveles de glucosa post-prandial.</textarea> <!-- Example note -->
+                            </div>
+                        </div>
+            
+                        <!-- Medication List - Editable -->
+                        <div class="medication-list-section">
+                            <h4 class="sub-section-title"><i class='bx bxs-capsule'></i> Medicamentos</h4>
+                            <div class="table-container">
+                                <table class="data-table medication-edit-table">
+                                    <thead>
+                                        <tr>
+                                            <th><i class='bx bx-rename'></i> Medicamento</th>
+                                            <th><i class='bx bx-ruler'></i> Dosis</th>
+                                            <th><i class='bx bx-calendar-check'></i> Frecuencia</th>
+                                            <th><i class='bx bx-injection'></i> Vía</th>
+                                            <th><i class='bx bx-calendar-plus'></i> Inicio</th>
+                                            <th><i class='bx bx-calendar-minus'></i> Fin</th>
+                                            <th><i class='bx bx-trash'></i> Quitar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="medication-list-body">
+                                        <!-- Pre-filled Editable Medication Row 1 -->
+                                        <tr>
+                                            <!-- Hidden input for existing medication ID (optional, for backend update logic) -->
+                                            <input type="hidden" name="med_id[]" value="med_abc">
+                                            <td>
+                                                <input type="text" name="med_nombre[]" class="form-input" value="Paracetamol 500mg" placeholder="Nombre">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="med_dosis[]" class="form-input" value="1 comp" placeholder="Dosis">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="med_frecuencia[]" class="form-input" value="Cada 8 horas si dolor" placeholder="Frecuencia">
+                                            </td>
+                                            <td>
+                                                <select name="med_via[]" class="form-select">
+                                                    <option value="oral" selected>Oral</option>
+                                                    <option value="topica">Tópica</option>
+                                                    <option value="intravenosa">Intravenosa</option>
+                                                    <option value="subcutanea">Subcutánea</option>
+                                                    <option value="inhalada">Inhalada</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="date" name="med_inicio[]" class="form-input" value="2024-01-10">
+                                            </td>
+                                            <td>
+                                                <input type="date" name="med_fin[]" class="form-input" value=""> <!-- Empty if ongoing -->
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn-icon btn-remove-med" title="Quitar medicamento"><i class='bx bx-trash'></i></button>
+                                            </td>
+                                        </tr>
+                                        <!-- Pre-filled Editable Medication Row 2 -->
+                                        <tr>
+                                            <input type="hidden" name="med_id[]" value="med_xyz">
+                                            <td>
+                                                <input type="text" name="med_nombre[]" class="form-input" value="Losartán 50mg" placeholder="Nombre">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="med_dosis[]" class="form-input" value="1 comp" placeholder="Dosis">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="med_frecuencia[]" class="form-input" value="Cada 24 horas (mañana)" placeholder="Frecuencia">
+                                            </td>
+                                            <td>
+                                                <select name="med_via[]" class="form-select">
+                                                    <option value="oral" selected>Oral</option>
+                                                    <option value="topica">Tópica</option>
+                                                    <option value="intravenosa">Intravenosa</option>
+                                                    <option value="subcutanea">Subcutánea</option>
+                                                    <option value="inhalada">Inhalada</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="date" name="med_inicio[]" class="form-input" value="2023-11-01">
+                                            </td>
+                                            <td>
+                                                <input type="date" name="med_fin[]" class="form-input" value="">
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn-icon btn-remove-med" title="Quitar medicamento"><i class='bx bx-trash'></i></button>
+                                            </td>
+                                        </tr>
+                                        <!-- Rows would be added/removed dynamically via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="btn btn-secondary btn-add-med" id="add-med-button"><i class='bx bx-plus-medical'></i> Añadir Medicamento</button>
+                        </div>
+            
+                        <!-- Form Actions -->
+                        <div class="form-actions">
+                            <!-- Changed Cancel to link back or clear -->
+                             <a href="/ruta/a/vista/anterior" class="btn btn-secondary"><i class='bx bx-arrow-back'></i> Volver</a>
+                            <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Guardar Cambios</button>
+                        </div>
+                    </form> <!-- End of the form -->
+            
+                </div> <!-- /treatment-form-area -->
+            
+            </div> <!-- /update-treatment-view -->
+            
+            <!-- Minimal JS for Add/Remove Rows (Add before closing </body> or in a separate JS file) -->
+            <script>
+                const medicationListBody = document.getElementById('medication-list-body');
+                const addMedButton = document.getElementById('add-med-button');
+            
+                addMedButton.addEventListener('click', () => {
+                    addEmptyMedicationRow();
+                });
+            
+                medicationListBody.addEventListener('click', (event) => {
+                    if (event.target.closest('.btn-remove-med')) {
+                        removeMedicationRow(event.target.closest('tr'));
+                    }
+                });
+            
+                function addEmptyMedicationRow() {
+                    const newRow = createMedicationRow({}); // Create row with empty data
+                    medicationListBody.appendChild(newRow);
+                }
+            
+                function createMedicationRow(medData = {}) {
+                    const tr = document.createElement('tr');
+                    // Note: No med_id hidden input for new rows
+                    tr.innerHTML = `
+                        <td><input type="text" name="med_nombre[]" class="form-input" value="${medData.nombre || ''}" placeholder="Nombre"></td>
+                        <td><input type="text" name="med_dosis[]" class="form-input" value="${medData.dosis || ''}" placeholder="Dosis"></td>
+                        <td><input type="text" name="med_frecuencia[]" class="form-input" value="${medData.frecuencia || ''}" placeholder="Frecuencia"></td>
+                        <td>
+                            <select name="med_via[]" class="form-select">
+                                <option value="oral" ${medData.via === 'oral' ? 'selected' : ''}>Oral</option>
+                                <option value="topica" ${medData.via === 'topica' ? 'selected' : ''}>Tópica</option>
+                                <option value="intravenosa" ${medData.via === 'intravenosa' ? 'selected' : ''}>Intravenosa</option>
+                                <option value="subcutanea" ${medData.via === 'subcutanea' ? 'selected' : ''}>Subcutánea</option>
+                                <option value="inhalada" ${medData.via === 'inhalada' ? 'selected' : ''}>Inhalada</option>
+                                ${!medData.via ? '<option value="" disabled selected>Seleccione</option>' : ''} <!-- Placeholder for new rows -->
+                            </select>
+                        </td>
+                        <td><input type="date" name="med_inicio[]" class="form-input" value="${medData.inicio || ''}"></td>
+                        <td><input type="date" name="med_fin[]" class="form-input" value="${medData.fin || ''}"></td>
+                        <td><button type="button" class="btn-icon btn-remove-med" title="Quitar medicamento"><i class='bx bx-trash'></i></button></td>
+                    `;
+                    return tr;
+                }
+            
+                function removeMedicationRow(rowElement) {
+                    // Optional: Add confirmation
+                    // if (confirm("¿Está seguro de que desea quitar este medicamento del tratamiento?")) {
+                         rowElement.remove();
+                    // }
+                    // Optional: Add a hidden input to track removed IDs if needed by the backend
+                    // const medIdInput = rowElement.querySelector('input[name="med_id[]"]');
+                    // if (medIdInput && medIdInput.value) {
+                    //     const hiddenInput = document.createElement('input');
+                    //     hiddenInput.type = 'hidden';
+                    //     hiddenInput.name = 'remove_med_id[]';
+                    //     hiddenInput.value = medIdInput.value;
+                    //     document.getElementById('update-treatment-form').appendChild(hiddenInput);
+                    // }
+                }
+            
+            </script>
+        </div>
+        <!--====================================================================================================-->
+        <!--====================================================================================================-->
+        <!--====================================================================================================-->
+    </div>
+  </div>
+  
+</body>
+
+</html>

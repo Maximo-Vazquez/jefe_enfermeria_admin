@@ -1,0 +1,269 @@
+/* Re-use variables if not already defined globally */
+:root {
+    --primary-color: #6a5acd;
+    --primary-light: #e8e6f8;
+    --success-color: #28a745;
+    --success-light-bg: #eaf6ec;
+    --warning-color: #ffc107;
+    --warning-light-bg: #fff8e1;
+    --info-color: #17a2b8; /* For observation/stable status */
+    --info-light-bg: #e2f6f9;
+    --text-color: #333;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --background-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --border-radius: 8px;
+    --input-bg: #ffffff;
+    --table-row-hover-bg: #f1f1f1; /* For subtle hover */
+}
+
+/* View Container */
+.resident-treatment-view {
+    padding: 20px; /* Slightly less padding than forms */
+}
+
+/* Title Style (Assuming .view-title is globally defined) */
+.view-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.view-title i {
+    color: var(--primary-color);
+    font-size: 1.9rem; /* Slightly larger icon for view title */
+}
+
+
+/* Controls Bar (reuse from inventory if possible) */
+.controls-bar {
+    margin-bottom: 25px;
+    background-color: var(--background-color);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0 10px;
+    flex-grow: 1; /* Takes available space */
+}
+
+.search-icon {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-right: 8px;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    padding: 10px 5px;
+    font-size: 0.95rem;
+    background: transparent;
+    width: 100%;
+}
+.search-input::placeholder {
+    color: #aaa;
+}
+
+
+/* Resident Card List */
+.resident-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between cards */
+}
+
+/* Individual Resident Card */
+.resident-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    display: flex; /* Use flex for vertical structure */
+    flex-direction: column;
+}
+
+.resident-card:hover {
+    border-color: #c8cde0; /* Slightly darker border on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Card Header */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+    flex-wrap: wrap; /* Allow wrapping if needed */
+    gap: 10px;
+}
+
+.resident-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color); /* Highlight name */
+    margin: 0;
+}
+
+/* Status Badges (Reuse general .status-badge styles if available) */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem; /* Slightly smaller badge */
+    font-weight: 500;
+    white-space: nowrap;
+}
+.status-badge i {
+    margin-right: 5px;
+    font-size: 1em;
+}
+
+/* Specific Statuses for Residents */
+.status-badge.status-active {
+    background-color: var(--success-light-bg);
+    color: var(--success-color);
+}
+.status-badge.status-observation {
+    background-color: var(--warning-light-bg);
+    color: var(--warning-color);
+}
+.status-badge.status-stable {
+    background-color: var(--info-light-bg);
+    color: var(--info-color);
+}
+/* Add more statuses as needed */
+
+
+/* Card Body */
+.card-body {
+    display: grid;
+    /* Responsive grid: Fit as many columns as possible with min width 180px */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px 15px; /* Row gap, Column gap */
+    margin-bottom: 20px;
+    flex-grow: 1; /* Allow body to take space */
+}
+
+.card-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.card-info i {
+    font-size: 1.2rem; /* Slightly larger icons for info */
+    color: var(--text-muted); /* Subtle icon color */
+    flex-shrink: 0; /* Prevent icon shrinking */
+    width: 20px; /* Ensure consistent icon alignment */
+    text-align: center;
+}
+
+.card-info span {
+    color: var(--text-color); /* Darker text for the actual info */
+}
+
+/* Class to make certain info fields span full width if needed */
+.card-info.card-info-full {
+    grid-column: 1 / -1; /* Span all columns in the grid */
+    align-items: flex-start; /* Align icon top-left for multi-line text */
+}
+.card-info.card-info-full i {
+    margin-top: 2px; /* Align icon better with first line */
+}
+
+
+/* Card Actions */
+.card-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto; /* Push actions to bottom if body varies height */
+}
+
+/* Reuse general .btn styles */
+.btn-action {
+    padding: 7px 14px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 500;
+}
+.btn-action i {
+    font-size: 1.1em;
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: darkslateblue;
+}
+.btn-secondary {
+    background-color: var(--card-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+    background-color: var(--table-row-hover-bg);
+    border-color: #bbb;
+    color: var(--text-color);
+}
+
+/* No results message styling */
+.no-results {
+    /* Styles already applied inline, but can be enhanced here */
+    border: 1px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+}
+
+/* Responsive Adjustments for Cards */
+@media (max-width: 480px) {
+     .card-body {
+        /* Stack info items vertically on very small screens */
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    .card-actions {
+        flex-direction: column; /* Stack buttons */
+        align-items: stretch; /* Make buttons full width */
+    }
+     .btn-action {
+        justify-content: center; /* Center button content */
+    }
+    .resident-name {
+        font-size: 1.1rem;
+    }
+     .status-badge {
+        font-size: 0.75rem;
+    }
+}

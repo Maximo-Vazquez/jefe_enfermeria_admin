@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administracion</title>
+  <!-- Boxicons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/base.css" />
+
+
+    <link rel="stylesheet" href="css/tratamientos/tratamiento-residentes.css" />
+
+</head>
+<body>
+  <div class="container">
+    <!-- En vez de incluir directamente -->
+    <!-- sidebar.html -->
+
+
+        <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; align-items: center;">
+            <img src="img/logo.png" alt="CS2 Investment" class="logo" />
+            <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+            </div>
+        </div>
+        <div class="sidebar-menu ">
+            
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+            <i class='bx bx-layer'></i>
+            <span>Inventario de Medicamentos</span>
+            </div>
+            <div class="submenu">
+            <a href="IN-ver-invetario.html" class="submenu-item">
+                <span>Ver Inventario</span>
+            </a>
+            <a href="IN-registrar-medicamento.html" class="submenu-item">
+                <span>Registrar Nuevo Medicamento</span>
+            </a>
+            <a href="IN-exportar.html" class="submenu-item">
+                <span>Exportar Stock</span>
+            </a>
+            </div>
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Tratamientos Médicos</span>
+                </div>
+                <div class="submenu">
+                <a href="TR-tratamiento.html" class="submenu-item">
+                    <span>Tratamientos por Residente</span>
+                </a>
+                <a href="TR-actualizar-tratamiento.html" class="submenu-item">
+                    <span>Actualizar Tratamiento</span>
+                </a>
+                <a href="TR-historial-medicaciones.html" class="submenu-item">
+                    <span>Historial de Medicación</span>
+                </a>
+            </div>
+            <!-- Sección de Pedidos y Ventas -->
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Informes</span>
+            </div>
+            <div class="submenu">
+                <a href="#" class="submenu-item">
+                    <span>Informe de Uso Semanal</span>
+                </a>
+                <a href="#" class="submenu-item">
+                    <span>Medicamentos Administrados</span>
+                </a>
+                <a href="INFO-alertas-stock.html" class="submenu-item">
+                    <span>Alertas de stock Bajo</span>
+                </a>
+            </div>
+        </div>
+
+
+        </div>
+        <script>
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            submenu.classList.toggle('expanded');
+            element.classList.toggle('expanded');
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (
+            window.innerWidth <= 768 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target) &&
+            sidebar.classList.contains('open')
+            ) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            if (window.innerWidth > 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        </script>
+
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="main-content">
+        <div class="app-header">
+            <div class="header-info-group">
+              <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+                <i class='bx bx-menu'></i>
+              </button>
+          
+          
+          
+              <div class="page-title-nav"> Administracion</div>
+              <span class="role-badge-nav">Jefe Enfermeria</span>
+            </div>
+            <!-- Acciones de la barra de navegación superior -->
+            <div class="header-action-list">
+                <!-- ========  Cerrar sesión (POST)  ======== -->
+                <form id="logout-form" action=""  method="post" style="display:inline;">
+
+                  <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <i class='bx bx-log-out'></i>
+                    <span>Cerrar sesión</span>
+                  </button>
+                </form>
+      
+
+              </div>
+        </div>
+          
+        <!-- Contenido Principal -->
+        <div class="content-area">
+            <div class="resident-treatment-view">
+                <h2 class="view-title"><i class='bx bx-user-pin'></i> Tratamientos por Residente</h2>
+            
+                <!-- Search and Filter Bar -->
+                <div class="controls-bar">
+                    <div class="search-container">
+                        <i class='bx bx-search search-icon'></i>
+                        <input type="search" placeholder="Buscar residente por nombre o habitación..." class="search-input" id="resident-search">
+                    </div>
+                    <!-- Optional: Add Filter Button if needed later -->
+                    <!-- <button class="filter-toggle-btn">
+                        <i class='bx bx-filter-alt'></i>
+                        <span>Filtros</span>
+                    </button> -->
+                </div>
+            
+                <!-- List of Resident Cards -->
+                <div class="resident-card-list" id="resident-list">
+            
+                    <!-- Example Resident Card 1 -->
+                    <div class="resident-card">
+                        <div class="card-header">
+                            <h3 class="resident-name">Ana García López</h3>
+                            <span class="status-badge status-active"><i class='bx bx-check-circle' ></i> Tratamiento Activo</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-info">
+                                <i class='bx bx-home-alt' title="Habitación"></i>
+                                <span>Habitación: 101A</span>
+                            </div>
+                            <div class="card-info">
+                                <i class='bx bx-cake' title="Edad"></i>
+                                <span>Edad: 82 años</span>
+                            </div>
+                             <div class="card-info">
+                                 <i class='bx bx-calendar-check' title="Fecha de Ingreso"></i>
+                                 <span>Ingreso: 15/03/2023</span>
+                             </div>
+                            <div class="card-info">
+                                <i class='bx bx-clinic' title="Médico Principal"></i>
+                                <span>Médico: Dr. Ramirez</span>
+                            </div>
+                             <div class="card-info card-info-full">
+                                 <i class='bx bx-info-circle' title="Alergias Conocidas"></i>
+                                 <span>Alergias: Penicilina, Frutos Secos</span>
+                             </div>
+                             <div class="card-info card-info-full">
+                                 <i class='bx bx-first-aid' title="Diagnóstico Principal"></i>
+                                 <span>Diagnóstico: Hipertensión Arterial, Diabetes Mellitus Tipo 2</span>
+                             </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-action btn-primary"><i class='bx bx-spreadsheet'></i> Ver Plan Tratamiento</button>
+                            <button class="btn btn-action btn-secondary"><i class='bx bx-history'></i> Historial Medicación</button>
+                            <button class="btn btn-action btn-secondary"><i class='bx bx-file-blank'></i> Documentos</button>
+                        </div>
+                    </div>
+                    <!-- /Example Resident Card 1 -->
+            
+                    <!-- Example Resident Card 2 -->
+                     <div class="resident-card">
+                        <div class="card-header">
+                            <h3 class="resident-name">Carlos Fernández Ruiz</h3>
+                            <span class="status-badge status-observation"><i class='bx bx-show' ></i> En Observación</span> <!-- Different Status Example -->
+                        </div>
+                        <div class="card-body">
+                            <div class="card-info">
+                                <i class='bx bx-home-alt' title="Habitación"></i>
+                                <span>Habitación: 205B</span>
+                            </div>
+                            <div class="card-info">
+                                <i class='bx bx-cake' title="Edad"></i>
+                                <span>Edad: 75 años</span>
+                            </div>
+                             <div class="card-info">
+                                 <i class='bx bx-calendar-check' title="Fecha de Ingreso"></i>
+                                 <span>Ingreso: 01/11/2023</span>
+                             </div>
+                             <div class="card-info">
+                                 <i class='bx bx-clinic' title="Médico Principal"></i>
+                                 <span>Médico: Dra. Sanz</span>
+                             </div>
+                             <div class="card-info card-info-full">
+                                <i class='bx bx-info-circle' title="Alergias Conocidas"></i>
+                                <span>Alergias: Ninguna conocida</span>
+                            </div>
+                            <div class="card-info card-info-full">
+                                 <i class='bx bx-first-aid' title="Diagnóstico Principal"></i>
+                                 <span>Diagnóstico: Recuperación post-operatoria (cadera)</span>
+                             </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-action btn-primary"><i class='bx bx-spreadsheet'></i> Ver Plan Tratamiento</button>
+                            <button class="btn btn-action btn-secondary"><i class='bx bx-history'></i> Historial Medicación</button>
+                            <button class="btn btn-action btn-secondary"><i class='bx bx-file-blank'></i> Documentos</button>
+                        </div>
+                    </div>
+                    <!-- /Example Resident Card 2 -->
+            
+                     <!-- Example Resident Card 3 -->
+                     <div class="resident-card">
+                        <div class="card-header">
+                            <h3 class="resident-name">Luisa Martínez Gómez</h3>
+                            <span class="status-badge status-stable"><i class='bx bxs-user-check'></i> Estable</span> <!-- Another Status Example -->
+                        </div>
+                        <div class="card-body">
+                            <div class="card-info">
+                                <i class='bx bx-home-alt' title="Habitación"></i>
+                                <span>Habitación: 110A</span>
+                            </div>
+                            <div class="card-info">
+                                <i class='bx bx-cake' title="Edad"></i>
+                                <span>Edad: 88 años</span>
+                            </div>
+                             <div class="card-info">
+                                 <i class='bx bx-calendar-check' title="Fecha de Ingreso"></i>
+                                 <span>Ingreso: 05/01/2022</span>
+                             </div>
+                             <div class="card-info">
+                                 <i class='bx bx-clinic' title="Médico Principal"></i>
+                                 <span>Médico: Dr. Ramirez</span>
+                             </div>
+                             <div class="card-info card-info-full">
+                                <i class='bx bx-info-circle' title="Alergias Conocidas"></i>
+                                <span>Alergias: Mariscos</span>
+                            </div>
+                            <div class="card-info card-info-full">
+                                 <i class='bx bx-first-aid' title="Diagnóstico Principal"></i>
+                                 <span>Diagnóstico: Artrosis, Deterioro Cognitivo Leve</span>
+                             </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-action btn-primary"><i class='bx bx-spreadsheet'></i> Ver Plan Tratamiento</button>
+                            <button class="btn btn-action btn-secondary"><i class='bx bx-history'></i> Historial Medicación</button>
+                            <button class="btn btn-action btn-secondary"><i class='bx bx-file-blank'></i> Documentos</button>
+                        </div>
+                    </div>
+                    <!-- /Example Resident Card 3 -->
+            
+                     <!-- Add more resident cards as needed -->
+            
+                </div> <!-- /resident-card-list -->
+            
+                 <!-- Optional: Placeholder for when search yields no results -->
+                 <div class="no-results" id="no-results-message" style="display: none; text-align: center; padding: 40px; color: var(--text-muted);">
+                     <i class='bx bx-search-alt-2' style="font-size: 3rem; display: block; margin-bottom: 10px;"></i>
+                     No se encontraron residentes que coincidan con la búsqueda.
+                 </div>
+            
+            </div>
+            
+
+            <script>
+                const searchInput = document.getElementById('resident-search');
+                const residentList = document.getElementById('resident-list');
+                const residentCards = residentList.getElementsByClassName('resident-card');
+                const noResultsMessage = document.getElementById('no-results-message');
+            
+                searchInput.addEventListener('keyup', function() {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    let foundMatch = false;
+            
+                    for (let card of residentCards) {
+                        const residentName = card.querySelector('.resident-name').textContent.toLowerCase();
+                        // Optional: Search other fields like room number
+                        const roomInfoElement = card.querySelector('.card-info i.bx-home-alt + span');
+                        const roomInfo = roomInfoElement ? roomInfoElement.textContent.toLowerCase() : '';
+            
+                        if (residentName.includes(searchTerm) || roomInfo.includes(searchTerm)) {
+                            card.style.display = ''; // Show card
+                            foundMatch = true;
+                        } else {
+                            card.style.display = 'none'; // Hide card
+                        }
+                    }
+            
+                    // Show/hide the 'no results' message
+                    noResultsMessage.style.display = foundMatch ? 'none' : 'block';
+                });
+            </script>
+        </div>
+        <!--====================================================================================================-->
+        <!--====================================================================================================-->
+        <!--====================================================================================================-->
+    </div>
+  </div>
+  
+</body>
+
+</html>

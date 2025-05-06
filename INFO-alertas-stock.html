@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administracion</title>
+  <!-- Boxicons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/base.css" />
+
+
+    <link rel="stylesheet" href="css/informes/alertas-stock.css" />
+
+</head>
+<body>
+  <div class="container">
+    <!-- En vez de incluir directamente -->
+    <!-- sidebar.html -->
+
+
+        <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; align-items: center;">
+            <img src="img/logo.png" alt="CS2 Investment" class="logo" />
+            <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+            </div>
+        </div>
+        <div class="sidebar-menu ">
+            
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+            <i class='bx bx-layer'></i>
+            <span>Inventario de Medicamentos</span>
+            </div>
+            <div class="submenu">
+            <a href="IN-ver-invetario.html" class="submenu-item">
+                <span>Ver Inventario</span>
+            </a>
+            <a href="IN-registrar-medicamento.html" class="submenu-item">
+                <span>Registrar Nuevo Medicamento</span>
+            </a>
+            <a href="IN-exportar.html" class="submenu-item">
+                <span>Exportar Stock</span>
+            </a>
+            </div>
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Tratamientos Médicos</span>
+                </div>
+                <div class="submenu">
+                <a href="TR-tratamiento.html" class="submenu-item">
+                    <span>Tratamientos por Residente</span>
+                </a>
+                <a href="TR-actualizar-tratamiento.html" class="submenu-item">
+                    <span>Actualizar Tratamiento</span>
+                </a>
+                <a href="TR-historial-medicaciones.html" class="submenu-item">
+                    <span>Historial de Medicación</span>
+                </a>
+            </div>
+            <!-- Sección de Pedidos y Ventas -->
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Informes</span>
+            </div>
+            <div class="submenu">
+                <a href="#" class="submenu-item">
+                    <span>Informe de Uso Semanal</span>
+                </a>
+                <a href="#" class="submenu-item">
+                    <span>Medicamentos Administrados</span>
+                </a>
+                <a href="INFO-alertas-stock.html" class="submenu-item">
+                    <span>Alertas de stock Bajo</span>
+                </a>
+            </div>
+        </div>
+
+
+        </div>
+        <script>
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            submenu.classList.toggle('expanded');
+            element.classList.toggle('expanded');
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (
+            window.innerWidth <= 768 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target) &&
+            sidebar.classList.contains('open')
+            ) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            if (window.innerWidth > 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        </script>
+
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="main-content">
+        <div class="app-header">
+            <div class="header-info-group">
+              <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+                <i class='bx bx-menu'></i>
+              </button>
+          
+          
+          
+              <div class="page-title-nav"> Administracion</div>
+              <span class="role-badge-nav">Jefe Enfermeria</span>
+            </div>
+            <!-- Acciones de la barra de navegación superior -->
+            <div class="header-action-list">
+                <!-- ========  Cerrar sesión (POST)  ======== -->
+                <form id="logout-form" action=""  method="post" style="display:inline;">
+
+                  <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <i class='bx bx-log-out'></i>
+                    <span>Cerrar sesión</span>
+                  </button>
+                </form>
+      
+
+              </div>
+        </div>
+          
+        <!-- Contenido Principal -->
+        <div class="content-area">
+            <div class="content-area">
+                <div class="low-stock-alert-view">
+                    <!-- 1. Título de la Vista -->
+                    <h2 class="view-title">
+                        <i class='bx bx-bell-minus'></i> Alertas de Stock Bajo y Configuración
+                    </h2>
+            
+                    <!-- 2. Barra de Controles (Búsqueda, Filtros, Acciones Principales) -->
+                    <div class="controls-bar alert-controls">
+                        <div class="search-container alert-search">
+                            <i class='bx bx-search search-icon'></i>
+                            <input type="search" placeholder="Buscar medicamento por nombre..." class="search-input" id="alert-med-search">
+                        </div>
+                        <div class="filter-group alert-filter-group">
+                            <input type="checkbox" id="show-only-alerts" name="show_only_alerts" class="form-checkbox">
+                            <label for="show-only-alerts">Mostrar solo alertas activas</label>
+                        </div>
+                        <!-- Acción principal: Guardar los umbrales modificados -->
+                        <button type="submit" form="alert-config-form" class="btn btn-primary btn-save-thresholds" title="Guardar los umbrales modificados">
+                            <i class='bx bx-save'></i> Guardar Cambios
+                        </button>
+                         <button type="button" class="btn btn-secondary btn-refresh-list" title="Actualizar lista y stock">
+                            <i class='bx bx-refresh'></i> Actualizar
+                        </button>
+                    </div>
+            
+                    <!-- 3. Formulario que envuelve la tabla para guardar cambios -->
+                    <form id="alert-config-form" action="/ruta/para/guardar/umbrales" method="POST">
+                        <!-- 3.1 Tabla de Medicamentos con Umbrales Configurables -->
+                        <div class="table-container alert-table-container">
+                            <table class="data-table alert-config-table">
+                                <thead>
+                                    <tr>
+                                        <th><i class='bx bxs-capsule'></i> Medicamento</th>
+                                        <th><i class='bx bx-package'></i> Stock Actual</th>
+                                        <th class="threshold-col"><i class='bx bx-tachometer'></i> Umbral Alerta</th>
+                                        <th><i class='bx bx-info-circle'></i> Estado</th>
+                                        <th><i class='bx bx-calendar-edit'></i> Última Modificación (Umbral)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="alert-medication-list-body">
+                                    <!-- Fila de Ejemplo 1: Medicamento OK -->
+                                    <tr data-med-id="med_ibu600"> <!-- Identificador único para JS/Backend -->
+                                        <td>Ibuprofeno 600mg (Caja 30 comp.)</td>
+                                        <td class="stock-actual">55</td>
+                                        <td class="threshold-input-cell">
+                                            <input type="hidden" name="med_id[]" value="med_ibu600"> <!-- ID para el backend -->
+                                            <input type="number" name="umbral[]" class="form-input threshold-input" value="20" min="0" step="1" aria-label="Umbral para Ibuprofeno 600mg">
+                                        </td>
+                                        <td><span class="status-badge status-ok"><i class='bx bx-check-circle'></i> OK</span></td>
+                                        <td>2024-03-10</td>
+                                    </tr>
+            
+                                    <!-- Fila de Ejemplo 2: Medicamento con Alerta de Stock Bajo -->
+                                    <tr class="row-alert" data-med-id="med_para500"> <!-- Clase para resaltar visualmente la alerta -->
+                                        <td>Paracetamol 500mg (Caja 20 comp.)</td>
+                                        <td class="stock-actual">18</td>
+                                        <td class="threshold-input-cell">
+                                            <input type="hidden" name="med_id[]" value="med_para500">
+                                            <input type="number" name="umbral[]" class="form-input threshold-input" value="25" min="0" step="1" aria-label="Umbral para Paracetamol 500mg">
+                                        </td>
+                                        <td><span class="status-badge status-low"><i class='bx bx-error-circle'></i> BAJO STOCK</span></td>
+                                        <td>2024-04-22</td>
+                                    </tr>
+            
+                                    <!-- Fila de Ejemplo 3: Otro Medicamento OK -->
+                                    <tr data-med-id="med_los50">
+                                        <td>Losartán 50mg (Caja 28 comp.)</td>
+                                        <td class="stock-actual">40</td>
+                                        <td class="threshold-input-cell">
+                                             <input type="hidden" name="med_id[]" value="med_los50">
+                                            <input type="number" name="umbral[]" class="form-input threshold-input" value="30" min="0" step="1" aria-label="Umbral para Losartán 50mg">
+                                        </td>
+                                        <td><span class="status-badge status-ok"><i class='bx bx-check-circle'></i> OK</span></td>
+                                        <td>2024-01-15</td>
+                                    </tr>
+            
+                                     <!-- Fila de Ejemplo 4: Umbral sin configurar (o en 0) -->
+                                    <tr data-med-id="med_ome20">
+                                        <td>Omeprazol 20mg (Caja 14 caps.)</td>
+                                        <td class="stock-actual">75</td>
+                                        <td class="threshold-input-cell">
+                                             <input type="hidden" name="med_id[]" value="med_ome20">
+                                            <input type="number" name="umbral[]" class="form-input threshold-input" value="0" min="0" step="1" aria-label="Umbral para Omeprazol 20mg">
+                                        </td>
+                                        <td><span class="status-badge status-unset"><i class='bx bx-minus-circle'></i> No configurado</span></td> <!-- Estado diferente -->
+                                        <td>N/A</td>
+                                    </tr>
+            
+                                    <!-- Más filas de medicamentos aquí (se cargarían dinámicamente) -->
+                                </tbody>
+                            </table>
+                        </div> <!-- /table-container -->
+                    </form> <!-- /alert-config-form -->
+            
+                    <!-- 4. Mensaje si no hay medicamentos o resultados de búsqueda -->
+                    <div class="no-results" id="no-alert-meds-message" style="display: none; text-align: center; padding: 40px; color: var(--text-muted);">
+                        <i class='bx bx-capsule' style="font-size: 3rem; display: block; margin-bottom: 10px;"></i>
+                        No se encontraron medicamentos que coincidan con la búsqueda o filtro.
+                    </div>
+            
+                    <!-- 5. Controles de Paginación (Opcional, si hay muchos medicamentos) -->
+                    <div class="pagination-controls" style="text-align: center; margin-top: 20px; display: none;"> <!-- Oculto por defecto si no es necesario -->
+                        <button class="btn btn-secondary btn-sm" disabled> < Anterior</button>
+                        <span style="margin: 0 10px; color: var(--text-muted); font-size: 0.9rem;">Página 1 de 1</span>
+                        <button class="btn btn-secondary btn-sm">Siguiente ></button>
+                    </div>
+            
+                </div> <!-- /low-stock-alert-view -->
+            
+                <!-- Script Básico (Opcional - para feedback visual inmediato al cambiar umbral) -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const tableBody = document.getElementById('alert-medication-list-body');
+            
+                        if (tableBody) {
+                            tableBody.addEventListener('input', (event) => {
+                                if (event.target.classList.contains('threshold-input')) {
+                                    updateRowStatus(event.target.closest('tr'));
+                                }
+                            });
+            
+                            // Actualizar estado inicial al cargar
+                            tableBody.querySelectorAll('tr').forEach(row => {
+                                 updateRowStatus(row);
+                             });
+                        }
+            
+                        // Función simple para actualizar el estado visual de la fila
+                        function updateRowStatus(row) {
+                            const stockElement = row.querySelector('.stock-actual');
+                            const thresholdInput = row.querySelector('.threshold-input');
+                            const statusBadge = row.querySelector('.status-badge');
+            
+                            if (!stockElement || !thresholdInput || !statusBadge) return; // Salir si falta algún elemento
+            
+                            const stock = parseInt(stockElement.textContent, 10);
+                            const threshold = parseInt(thresholdInput.value, 10);
+            
+                             // Limpiar clases antiguas
+                             statusBadge.classList.remove('status-ok', 'status-low', 'status-unset');
+                             row.classList.remove('row-alert');
+            
+                            if (isNaN(threshold) || threshold <= 0) {
+                                 statusBadge.innerHTML = `<i class='bx bx-minus-circle'></i> No configurado`;
+                                 statusBadge.classList.add('status-unset');
+                             } else if (isNaN(stock)) {
+                                  // Manejar caso donde stock no es número (poco probable pero seguro)
+                                  statusBadge.innerHTML = `<i class='bx bx-question-mark'></i> Desconocido`;
+                                  statusBadge.classList.add('status-unset');
+                             } else if (stock <= threshold) {
+                                 statusBadge.innerHTML = `<i class='bx bx-error-circle'></i> BAJO STOCK`;
+                                 statusBadge.classList.add('status-low');
+                                 row.classList.add('row-alert'); // Añadir clase de resaltado a la fila
+                             } else {
+                                 statusBadge.innerHTML = `<i class='bx bx-check-circle'></i> OK`;
+                                 statusBadge.classList.add('status-ok');
+                             }
+                        }
+                    });
+                </script>
+            
+            </div> <!-- /content-area -->
+        </div>
+        <!--====================================================================================================-->
+        <!--====================================================================================================-->
+        <!--====================================================================================================-->
+    </div>
+  </div>
+  
+</body>
+
+</html>

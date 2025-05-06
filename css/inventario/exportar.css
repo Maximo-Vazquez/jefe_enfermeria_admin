@@ -1,0 +1,158 @@
+
+
+/* Contenedor principal de la sección */
+.contenedor-exportar {
+    background-color: #fdfdfd; /* Fondo casi blanco */
+    padding: 20px 25px;       /* Espaciado interno */
+    border: 1px solid #e9e9e9; /* Borde sutil */
+    border-radius: 8px;       /* Bordes redondeados */
+    margin-bottom: 30px;      /* Margen inferior para separarlo de otros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04); /* Sombra suave */
+}
+
+/* Estilo del título de la sección */
+.titulo-seccion {
+    font-size: 1.4rem;        /* Tamaño de fuente */
+    font-weight: 600;         /* Grosor de la fuente */
+    margin-top: 0;            /* Quitar margen superior por defecto */
+    margin-bottom: 25px;      /* Espacio debajo del título */
+    color: #444;             /* Color de texto oscuro */
+    display: flex;            /* Para alinear icono y texto */
+    align-items: center;      /* Centrar verticalmente icono y texto */
+    gap: 10px;                /* Espacio entre icono y texto */
+    padding-bottom: 10px;     /* Espacio debajo antes de la línea */
+    border-bottom: 1px solid #eee; /* Línea separadora sutil */
+}
+
+.titulo-seccion i {
+    color: #6a5acd;           /* Color primario (morado) para el icono */
+    font-size: 1.6rem;        /* Tamaño del icono */
+}
+
+/* Contenedor para las opciones/filtros de exportación */
+.opciones-exportacion {
+    display: grid;            /* Usar CSS Grid para el layout */
+    /* Crea columnas automáticas que tengan al menos 240px */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;                /* Espacio entre los campos de opciones */
+    margin-bottom: 30px;      /* Espacio antes de los botones de acción */
+}
+
+/* Estilo para cada grupo de etiqueta + campo */
+.grupo-campo {
+    display: flex;            /* Usar flexbox */
+    flex-direction: column;   /* Poner la etiqueta encima del campo */
+}
+
+/* Estilo de las etiquetas */
+.grupo-campo label {
+    font-size: 0.9rem;        /* Tamaño de fuente de la etiqueta */
+    font-weight: 500;         /* Grosor medio */
+    color: #555;             /* Color de texto gris oscuro */
+    margin-bottom: 8px;       /* Espacio entre etiqueta y campo */
+    display: flex;            /* Para alinear icono y texto */
+    align-items: center;      /* Centrar icono y texto */
+    gap: 6px;                 /* Espacio entre icono y texto de la etiqueta */
+}
+.grupo-campo label i {
+    font-size: 1rem;          /* Tamaño del icono en la etiqueta */
+}
+
+/* Estilo base común para selects y otros inputs si los hubiera */
+.campo-select {
+    width: 100%;              /* Ocupar todo el ancho disponible */
+    padding: 10px 12px;       /* Espaciado interno */
+    font-size: 0.95rem;       /* Tamaño de fuente */
+    border: 1px solid #ccc;   /* Borde gris claro */
+    border-radius: 6px;       /* Bordes redondeados */
+    background-color: #fff;   /* Fondo blanco */
+    box-sizing: border-box;   /* El padding no aumenta el tamaño total */
+    transition: border-color 0.2s ease; /* Transición suave para el foco */
+
+    /* Estilos para la flecha personalizada del select */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%236c757d' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Posición de la flecha */
+    background-size: 1em;     /* Tamaño de la flecha */
+    padding-right: 35px;      /* Espacio extra a la derecha para la flecha */
+}
+
+/* Estilo al pasar el mouse o enfocar */
+.campo-select:focus {
+    outline: none;            /* Quitar el borde por defecto del navegador */
+    border-color: #8a7ff0;    /* Cambiar color del borde (morado claro) */
+    box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.15); /* Sombra suave al enfocar */
+}
+
+/* Color del texto para la opción seleccionada por defecto (placeholder) */
+.campo-select:required:invalid {
+     color: #777;             /* Gris medio */
+}
+
+/* Contenedor para los botones de acción (Exportar, Limpiar) */
+.acciones-formulario {
+    display: flex;            /* Usar flexbox */
+    justify-content: flex-end;/* Alinear botones a la derecha */
+    gap: 10px;                /* Espacio entre botones si hubiera más de uno */
+    padding-top: 20px;        /* Espacio arriba */
+    border-top: 1px solid #eee; /* Línea separadora sutil */
+}
+
+/* Estilo base para botones (simplificado) */
+.boton {
+    display: inline-flex;     /* Para alinear icono y texto */
+    align-items: center;      /* Centrar verticalmente */
+    justify-content: center;  /* Centrar horizontalmente */
+    gap: 8px;                 /* Espacio entre icono y texto */
+    padding: 10px 20px;       /* Espaciado interno del botón */
+    font-size: 0.95rem;       /* Tamaño de fuente */
+    font-weight: 500;         /* Grosor medio */
+    border: none;             /* Sin borde por defecto */
+    border-radius: 6px;       /* Bordes redondeados */
+    cursor: pointer;          /* Cursor de mano */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves */
+    text-decoration: none;    /* Quitar subrayado si es un enlace */
+    color: white;             /* Texto blanco */
+}
+
+.boton i {
+    font-size: 1.1em;         /* Tamaño del icono en el botón */
+}
+
+/* Botón primario (Exportar) */
+.boton-primario {
+    background-color: #6a5acd; /* Color morado */
+}
+.boton-primario:hover {
+    background-color: #584ab3; /* Morado más oscuro al pasar el mouse */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra ligera al pasar el mouse */
+}
+
+/* Botón secundario (si lo añades, ej: Limpiar) */
+.boton-secundario {
+    background-color: #6c757d; /* Color gris */
+    color: white;
+}
+.boton-secundario:hover {
+    background-color: #5a6268; /* Gris más oscuro */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 600px) {
+    .contenedor-exportar {
+        padding: 15px; /* Menos padding en móvil */
+    }
+    .opciones-exportacion {
+        grid-template-columns: 1fr; /* Una sola columna */
+        gap: 15px;          /* Menos espacio entre campos */
+    }
+    .acciones-formulario {
+        justify-content: center; /* Centrar el botón */
+    }
+    .boton {
+        width: 100%;          /* Botón ocupa todo el ancho */
+    }
+}

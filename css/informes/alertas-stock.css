@@ -1,0 +1,360 @@
+    /* css/alertas/alertas-stock.css */
+
+/* Re-use variables if not already defined globally */
+:root {
+    --primary-color: #6a5acd;
+    --primary-light: #e8e6f8;
+    --success-color: #28a745; /* Para estado OK */
+    --success-light-bg: #eaf6ec;
+    --warning-color: #ffc107; /* Para estado BAJO STOCK */
+    --warning-dark: #b38600;
+    --warning-light-bg: #fffbee; /* Más sutil para fondo de fila */
+    --danger-color: #dc3545;
+    --danger-light-bg: #f8d7da;
+    --info-color: #17a2b8;
+    --info-light-bg: #e2f6f9;
+    --secondary-color: #6c757d; /* Para estado 'No configurado' */
+    --secondary-light-bg: #f8f9fa;
+    --text-color: #333;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --background-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --border-radius: 8px;
+    --input-bg: #ffffff;
+    --input-border-focus: #8a7ff0; /* Color borde input al enfocar */
+    --table-header-bg: #f8f9fa;
+    --table-row-hover-bg: #f1f1f1;
+    --table-border-color: #e9ecef;
+}
+
+/* View Container */
+.low-stock-alert-view {
+    padding: 20px;
+}
+
+/* Title Style (Assuming .view-title is globally defined) */
+.view-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 25px; /* Más espacio después del título */
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.view-title i {
+    color: var(--warning-color); /* Icono de campana en color alerta */
+    font-size: 1.9rem;
+}
+
+/* Controls Bar (Reusing base .controls-bar styles) */
+.controls-bar.alert-controls {
+    margin-bottom: 25px;
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px 20px; /* Row gap, Column gap */
+    box-shadow: var(--box-shadow);
+}
+
+/* Search specific adjustments */
+.search-container.alert-search {
+    flex-grow: 1;
+    min-width: 250px;
+    padding: 0 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+}
+.search-container.alert-search .search-input {
+    padding: 8px 5px;
+    font-size: 0.9rem;
+}
+.search-container.alert-search .search-icon {
+    font-size: 1rem;
+    margin-right: 5px;
+}
+
+/* Filter group styling */
+.filter-group.alert-filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0; /* Add padding for alignment */
+}
+
+.filter-group label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    user-select: none; /* Prevent text selection on label click */
+}
+
+.form-checkbox { /* Basic checkbox styling */
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--primary-color); /* Color del check */
+}
+
+/* Action Buttons in controls bar */
+.controls-bar .btn {
+    padding: 8px 16px; /* Slightly larger buttons */
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 500;
+}
+.controls-bar .btn i {
+    font-size: 1.2em;
+}
+.controls-bar .btn-primary { /* Save button */
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    order: 1; /* Try to keep save button prominent */
+}
+.controls-bar .btn-primary:hover {
+    background-color: darkslateblue;
+}
+.controls-bar .btn-secondary { /* Refresh button */
+    background-color: var(--background-color);
+    color: var(--text-muted);
+     order: 2;
+}
+.controls-bar .btn-secondary:hover {
+    background-color: var(--table-row-hover-bg);
+    border-color: #bbb;
+    color: var(--text-color);
+}
+
+
+/* Table Container and Table Styling */
+.table-container.alert-table-container {
+    overflow-x: auto;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.data-table.alert-config-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.data-table.alert-config-table th,
+.data-table.alert-config-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--table-border-color);
+    vertical-align: middle;
+}
+
+.data-table.alert-config-table th {
+    background-color: var(--table-header-bg);
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+.data-table.alert-config-table th i {
+    margin-right: 6px;
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+/* Specific column styling */
+.data-table.alert-config-table .threshold-col {
+    width: 130px; /* Fixed width for threshold column */
+    text-align: center;
+}
+.data-table.alert-config-table td.stock-actual {
+    font-weight: 500;
+    text-align: center;
+    width: 100px;
+}
+.data-table.alert-config-table td:nth-child(1) { /* Medicamento */
+    font-weight: 500;
+}
+.data-table.alert-config-table td:last-child { /* Última Modificación */
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+/* Styling for the input within the table cell */
+.threshold-input-cell {
+    padding-top: 8px; /* Adjust padding to better center input */
+    padding-bottom: 8px;
+}
+.form-input.threshold-input {
+    width: 80px; /* Control input width */
+    padding: 6px 8px;
+    font-size: 0.9rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    text-align: center;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-input.threshold-input:focus {
+    border-color: var(--input-border-focus);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.2); /* Subtle focus ring */
+}
+/* Hide default number input arrows (optional) */
+.form-input.threshold-input::-webkit-outer-spin-button,
+.form-input.threshold-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Status Badges */
+.status-badge { /* Base badge style reuse */
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.status-badge i {
+    margin-right: 5px;
+    font-size: 1em;
+}
+
+.status-badge.status-ok {
+    background-color: var(--success-light-bg);
+    color: var(--success-color);
+}
+.status-badge.status-low {
+    background-color: var(--warning-light-bg);
+    color: var(--warning-dark); /* Use darker warning for better contrast */
+    font-weight: 600; /* Make low stock stand out more */
+}
+.status-badge.status-unset {
+    background-color: var(--secondary-light-bg);
+    color: var(--secondary-color);
+    border: 1px dashed #ced4da; /* Subtle dashed border */
+}
+
+/* Row Highlighting for Alerts */
+.data-table.alert-config-table tbody tr.row-alert {
+    background-color: var(--warning-light-bg); /* Light yellow background for alert rows */
+    border-left: 3px solid var(--warning-color); /* Accent border */
+}
+.data-table.alert-config-table tbody tr.row-alert td:first-child {
+    font-weight: 600; /* Emphasize name in alert rows */
+}
+.data-table.alert-config-table tbody tr:hover {
+    background-color: var(--table-row-hover-bg); /* Hover overrides alert bg for clarity */
+}
+.data-table.alert-config-table tbody tr.row-alert:hover {
+     background-color: #fff3cd; /* Slightly darker yellow hover for alert rows */
+}
+
+
+/* No Results Message */
+.no-results {
+    border: 1px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+    margin-top: 20px;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+    padding-top: 15px;
+}
+.pagination-controls .btn-sm {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+}
+.pagination-controls button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+
+@media (max-width: 768px) {
+    .view-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    .controls-bar.alert-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .search-container.alert-search {
+        min-width: unset; /* Remove min-width */
+        width: 100%;
+    }
+    .filter-group.alert-filter-group {
+        justify-content: flex-start; /* Align checkbox left */
+        padding: 5px 0;
+        width: 100%;
+    }
+    .controls-bar .btn {
+        width: 100%;
+        justify-content: center;
+        order: 3; /* Reset order to stack naturally */
+    }
+     .controls-bar .btn-primary {
+        order: 1; /* Ensure Save is still prominent if possible */
+    }
+
+    /* Table adjustments */
+    .data-table.alert-config-table th,
+    .data-table.alert-config-table td {
+        padding: 10px 10px; /* Reduce padding */
+        font-size: 0.85rem;
+    }
+    .data-table.alert-config-table .threshold-col {
+        width: 100px; /* Slightly smaller width */
+    }
+    .form-input.threshold-input {
+        width: 65px; /* Smaller input */
+        padding: 5px 6px;
+    }
+    .status-badge {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .low-stock-alert-view {
+        padding: 15px;
+    }
+    .view-title {
+        font-size: 1.3rem;
+    }
+     /* Further reduce table padding/font if needed */
+     .data-table.alert-config-table th,
+     .data-table.alert-config-table td {
+        padding: 8px 6px;
+     }
+     .data-table.alert-config-table {
+        font-size: 0.8rem;
+     }
+}
