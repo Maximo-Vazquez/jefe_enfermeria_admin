@@ -207,7 +207,7 @@
                                     <label for="med-unidades-presentacion"><i class='bx bx-purchase-tag-alt'></i> Unidad de Presentación</label>
                                     <select id="med-unidades-presentacion" name="unidades_presentacion" class="form-select" required>
                                         <option value="unidades">Unidades</option>
-                                        <option value="cajas" selected>Cajas</option>
+                                        <option value="dosis" selected>dosis</option>
                                         <option value="blisters">Blisters</option>
                                         <option value="frascos">Frascos</option>
                                     </select>
@@ -253,8 +253,8 @@
                     <div class="stock-management-section card">
                         <h3 class="section-title"><i class='bx bx-slider-alt'></i> Ajustes de Stock y Salidas</h3>
                         <div class="current-stock-info">
-                            <p>Stock Actual Total: <strong id="current-stock-value">100</strong> <span id="current-stock-unit">Cajas</span></p>
-                            <p>Umbral de Stock Bajo: <span id="low-stock-threshold">20 Cajas</span></p>
+                            <p>Stock Actual Total: <strong id="current-stock-value">100</strong> <span id="current-stock-unit">dosis</span></p>
+                            <p>Umbral de Stock Bajo: <span id="low-stock-threshold">20 dosis</span></p>
                             <!-- <p>Última actualización: <span id="last-stock-update">2023-10-26 10:30 AM</span></p> -->
                              <p class="info-note"><i class='bx bx-info-circle'></i> El stock total se actualiza automáticamente con las compras. Use esta sección para salidas o correcciones manuales.</p>
                         </div>
@@ -266,9 +266,8 @@
                                     <!-- Opción "Añadir (Entrada)" removida o modificada conceptualmente -->
                                     <!-- Se podría tener "Registrar Compra" que lleve a otro formulario/modal -->
                                     <option value="subtract">Registrar Salida (Uso/Dispensación)</option>
-                                    <option value="correction_add">Corrección (Añadir por error conteo)</option>
                                     <option value="correction_subtract">Corrección (Restar por error conteo/Pérdida)</option>
-                                    <option value="set_total">Establecer Nuevo Total (Auditoría)</option>
+
                                 </select>
                             </div>
                             <div class="form-group">
@@ -332,9 +331,7 @@
                 <div class="purchase-history-section card">
                     <div class="section-header-actions">
                         <h3 class="section-title"><i class='bx bx-cart-add'></i> Historial de Compras y Lotes</h3>
-                        <button class="btn btn-primary btn-sm" onclick="openRegisterPurchaseModal()">
-                            <i class='bx bx-plus-circle'></i> Registrar Nueva Compra
-                        </button>
+
                     </div>
                     <div class="table-container"> <!-- Usar clase más genérica si ya existe para tablas grandes -->
                         <table class="data-table purchase-history-table">
@@ -344,10 +341,8 @@
                                     <th><i class='bx bxs-truck'></i> Proveedor</th>
                                     <th><i class='bx bx-barcode'></i> Nº Lote/Factura</th>
                                     <th><i class='bx bx-package'></i> Cant. Comprada</th>
-                                    <th><i class='bx bx-dollar-circle'></i> Costo Unit.</th>
                                     <th><i class='bx bx-calendar-x'></i> Vencimiento Lote</th>
-                                    <th><i class='bx bx-box'></i> Stock Rest. Lote</th>
-                                    <th><i class='bx bx-cog'></i> Acciones</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -355,25 +350,21 @@
                                     <td>2023-10-01</td>
                                     <td>Proveedor B</td>
                                     <td>LOTE789XYZ</td>
-                                    <td>50 <span class="unit-small">Cajas</span></td>
-                                    <td>$10.50</td>
+                                    <td>50 <span class="unit-small">dosis</span></td>
+
                                     <td><span class="date-highlight">2025-09-30</span></td>
-                                    <td>30 <span class="unit-small">Cajas</span></td>
-                                    <td>
-                                        <button class="btn-action btn-edit-purchase" title="Editar Compra/Lote"><i class='bx bxs-edit'></i></button>
-                                    </td>
+
+
                                 </tr>
                                 <tr>
                                     <td>2023-08-15</td>
                                     <td>Proveedor A</td>
                                     <td>LOTEABC123</td>
-                                    <td>100 <span class="unit-small">Cajas</span></td>
-                                    <td>$10.00</td>
+                                    <td>100 <span class="unit-small">dosis</span></td>
+
                                     <td><span class="date-highlight text-warning">2024-07-31</span></td>
-                                    <td>15 <span class="unit-small">Cajas</span></td>
-                                    <td>
-                                        <button class="btn-action btn-edit-purchase" title="Editar Compra/Lote"><i class='bx bxs-edit'></i></button>
-                                    </td>
+
+
                                 </tr>
                                 <!-- Más filas dinámicamente -->
                                 <tr>
@@ -395,53 +386,6 @@
 
             </div> <!-- Cierre de .medication-management-container -->
 
-            <!-- Modal para Registrar Compra (Ejemplo Básico) -->
-            <div id="registerPurchaseModal" class="modal">
-                <div class="modal-content card">
-                    <div class="modal-header">
-                        <h3 class="section-title"><i class='bx bx-cart-add'></i> Registrar Nueva Compra</h3>
-                        <span class="close-modal" onclick="closeRegisterPurchaseModal()">×</span>
-                    </div>
-                    <form id="register-purchase-form">
-                        <input type="hidden" id="purchase-medication-id" name="medication_id" value="[ID_MEDICAMENTO_ACTUAL]">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="purchase-date"><i class='bx bx-calendar-event'></i> Fecha de Compra</label>
-                                <input type="date" id="purchase-date" name="purchase_date" class="form-input" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="purchase-proveedor"><i class='bx bxs-truck'></i> Proveedor</label>
-                                <select id="purchase-proveedor" name="proveedor_id" class="form-select">
-                                    <option value="">Seleccionar proveedor...</option>
-                                    <option value="proveedor_a">Proveedor A</option>
-                                    <option value="proveedor_b">Proveedor B</option>
-                                    <!-- Llenar dinámicamente -->
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="purchase-lote"><i class='bx bx-barcode'></i> Nº Lote / Factura</label>
-                                <input type="text" id="purchase-lote" name="lote_numero" class="form-input" placeholder="Ej: LOTE123XYZ" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="purchase-quantity"><i class='bx bx-package'></i> Cantidad Comprada</label>
-                                <input type="number" id="purchase-quantity" name="quantity" class="form-input" placeholder="Ej: 50" required min="1">
-                            </div>
-                             <div class="form-group">
-                                <label for="purchase-cost"><i class='bx bx-dollar-circle'></i> Costo Unitario (Opcional)</label>
-                                <input type="number" id="purchase-cost" name="cost_unit" class="form-input" placeholder="Ej: 10.50" min="0" step="0.01">
-                            </div>
-                            <div class="form-group">
-                                <label for="purchase-expiry-date"><i class='bx bx-calendar-x'></i> Fecha de Vencimiento del Lote</label>
-                                <input type="date" id="purchase-expiry-date" name="expiry_date" class="form-input" required>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-secondary" onclick="closeRegisterPurchaseModal()"><i class='bx bx-x'></i> Cancelar</button>
-                            <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Registrar Compra</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
 
         </div> <!-- Cierre de .content-area -->
         </div>
