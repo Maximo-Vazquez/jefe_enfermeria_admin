@@ -181,21 +181,23 @@
                                 <tr>
                                     <!-- Added icons to headers like reference -->
                                     <th><i class='bx bx-capsule'></i> Nombre</th>
+                                    <th><i class='bx bx-capsule'></i> Graduacion</th>
                                     <th><i class='bx bx-barcode'></i> Código</th>
                                     <th><i class='bx bx-package'></i> Stock</th>
-                                    <th><i class='bx bx-calendar-x'></i> Vencimiento</th>
+
                                     <th><i class='bx bx-map-pin'></i> Ubicación</th>
                                     <th><i class='bx bx-category-alt'></i> Categoría</th>
-                                    <th><i class='bx bx-check-shield'></i> Estado</th>
+                                    <th><i class='bx bx-check-shield'></i> Estado stock</th>
                                     <th><i class='bx bx-cog'></i> Acciones</th> <!-- Added Actions Column -->
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Paracetamol 500mg</td>
+                                    <td>Paracetamol</td>
+                                    <td>500mg</td>
                                     <td>51515155</td>
                                     <td>150</td>
-                                    <td>2026-12-31</td>
+
                                     <td>Estante A1</td>
                                     <td>Analgésicos</td>
                                     <td><span class="status-badge status-active"><i class='bx bxs-check-circle'></i> Activo</span></td>
@@ -204,12 +206,13 @@
                                     </td>
                                 </tr>
                                 <tr class="low-stock"> <!-- Keep class for potential specific styling if needed -->
-                                    <td>Ibuprofeno 400mg</td>
+                                    <td>Ibuprofeno</td>
+                                    <td>400mg</td>
                                     <td>532532553</td>
                                     <td>
                                        <span class="low-stock-indicator" title="Stock bajo"><i class='bx bxs-error-circle'></i></span> 8
                                     </td>
-                                    <td>2025-08-15</td>
+
                                     <td>Estante B2</td>
                                     <td>Antiinflamatorios</td>
                                     <!-- Changed status to reflect low stock -->
@@ -219,43 +222,30 @@
                                     </td>
                                 </tr>
                                 <tr class="expired"> <!-- Keep class for potential specific styling if needed -->
-                                    <td>Amoxicilina 250mg</td>
+                                    <td>Amoxicilina</td>
+                                    <td>500mg</td>
                                     <td>6545654654</td>
                                     <td>25</td>
-                                    <td>2024-03-01</td> <!-- This is actually expired -->
+
                                     <td>Estante C3</td>
                                     <td>Antibióticos</td>
-                                    <td><span class="status-badge status-expired"><i class='bx bxs-calendar-x'></i> Expirado</span></td>
+                                    <td><span class="status-badge status-expired"><i class='bx bxs-calendar-x'></i> Sin stock</span></td>
                                      <td>
                                         <button class="btn-action btn-details"><i class='bx bx-info-circle'></i> Detalles</button>
                                     </td>
                                 </tr>
                                  <tr>
-                                    <td>Loratadina 10mg</td>
+                                    <td>Loratadina </td>
+                                    <td>10mg</td>
                                     <td>523432333222111</td>
                                     <td>75</td>
-                                    <td>2027-05-20</td>
                                     <td>Estante A1</td>
                                     <td>Antihistamínicos</td>
                                     <td><span class="status-badge status-active"><i class='bx bxs-check-circle'></i> Activo</span></td>
                                      <td>
                                         <button class="btn-action btn-details"><i class='bx bx-info-circle'></i> Detalles</button>
                                     </td>
-                                </tr>
-                                 <tr class="low-stock">
-                                    <td>Omeprazol 20mg</td>
-                                    <td>5324532532</td>
-                                    <td>
-                                       <span class="low-stock-indicator" title="Stock bajo"><i class='bx bxs-error-circle'></i></span> 5
-                                    </td>
-                                    <td>2025-11-30</td>
-                                    <td>Estante D1</td>
-                                    <td>Gástricos</td>
-                                     <td><span class="status-badge status-low-stock"><i class='bx bxs-error-alt'></i> Stock Bajo</span></td>
-                                     <td>
-                                        <button class="btn-action btn-details"><i class='bx bx-info-circle'></i> Detalles</button>
-                                    </td>
-                                </tr>
+
                                </tbody>
                         </table>
                     </div>

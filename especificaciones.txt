@@ -1,0 +1,32 @@
+8
+RF3.4.3 El sistema desplegará la opción de ver el historial médico del residente entre sus datos. falta
+RF3.4.4 El sistema desplegará una lista con el historial médico completo del residente.  falta
+nnn
+
+
+RF3.5.1 El sistema permitirá modificar los horarios de los medicamentos. check
+RF3.5.2 El sistema permitirá agregar nuevos medicamentos o tratamientos para el residente. check
+RF3.5.3 El sistema permitirá aumentar la dosis o frecuencia de algún medicamento. check
+RF3.5.4 El sistema permitirá eliminar algún medicamento para algún residente. check
+RF3.8.2 El sistema permitirá a la jefa de enfermería cargar un medicamento nuevo. check
+RF3.8.3 El sistema mostrará la cantidad disponible de cada medicamento. check 
+RF3.8.4 El sistema notificará cuando el nivel de stock de un medicamento sea inferior a 10 unidades empaquetadas. check 
+RF3.8.7 El sistema permitirá acceder a detalles adicionales de cada medicamento, como la fecha de vencimiento y la ubicación en el almacén. check
+
+El sistema permitirá exportar la información del stock a un formato imprimible o descargable (por ejemplo, PDF o Excel). check
+
+
+
+
+
+cocina
+RF3.6.1 El sistema desplegará una lista con los diferentes tipos de dieta (diabéticos, celíacos, hipertensos, bajos en sodio, normales).
+RF3.6.2 El sistema permitirá ver cuántos tipos de cada menú deben prepararse, de acuerdo a los residentes.
+RF3.6.3 El sistema permitirá acceder a una base de datos sobre alimentos con sus respectivos valores nutricionales.
+RF3.6.4 El sistema permitirá almacenar y gestionar recetas para los diferentes menús.
+RF3.6.5 El sistema permitirá actualizar los menús diarios según las necesidades dietéticas.
+
+
+
+salida...…
+RF3.11.1 El sistema generará automáticamente un informe semanal que incluirá el consumo de medicamentos y el presentismo de los empleados.

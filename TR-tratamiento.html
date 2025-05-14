@@ -158,7 +158,7 @@
                 <div class="controls-bar">
                     <div class="search-container">
                         <i class='bx bx-search search-icon'></i>
-                        <input type="search" placeholder="Buscar residente por nombre o habitación..." class="search-input" id="resident-search">
+                        <input type="search" placeholder="Buscar residente por nombre, habitación o DNI..." class="search-input" id="resident-search">
                     </div>
                     <!-- Optional: Add Filter Button if needed later -->
                     <!-- <button class="filter-toggle-btn">
@@ -174,9 +174,13 @@
                     <div class="resident-card">
                         <div class="card-header">
                             <h3 class="resident-name">Ana García López</h3>
-                            <span class="status-badge status-active"><i class='bx bx-check-circle' ></i> Tratamiento Activo</span>
+
                         </div>
                         <div class="card-body">
+                            <div class="card-info">
+                                <i class='bx bx-id-card' title="DNI"></i>
+                                <span>DNI: 12345678A</span>
+                            </div>
                             <div class="card-info">
                                 <i class='bx bx-home-alt' title="Habitación"></i>
                                 <span>Habitación: 101A</span>
@@ -203,9 +207,9 @@
                              </div>
                         </div>
                         <div class="card-actions">
-                            <button class="btn btn-action btn-primary"><i class='bx bx-spreadsheet'></i> Ver Plan Tratamiento</button>
-                            <button class="btn btn-action btn-secondary"><i class='bx bx-history'></i> Historial Medicación</button>
-                            <button class="btn btn-action btn-secondary"><i class='bx bx-file-blank'></i> Documentos</button>
+                            <a href="TR-actualizar-tratamiento.html" style="text-decoration: none;" class="btn btn-action btn-primary"><i class='bx bx-spreadsheet'></i> Ver Plan Tratamiento</a>
+                            <a href="TR-historial-medicaciones.html" style="text-decoration: none;" class="btn btn-action btn-secondary"><i class='bx bx-history'></i> Historial Medicaciones</a>
+                            <a href="" style="text-decoration: none;" class="btn btn-action btn-secondary"><i class='bx bx-file-blank'></i> Historia Medica</a>
                         </div>
                     </div>
                     <!-- /Example Resident Card 1 -->
@@ -214,9 +218,13 @@
                      <div class="resident-card">
                         <div class="card-header">
                             <h3 class="resident-name">Carlos Fernández Ruiz</h3>
-                            <span class="status-badge status-observation"><i class='bx bx-show' ></i> En Observación</span> <!-- Different Status Example -->
+
                         </div>
                         <div class="card-body">
+                            <div class="card-info">
+                                <i class='bx bx-id-card' title="DNI"></i>
+                                <span>DNI: 87654321B</span>
+                            </div>
                             <div class="card-info">
                                 <i class='bx bx-home-alt' title="Habitación"></i>
                                 <span>Habitación: 205B</span>
@@ -243,9 +251,9 @@
                              </div>
                         </div>
                         <div class="card-actions">
-                            <button class="btn btn-action btn-primary"><i class='bx bx-spreadsheet'></i> Ver Plan Tratamiento</button>
-                            <button class="btn btn-action btn-secondary"><i class='bx bx-history'></i> Historial Medicación</button>
-                            <button class="btn btn-action btn-secondary"><i class='bx bx-file-blank'></i> Documentos</button>
+                            <a href="TR-actualizar-tratamiento.html" style="text-decoration: none;" class="btn btn-action btn-primary"><i class='bx bx-spreadsheet'></i> Ver Plan Tratamiento</a>
+                            <a href="TR-historial-medicaciones.html" style="text-decoration: none;" class="btn btn-action btn-secondary"><i class='bx bx-history'></i> Historial Medicaciones</a>
+                            <a href="" style="text-decoration: none;" class="btn btn-action btn-secondary"><i class='bx bx-file-blank'></i> Historia Medica</a>
                         </div>
                     </div>
                     <!-- /Example Resident Card 2 -->
@@ -254,9 +262,13 @@
                      <div class="resident-card">
                         <div class="card-header">
                             <h3 class="resident-name">Luisa Martínez Gómez</h3>
-                            <span class="status-badge status-stable"><i class='bx bxs-user-check'></i> Estable</span> <!-- Another Status Example -->
+
                         </div>
                         <div class="card-body">
+                            <div class="card-info">
+                                <i class='bx bx-id-card' title="DNI"></i>
+                                <span>DNI: 11223344C</span>
+                            </div>
                             <div class="card-info">
                                 <i class='bx bx-home-alt' title="Habitación"></i>
                                 <span>Habitación: 110A</span>
@@ -280,12 +292,13 @@
                             <div class="card-info card-info-full">
                                  <i class='bx bx-first-aid' title="Diagnóstico Principal"></i>
                                  <span>Diagnóstico: Artrosis, Deterioro Cognitivo Leve</span>
-                             </div>
+                            </div>
+                            
                         </div>
                         <div class="card-actions">
-                            <button class="btn btn-action btn-primary"><i class='bx bx-spreadsheet'></i> Ver Plan Tratamiento</button>
-                            <button class="btn btn-action btn-secondary"><i class='bx bx-history'></i> Historial Medicación</button>
-                            <button class="btn btn-action btn-secondary"><i class='bx bx-file-blank'></i> Documentos</button>
+                            <a href="TR-actualizar-tratamiento.html" style="text-decoration: none;" class="btn btn-action btn-primary"><i class='bx bx-spreadsheet'></i> Ver Plan Tratamiento</a>
+                            <a href="TR-historial-medicaciones.html" style="text-decoration: none;" class="btn btn-action btn-secondary"><i class='bx bx-history'></i> Historial Medicaciones</a>
+                            <a href="" style="text-decoration: none;" class="btn btn-action btn-secondary"><i class='bx bx-file-blank'></i> Historia Medica</a>
                         </div>
                     </div>
                     <!-- /Example Resident Card 3 -->
@@ -310,16 +323,22 @@
                 const noResultsMessage = document.getElementById('no-results-message');
             
                 searchInput.addEventListener('keyup', function() {
-                    const searchTerm = searchInput.value.toLowerCase();
+                    const searchTerm = searchInput.value.toLowerCase().trim();
                     let foundMatch = false;
             
                     for (let card of residentCards) {
                         const residentName = card.querySelector('.resident-name').textContent.toLowerCase();
-                        // Optional: Search other fields like room number
                         const roomInfoElement = card.querySelector('.card-info i.bx-home-alt + span');
                         const roomInfo = roomInfoElement ? roomInfoElement.textContent.toLowerCase() : '';
             
-                        if (residentName.includes(searchTerm) || roomInfo.includes(searchTerm)) {
+                        // Nuevo: Obtener DNI
+                        const dniElement = card.querySelector('.card-info i.bx-id-card + span');
+                        // Asegurarse de que el DNI existe y quitar "DNI: " para buscar solo el número/letra
+                        const dniInfo = dniElement ? dniElement.textContent.toLowerCase().replace('dni: ', '').trim() : ''; 
+            
+                        if (residentName.includes(searchTerm) || 
+                            roomInfo.includes(searchTerm) ||
+                            (dniInfo && dniInfo.includes(searchTerm))) { // Añadida condición de búsqueda por DNI
                             card.style.display = ''; // Show card
                             foundMatch = true;
                         } else {
@@ -332,9 +351,7 @@
                 });
             </script>
         </div>
-        <!--====================================================================================================-->
-        <!--====================================================================================================-->
-        <!--====================================================================================================-->
+
     </div>
   </div>
   

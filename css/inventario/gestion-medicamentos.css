@@ -1,0 +1,721 @@
+/* ==========================================================================
+   START: Complete CSS for Medication Management Page (V2 with Purchase History)
+   Includes:
+   - Root variables
+   - Basic resets
+   - Form styles
+   - Card styles
+   - Button styles (generic and specific)
+   - Table styles (for mini history and purchase history)
+   - Badge styles
+   - Modal Styles
+   - Specific styles for the medication-management-container and its sub-sections
+   - Responsive adjustments
+   ========================================================================== */
+
+/* Import Boxicons */
+@import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
+
+/* Define color variables (merged and prioritized) */
+:root {
+    --primary-color: #6a5acd;
+    --primary-light: #e8e6f8;
+    --success-color: #28a745;
+    --success-light-bg: #eaf6ec;
+    --warning-color: #ffc107;
+    --warning-light-bg: #fff8e1;
+    --danger-color: #dc3545;
+    --danger-light-bg: #f8d7da;
+    --info-color: #17a2b8;
+    --info-light-bg: #e8f6f8;
+
+    --text-color: #333;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --background-color: #f5f9ff;
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --input-focus-border: #8a7ff0;
+
+    --table-header-bg: #f1f3f5;
+    --table-row-hover-bg: #f1f1f1;
+
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --border-radius: 8px;
+    --font-family: 'Poppins', sans-serif; /* Ensure Poppins or your chosen font is loaded */
+}
+
+/* Basic Reset and Body Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family, sans-serif);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* General Form Container Styling (Card-like, e.g., for registrar-medicamento) */
+.form-container {
+    background-color: var(--card-bg);
+    padding: 25px 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin: 20px;
+}
+
+/* Title Style (Generic) */
+.view-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.view-title i {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+}
+
+/* Form Grid Layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 25px;
+    margin-bottom: 30px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+.form-group.form-group-full {
+    grid-column: 1 / -1;
+}
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.form-group label i {
+    font-size: 1.1rem;
+}
+
+/* General Input Styling */
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #aaa;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.2);
+}
+.form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%236c757d' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 1em;
+    padding-right: 35px;
+}
+.form-select:required:invalid {
+     color: var(--text-muted);
+}
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Input Group Inline (for Dosis/Graduación) */
+.input-group-inline {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+}
+.input-group-inline .form-input,
+.input-group-inline .form-select {
+    width: auto;
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+.input-group-inline .form-input[type="number"] {
+    flex-basis: 65%;
+    -moz-appearance: textfield;
+}
+.input-group-inline .form-input[type="number"]::-webkit-outer-spin-button,
+.input-group-inline .form-input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.input-group-inline .form-select {
+    flex-basis: 35%;
+    min-width: 80px;
+    padding-right: 30px;
+    background-position: right 8px center;
+}
+
+/* Form Actions (Button container) */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 10px;
+}
+
+/* General Button Styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.btn i {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
+}
+.btn-primary:hover {
+    background-color: #584ab3;
+    border-color: #584ab3;
+}
+.btn-primary:focus {
+    box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.3);
+}
+.btn-secondary {
+    background-color: var(--text-muted);
+    color: #ffffff;
+    border-color: var(--text-muted);
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+.btn-secondary:focus {
+     box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.4);
+}
+.btn-success {
+    background-color: var(--success-color);
+    color: #ffffff;
+    border-color: var(--success-color);
+}
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+.btn-success:focus {
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.4);
+}
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+    border: 1px solid var(--danger-color);
+}
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+.btn-danger:focus {
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.4);
+}
+.btn-outline-secondary {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+.btn-outline-secondary:hover {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-color: #adb5bd;
+}
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+.btn-sm i {
+    margin-right: 5px;
+    font-size: 1.1em;
+}
+
+/* Card Styling (for sections) */
+.card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 25px; /* Increased margin for better separation */
+}
+
+/* Styles for Medication Management Page Specifics */
+.medication-management-container {
+    padding: 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+.page-header .view-title {
+    margin-bottom: 0;
+}
+#medication-name-title {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+.btn.back-to-inventory {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+}
+
+.management-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+    gap: 25px;
+    /* margin-bottom: 25px;  Let cards handle their own bottom margin */
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+.section-title i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+/* Stock Management Section Specifics */
+.stock-management-section .current-stock-info {
+    background-color: var(--primary-light);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    border: 1px solid var(--primary-color);
+}
+.current-stock-info p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+.current-stock-info strong {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+.current-stock-info #last-stock-update, /* May not be used now */
+.current-stock-info #low-stock-threshold {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+.info-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding: 10px 15px;
+    background-color: var(--primary-light); /* Using primary-light for info consistency */
+    border-left: 4px solid var(--primary-color);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.info-note i {
+    margin-right: 5px;
+    color: var(--primary-color);
+}
+
+.stock-movements-history { /* Renamed from stock-history */
+    margin-top: 30px;
+}
+.subsection-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.subsection-title i {
+    font-size: 1.3rem;
+}
+
+.table-container-mini {
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+.data-table-mini {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+.data-table-mini thead th {
+    background-color: var(--table-header-bg);
+    color: var(--text-muted);
+    font-weight: 500;
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+.data-table-mini tbody td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    vertical-align: middle;
+}
+.data-table-mini tbody td small { /* For "(Corrección)" text */
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+.data-table-mini tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Badges for Stock History */
+.badge {
+    display: inline-block;
+    padding: 0.3em 0.65em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: var(--border-radius);
+}
+.badge-success {
+    color: #fff;
+    background-color: var(--success-color);
+}
+.badge-warning { /* For Salida */
+    color: var(--warning-color);
+    background-color: var(--warning-light-bg);
+    border: 1px solid var(--warning-color);
+}
+.badge-danger {
+    color: #fff;
+    background-color: var(--danger-color);
+}
+.badge-info { /* For Ajuste */
+    color: #fff;
+    background-color: var(--info-color, var(--primary-color));
+}
+
+/* Purchase History Section */
+.purchase-history-section .section-header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.purchase-history-section .section-header-actions .section-title {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.table-container { /* For larger tables like purchase history */
+    overflow-x: auto;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+.data-table.purchase-history-table { /* General table style if not defined elsewhere */
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+.data-table.purchase-history-table thead th {
+    background-color: var(--table-header-bg);
+    color: var(--text-muted);
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 2px solid var(--border-color);
+    white-space: nowrap;
+}
+.data-table.purchase-history-table thead th i,
+.data-table.purchase-history-table tbody td i {
+    vertical-align: middle;
+    margin-right: 6px;
+    font-size: 1.1em;
+}
+.data-table.purchase-history-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.15s ease-in-out;
+}
+.data-table.purchase-history-table tbody tr:last-child {
+    border-bottom: none;
+}
+.data-table.purchase-history-table tbody tr:hover {
+    background-color: var(--table-row-hover-bg);
+}
+.data-table.purchase-history-table tbody td {
+    padding: 12px 15px;
+    vertical-align: middle;
+    color: var(--text-color);
+}
+.unit-small {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-left: 3px;
+}
+.date-highlight {
+    font-weight: 500;
+}
+.date-highlight.text-warning {
+    color: var(--warning-color);
+}
+.date-highlight.text-danger {
+    color: var(--danger-color);
+}
+.btn-action { /* For edit/delete buttons in table rows */
+    padding: 5px 8px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: var(--primary-color);
+    transition: color 0.2s ease;
+}
+.btn-action:hover {
+    color: #584ab3;
+}
+.btn-action i {
+    font-size: 1.4em; /* Slightly larger icons for actions */
+    margin-right: 0; /* No margin if icon is alone */
+}
+.text-center {
+    text-align: center;
+}
+.no-data td { /* If using colspan for no-data message */
+    padding: 20px !important;
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+}
+
+/* Additional Actions Section (Eliminar) */
+.additional-actions-section {
+    /* margin-top: 25px; Handled by card margin */
+}
+.additional-actions-section .action-buttons-group {
+    display: flex; /* Default, will be overridden on mobile if needed */
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.action-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    padding: 12px 15px;
+    background-color: var(--danger-light-bg); /* Warning for delete note */
+    border-left: 4px solid var(--danger-color);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+.action-note strong {
+    color: var(--danger-color);
+}
+
+/* Basic Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 10% auto;
+    padding: 0; /* Card inside will handle padding */
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 80%;
+    max-width: 700px;
+    position: relative;
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    border-bottom: 1px solid var(--border-color);
+}
+.modal-header .section-title { /* Re-use section-title for modal header */
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+    font-size: 1.2rem; /* Slightly smaller for modal */
+}
+.modal-header .section-title i {
+    font-size: 1.4rem;
+}
+.close-modal {
+    color: var(--text-muted);
+    font-size: 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+.close-modal:hover,
+.close-modal:focus {
+    color: var(--text-color);
+    text-decoration: none;
+}
+/* Ensure form inside modal uses card padding */
+#registerPurchaseModal .card {
+    box-shadow: none;
+    margin-bottom: 0;
+}
+#registerPurchaseModal .form-grid { /* Specific to modal form */
+    margin-bottom: 20px;
+}
+#registerPurchaseModal .form-actions { /* Specific to modal form */
+    padding-top: 15px;
+    margin-top: 5px;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) { /* Tablet and below */
+    .management-grid {
+        grid-template-columns: 1fr; /* Stack main content sections */
+    }
+    .medication-management-container {
+        padding: 15px;
+    }
+    .form-grid { /* General form grid stacking */
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) { /* Mobile */
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .page-header .view-title {
+        font-size: 1.4rem;
+    }
+    .btn.back-to-inventory {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .card, .form-container { /* Reduce padding on mobile for cards and general form containers */
+        padding: 20px;
+        margin-left: 10px; /* Reduce side margins for full page layouts */
+        margin-right: 10px;
+    }
+    .medication-management-container {
+        padding: 10px 0; /* Let cards handle their own padding */
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+    }
+
+    .additional-actions-section .action-buttons-group {
+        flex-direction: column;
+    }
+    .btn-danger.full-width-mobile,
+    .additional-actions-section .action-buttons-group .btn { /* Ensure buttons in this group are full width */
+        width: 100%;
+    }
+    
+    .form-actions { /* General form actions stacking */
+        flex-direction: column;
+        gap: 10px;
+    }
+    .form-actions .btn {
+        width: 100%;
+    }
+
+    /* Specific for modal on mobile */
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+    #registerPurchaseModal .form-grid { /* Modal form grid */
+        grid-template-columns: 1fr;
+    }
+
+    /* Purchase history section responsive */
+    .purchase-history-section .section-header-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .purchase-history-section .section-header-actions .btn {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   END: Complete CSS for Medication Management Page
+   ========================================================================== */
