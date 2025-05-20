@@ -1,0 +1,362 @@
+/* Archivo: css/cocina/receta-detalle.css */
+
+/* :root variables se asumen definidas globalmente desde el CSS principal */
+:root {
+    --primary-color: #6a5acd;
+    --primary-light: #e8e6f8;
+    --success-color: #28a745;
+    --success-light-bg: #eaf6ec;
+    --warning-color: #ffc107;
+    --warning-light-bg: #fff8e1;
+    --info-color: #17a2b8;
+    --info-light-bg: #e2f6f9;
+    --danger-color: #dc3545;
+    --danger-light-bg: #f8d7da;
+
+    --text-color: #333;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --background-color: white;
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --table-row-hover-bg: #f1f1f1;
+
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --border-radius: 8px;
+    --border-radius-sm: 6px;
+    
+    /* Colores específicos para etiquetas de dieta */
+    --diet-standard-bg: #e0eaff; 
+    --diet-standard-text: #4a69bb;
+    --diet-diabetic-bg: #e0f8e0; 
+    --diet-diabetic-text: #38761d;
+    --diet-low-sodium-bg: #fff0e0; 
+    --diet-low-sodium-text: #c2780e;
+    --diet-soft-bg: #fce4ec; 
+    --diet-soft-text: #880e4f;
+    --diet-pureed-bg: #e8e6f8; 
+    --diet-pureed-text: #6a5acd; 
+
+    /* Colores para estados de comida */
+    --status-planned-bg: var(--info-light-bg);
+    --status-planned-text: var(--info-color);
+    --status-in-progress-bg: var(--warning-light-bg);
+    --status-in-progress-text: var(--warning-color);
+    --status-served-bg: var(--success-light-bg);
+    --status-served-text: var(--success-color);
+}
+
+/* Estilos específicos para la vista de Detalle de Receta */
+.recipe-detail-view {
+    padding: 25px;
+    background-color: var(--background-color);
+}
+
+.recipe-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.recipe-detail-header .view-title { /* Hereda estilos de .view-title base */
+    margin-bottom: 0; /* Anula el margin-bottom de la clase base si es necesario aquí */
+}
+.recipe-detail-header .view-title i.bx-receipt {
+    color: var(--primary-color);
+    font-size: 2rem; /* Ligeramente más grande para destacar */
+}
+#recipe-detail-name {
+    font-weight: 600;
+}
+
+
+/* Información general de la receta */
+.recipe-main-info {
+    margin-bottom: 35px;
+}
+
+.recipe-summary-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 20px 25px;
+    box-shadow: var(--box-shadow);
+}
+
+.recipe-summary-card h3 {
+    font-size: 1.45rem;
+    color: var(--text-color); /* Usar text-color para consistencia, o primary-color si se prefiere énfasis */
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.recipe-summary-card p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+.recipe-summary-card p strong {
+    font-weight: 600;
+    color: var(--text-color);
+}
+.recipe-summary-card .recipe-image {
+    max-width: 100%;
+    border-radius: var(--border-radius-sm);
+    margin-top: 15px;
+}
+
+/* Título para la sección de variantes */
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 30px;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.section-title i {
+    color: var(--primary-color);
+    font-size: 1.3em;
+}
+
+/* Grid para las tarjetas de variantes */
+.recipe-variants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 25px;
+}
+
+/* Tarjeta de Variante Individual */
+.variant-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+.variant-card:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    transform: translateY(-3px);
+}
+
+.variant-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #fdfdff; /* Un fondo muy sutil */
+}
+
+.variant-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1; /* Permite que el grupo de título tome espacio */
+}
+
+.variant-title-group h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.variant-servings {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    background-color: var(--primary-light);
+    padding: 6px 12px;
+    border-radius: var(--border-radius-sm);
+    white-space: nowrap;
+    margin-left: 10px; /* Espacio si el título es largo */
+}
+
+.variant-card-body {
+    padding: 20px 25px;
+    flex-grow: 1;
+}
+
+.variant-card-body h5 {
+    font-size: 1.05rem; /* Ligeramente más grande */
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: 0; /* Ajustar si es el primer elemento */
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.variant-card-body h5:not(:first-child) {
+    margin-top: 20px; /* Espacio entre secciones de ingredientes y pasos */
+}
+.variant-card-body h5 i {
+    font-size: 1.3em; /* Iconos un poco más grandes */
+}
+
+.variant-card-body ul,
+.variant-card-body ol {
+    padding-left: 25px; /* Más indentación */
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    line-height: 1.75; /* Mayor interlineado para legibilidad */
+}
+.variant-card-body ul li,
+.variant-card-body ol li {
+    margin-bottom: 8px;
+}
+.variant-card-body ul li::marker {
+    color: var(--primary-color);
+    font-size: 0.9em; /* Ajustar tamaño del bullet si es necesario */
+}
+.variant-card-body ol {
+    list-style-type: decimal; /* Asegurar numeración */
+}
+.variant-card-body ol li::marker {
+    font-weight: 500;
+    color: var(--primary-color);
+}
+.variant-card-body strong { /* Para destacar texto dentro de listas */
+    font-weight: 600;
+    color: var(--text-color); /* O un color específico si se desea */
+}
+
+
+/* Estilos para etiquetas de dieta (reutilizados y ajustados si es necesario) */
+.diet-tag {
+    font-size: 0.7rem; /* Un poco más pequeño en este contexto */
+    padding: 4px 10px;
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+    white-space: nowrap;
+    display: inline-block; /* Para que el padding funcione bien */
+}
+.diet-tag.diet-standard { background-color: var(--diet-standard-bg); color: var(--diet-standard-text); }
+.diet-tag.diet-diabetic { background-color: var(--diet-diabetic-bg); color: var(--diet-diabetic-text); }
+.diet-tag.diet-low-sodium { background-color: var(--diet-low-sodium-bg); color: var(--diet-low-sodium-text); }
+.diet-tag.diet-soft { background-color: var(--diet-soft-bg); color: var(--diet-soft-text); }
+.diet-tag.diet-pureed { background-color: var(--diet-pureed-bg); color: var(--diet-pureed-text); }
+
+/* Estilos base para botones (reutilizados) */
+.btn { /* Asegurar que los estilos base de .btn estén disponibles */
+    padding: 8px 16px; /* Ajuste ligero al padding */
+    font-size: 0.9rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espacio entre icono y texto */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    font-weight: 500;
+    text-decoration: none;
+    line-height: 1.5;
+}
+.btn i {
+    font-size: 1.15em; /* Iconos de botón un poco más grandes */
+}
+
+.btn-secondary {
+    background-color: var(--card-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+    background-color: var(--table-row-hover-bg);
+    border-color: #adb5bd; /* Un poco más oscuro en hover */
+    color: var(--text-color);
+}
+
+/* Estilos para título de vista (reutilizado) */
+.view-title { /* Asegurar que los estilos base de .view-title estén disponibles */
+    font-size: 1.85rem; /* Ligeramente más grande */
+    font-weight: 600;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.view-title i {
+    font-size: 1.9rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .recipe-variants-grid {
+        grid-template-columns: 1fr; /* Una columna en tablets y móviles */
+    }
+}
+
+@media (max-width: 768px) {
+    .recipe-detail-view {
+        padding: 20px;
+    }
+    .recipe-detail-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px; /* Reducir gap */
+    }
+    .recipe-detail-header .btn {
+        width: 100%; /* Botón ocupa todo el ancho */
+        justify-content: center;
+        margin-top: 10px;
+    }
+    .view-title {
+        font-size: 1.6rem;
+    }
+    .section-title {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .recipe-detail-view {
+        padding: 15px;
+    }
+    .view-title {
+        font-size: 1.4rem;
+    }
+    .view-title i.bx-receipt {
+        font-size: 1.7rem;
+    }
+    .section-title {
+        font-size: 1.25rem;
+    }
+    .variant-card-header {
+        padding: 15px;
+        flex-direction: column; /* Apilar en móvil */
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .variant-title-group h4 {
+        font-size: 1.15rem;
+    }
+    .variant-servings {
+        align-self: flex-start; /* Alinear a la izquierda */
+        margin-left: 0;
+        margin-top: 5px;
+    }
+    .variant-card-body {
+        padding: 15px 20px;
+    }
+    .variant-card-body ul,
+    .variant-card-body ol {
+        padding-left: 20px;
+    }
+}

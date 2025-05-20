@@ -1,0 +1,543 @@
+/* Archivo: css/cocina/recetas-dia.css */
+
+/* Variables de color y estilos base */
+:root {
+    --primary-color: #6a5acd;
+    --primary-light: #e8e6f8;
+    --success-color: #28a745;
+    --success-light-bg: #eaf6ec;
+    --warning-color: #ffc107;
+    --warning-light-bg: #fff8e1;
+    --info-color: #17a2b8;
+    --info-light-bg: #e2f6f9;
+    --danger-color: #dc3545;
+    --danger-light-bg: #f8d7da;
+
+    --text-color: #333;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --background-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --table-row-hover-bg: #f1f1f1;
+
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --border-radius: 8px;
+    --border-radius-sm: 6px;
+    
+    /* Colores específicos para etiquetas de dieta */
+    --diet-standard-bg: #e0eaff; 
+    --diet-standard-text: #4a69bb;
+    --diet-diabetic-bg: #e0f8e0; 
+    --diet-diabetic-text: #38761d;
+    --diet-low-sodium-bg: #fff0e0; 
+    --diet-low-sodium-text: #c2780e;
+    --diet-soft-bg: #fce4ec; 
+    --diet-soft-text: #880e4f;
+    --diet-pureed-bg: #e8e6f8; 
+    --diet-pureed-text: #6a5acd; 
+
+    /* Colores para estados de comida */
+    --status-planned-bg: var(--info-light-bg);
+    --status-planned-text: var(--info-color);
+    --status-in-progress-bg: var(--warning-light-bg);
+    --status-in-progress-text: var(--warning-color);
+    --status-served-bg: var(--success-light-bg);
+    --status-served-text: var(--success-color);
+}
+
+/* Estilos base */
+.view-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.view-title i {
+    font-size: 1.9rem; 
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem; 
+    font-weight: 500;
+    white-space: nowrap;
+}
+.status-badge i {
+    margin-right: 5px;
+    font-size: 1em;
+}
+
+/* General Button Styles */
+.btn, .btn-action {
+    padding: 7px 14px;
+    font-size: 0.85rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    font-weight: 500;
+    text-decoration: none;
+    line-height: 1.5;
+}
+.btn i, .btn-action i {
+    font-size: 1.1em;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: darkslateblue;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-secondary {
+    background-color: var(--card-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+    background-color: var(--table-row-hover-bg);
+    border-color: #bbb;
+    color: var(--text-color);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+.btn-success:hover {
+    background-color: #1e7e34;
+}
+
+.btn:disabled, .btn-action:disabled {
+    background-color: #e9ecef;
+    color: #adb5bd;
+    border-color: #ced4da;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* Estilos específicos para la vista de Recetas del Día */
+.daily-recipes-view {
+    padding: 20px;
+}
+
+/* Encabezado de la vista y controles de fecha */
+.view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap; 
+    gap: 15px;
+}
+
+.view-title i.bx-food-menu {
+    color: var(--primary-color); 
+}
+
+.date-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--card-bg);
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--box-shadow);
+}
+
+.date-input {
+    border: 1px solid var(--border-color);
+    padding: 6px 10px;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    max-width: 150px;
+}
+.date-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.btn-icon {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 6px;
+    border-radius: 50%; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.btn-icon i {
+    font-size: 1.4rem;
+}
+.btn-icon:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.btn-today {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+.btn-today i {
+}
+
+/* Grid para las tarjetas de comidas */
+.meal-plan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+/* Tarjeta de Comida Individual */
+.meal-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s ease-in-out;
+}
+.meal-card:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.meal-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #fcfdff;
+}
+
+.meal-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.meal-title-group h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+}
+.meal-icon {
+    font-size: 1.8rem;
+}
+
+/* Variantes de .status-badge específicas para comidas */
+.status-badge.status-planned {
+    background-color: var(--status-planned-bg);
+    color: var(--status-planned-text);
+}
+.status-badge.status-in-progress {
+    background-color: var(--status-in-progress-bg);
+    color: var(--status-in-progress-text);
+}
+.status-badge.status-served {
+    background-color: var(--status-served-bg);
+    color: var(--status-served-text);
+}
+
+.meal-card-body {
+    padding: 15px 20px 20px;
+    flex-grow: 1;
+}
+
+.recipe-entry {
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--border-color);
+}
+.recipe-entry:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.recipe-entry:first-child {
+    padding-top: 0;
+}
+
+.diet-breakdown {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.diet-tag {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.diet-tag.diet-standard { background-color: var(--diet-standard-bg); color: var(--diet-standard-text); }
+.diet-tag.diet-diabetic { background-color: var(--diet-diabetic-bg); color: var(--diet-diabetic-text); }
+.diet-tag.diet-low-sodium { background-color: var(--diet-low-sodium-bg); color: var(--diet-low-sodium-text); }
+.diet-tag.diet-soft { background-color: var(--diet-soft-bg); color: var(--diet-soft-text); }
+.diet-tag.diet-pureed { background-color: var(--diet-pureed-bg); color: var(--diet-pureed-text); }
+
+.recipe-actions {
+    margin-top: 8px;
+}
+
+/* Botones pequeños y outline */
+.btn-sm {
+    padding: 4px 10px !important;
+    font-size: 0.8rem !important;
+}
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+.btn-outline:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.meal-card-footer {
+    padding: 15px 20px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: auto;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .view-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .date-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .date-input {
+        flex-grow: 1;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .meal-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .meal-title-group h3 {
+        font-size: 1.15rem;
+    }
+    .meal-icon {
+        font-size: 1.6rem;
+    }
+    .meal-card-footer {
+        flex-direction: column;
+    }
+    .meal-card-footer .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .date-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .btn-today {
+        flex-basis: 100%; 
+        margin-top: 5px;
+    }
+}
+
+/* Encabezado de la Vista */
+#view-title-date-text {
+    font-weight: 600;
+}
+
+/* Banners de información de fecha */
+.today-highlight-banner,
+.past-day-info-banner {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 10px 15px;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+.today-highlight-banner i,
+.past-day-info-banner i {
+    margin: 0 5px;
+    vertical-align: middle;
+}
+.past-day-info-banner {
+    background-color: #f0f0f0;
+    color: var(--text-muted);
+    border-color: #ccc;
+}
+
+
+/* Tarjeta de Comida - Simplificada */
+.meal-card-header {
+}
+
+
+/* Item de Receta Individual */
+.recipe-item {
+    padding: 15px 0;
+    border-bottom: 1px dashed var(--border-color);
+}
+.recipe-item:last-child {
+    border-bottom: none;
+    padding-bottom: 5px;
+}
+.recipe-item:first-child {
+    padding-top: 5px;
+}
+
+.recipe-name {
+    display: block;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+}
+
+.recipe-variants {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.variant-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: #fdfdfd;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid #f0f0f0;
+}
+
+.variant-tag {
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding-right: 10px;
+}
+
+
+/* Botón para marcar/desmarcar preparación de variante */
+.btn-toggle-prepared {
+    background-color: var(--card-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    min-width: 160px;
+    justify-content: flex-start;
+}
+.btn-toggle-prepared:not(:disabled):hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+.btn-toggle-prepared i {
+    font-size: 1.3em;
+    margin-right: 8px;
+}
+.btn-toggle-prepared.prepared {
+    background-color: var(--success-light-bg);
+    color: var(--success-color);
+    border-color: var(--success-color);
+}
+.btn-toggle-prepared.prepared i {
+    color: var(--success-color);
+}
+.btn-toggle-prepared:disabled,
+.btn-toggle-prepared.disabled-past {
+    background-color: #f8f9fa;
+    color: #adb5bd;
+    border-color: #e0e0e0;
+    cursor: not-allowed;
+}
+.btn-toggle-prepared:disabled i,
+.btn-toggle-prepared.disabled-past i {
+    color: #adb5bd;
+}
+
+
+/* Botón Ver Detalle Receta */
+.recipe-actions-view {
+    margin-top: 10px;
+    text-align: right;
+}
+.btn-xs {
+    padding: 3px 8px !important;
+    font-size: 0.75rem !important;
+}
+.btn-xs i {
+    font-size: 1em !important;
+    margin-right: 3px !important;
+}
+
+/* Contenedor para el botón de finalizar día */
+.finalize-day-action {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.btn-lg {
+    padding: 12px 25px !important;
+    font-size: 1.1rem !important;
+}
+.btn-lg i {
+    font-size: 1.2em !important;
+}
+.finalize-message-status {
+    font-weight: 500;
+    color: var(--success-color);
+    font-size: 0.95rem;
+}
+
+/* Responsive Adjustments para los nuevos elementos */
+@media (max-width: 520px) {
+    .variant-entry {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .btn-toggle-prepared {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -18,7 +18,7 @@
 ## Registrar Medicamento
 
 - Eliminar el campo **"Fecha de vencimiento"** del formulario. puesto que el vencimiento estara dadao por el lote en el que se compro. 
-
+n
 ---
 
 ## Tratamientos Médicos

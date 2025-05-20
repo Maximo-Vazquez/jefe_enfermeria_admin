@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administracion</title>
+  <!-- Boxicons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+
+    <link rel="stylesheet" href="css/cocinero.css">
+
+  <style>
+
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <!-- En vez de incluir directamente -->
+    <!-- sidebar.html -->
+
+
+        <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; align-items: center;">
+            <img src="img/logo.png" alt="" class="logo" />
+            <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+            </div>
+        </div>
+        <div class="sidebar-menu ">
+            
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+            <i class='bx bx-layer'></i>
+            <span>Inventario de Medicamentos</span>
+            </div>
+            <div class="submenu">
+            <a href="IN-ver-invetario.html" class="submenu-item">
+                <span>Ver Inventario</span>
+            </a>
+            <a href="IN-registrar-medicamento.html" class="submenu-item">
+                <span>Registrar Nuevo Medicamento</span>
+            </a>
+            <a href="IN-exportar.html" class="submenu-item">
+                <span>Exportar Stock</span>
+            </a>
+            </div>
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Tratamientos Médicos</span>
+                </div>
+                <div class="submenu">
+                <a href="TR-tratamiento.html" class="submenu-item">
+                    <span>Tratamientos por Residente</span>
+                </a>
+                <a href="TR-actualizar-tratamiento.html" class="submenu-item">
+                    <span>Actualizar Tratamiento</span>
+                </a>
+                <a href="TR-historial-medicaciones.html" class="submenu-item">
+                    <span>Historial de Medicación</span>
+                </a>
+            </div>
+            <!-- Sección de Pedidos y Ventas -->
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Informes</span>
+            </div>
+            <div class="submenu">
+                <a href="#" class="submenu-item">
+                    <span>Informe de Uso Semanal</span>
+                </a>
+                <a href="#" class="submenu-item">
+                    <span>Medicamentos Administrados</span>
+                </a>
+                <a href="INFO-alertas-stock.html" class="submenu-item">
+                    <span>Alertas de stock Bajo</span>
+                </a>
+            </div>
+        </div>
+
+
+        </div>
+        <script>
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            submenu.classList.toggle('expanded');
+            element.classList.toggle('expanded');
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (
+            window.innerWidth <= 768 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target) &&
+            sidebar.classList.contains('open')
+            ) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            if (window.innerWidth > 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        </script>
+
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="main-content">
+        <div class="app-header">
+            <div class="header-info-group">
+              <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+                <i class='bx bx-menu'></i>
+              </button>
+          
+          
+          
+              <div class="page-title-nav"> Administracion</div>
+              <span class="role-badge-nav">Cocinero</span>
+            </div>
+            <!-- Acciones de la barra de navegación superior -->
+            <div class="header-action-list">
+                <!-- ========  Cerrar sesión (POST)  ======== -->
+                <form id="logout-form" action=""  method="post" style="display:inline;">
+
+                  <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <i class='bx bx-log-out'></i>
+                    <span>Cerrar sesión</span>
+                  </button>
+                </form>
+      
+
+              </div>
+        </div>
+          
+
+        <div class="content-area">
+
+            <div class="daily-recipes-view">
+                <!-- Encabezado de la Vista y Controles de Fecha -->
+                <div class="view-header">
+                    <h2 class="view-title"><i class='bx bx-food-menu'></i> <span id="view-title-date-text">Recetas del Día</span></h2>
+                    <div class="date-controls">
+                        <button class="btn-icon" id="prev-day" aria-label="Día anterior">
+                            <i class='bx bx-chevron-left'></i>
+                        </button>
+                        <input type="date" id="current-date" class="date-input" value="2025-05-20"> <!-- JS actualizará esto -->
+                        <button class="btn-icon" id="next-day" aria-label="Día siguiente">
+                            <i class='bx bx-chevron-right'></i>
+                        </button>
+                        <button class="btn btn-secondary btn-today" id="go-to-today">
+                            <i class='bx bx-calendar-event'></i> Ir a Hoy
+                        </button>
+                    </div>
+                </div>
+
+                <div class="today-highlight-banner" id="today-banner" style="display: none;">
+                    <i class='bx bxs-star'></i> Estás viendo el menú programado para HOY <i class='bx bxs-star'></i>
+                </div>
+                <div class="past-day-info-banner" id="past-day-banner" style="display: none;">
+                    <i class='bx bx-history'></i> Estás viendo el historial de recetas del día <span id="past-day-date-text"></span>. Las acciones de preparación están deshabilitadas.
+                </div>
+
+
+                <!-- Contenedor de Planes de Comida (Desayuno, Almuerzo, Merienda, Cena) -->
+                <div class="meal-plan-grid">
+
+                    <!-- Tarjeta de Comida: Desayuno -->
+                    <div class="meal-card" data-meal-type="desayuno">
+                        <div class="meal-card-header">
+                            <div class="meal-title-group">
+                                <i class='bx bx-cafe meal-icon' style="color: #8B4513;"></i>
+                                <h3>Desayuno</h3>
+                            </div>
+                            <!-- Ya no hay badge de estado de comida general -->
+                        </div>
+                        <div class="meal-card-body">
+                            <div class="recipe-item">
+                                <span class="recipe-name">Avena Caliente con Frutos Rojos y Nueces</span>
+                                <div class="recipe-variants">
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-standard">Estándar (20)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="avena-estandar" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-diabetic">Sin Azúcar Añadido (8)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="avena-diabetico" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div class="recipe-actions-view">
+                                    <a href="recetas.html" class="btn btn-xs btn-outline"><i class='bx bx-detail'></i> Ver Detalle Receta</a>
+                                </div>
+                            </div>
+                            <div class="recipe-item">
+                                <span class="recipe-name">Yogur Natural con Semillas de Chía</span>
+                                <div class="recipe-variants">
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-standard">Estándar (30)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="yogur-estandar" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                 <div class="recipe-actions-view">
+                                    <a href="recetas.html" class="btn btn-xs btn-outline"><i class='bx bx-detail'></i> Ver Detalle Receta</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- El footer se elimina, las acciones están por receta -->
+                    </div>
+                    <!-- /Tarjeta de Comida: Desayuno -->
+
+                    <!-- Tarjeta de Comida: Almuerzo -->
+                    <div class="meal-card" data-meal-type="almuerzo">
+                        <div class="meal-card-header">
+                             <div class="meal-title-group">
+                                <i class='bx bx-restaurant meal-icon' style="color: #FF8C00;"></i>
+                                <h3>Almuerzo</h3>
+                            </div>
+                        </div>
+                        <div class="meal-card-body">
+                            <div class="recipe-item">
+                                <span class="recipe-name">Salmón al Horno con Espárragos y Quinoa</span>
+                                <div class="recipe-variants">
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-standard">Estándar (18)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="salmon-estandar" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-low-sodium">Bajo en Sodio (7)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="salmon-sodio" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                 <div class="recipe-actions-view">
+                                    <a href="recetas.html" class="btn btn-xs btn-outline"><i class='bx bx-detail'></i> Ver Detalle Receta</a>
+                                </div>
+                            </div>
+                            <div class="recipe-item">
+                                <span class="recipe-name">Crema de Verduras de Temporada</span>
+                                <div class="recipe-variants">
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-standard">Estándar (25)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="crema-estandar" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-pureed">Triturado (6)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="crema-triturado" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                 <div class="recipe-actions-view">
+                                    <a href="recetas.html" class="btn btn-xs btn-outline"><i class='bx bx-detail'></i> Ver Detalle Receta</a>
+                                </div>
+                            </div>
+                            <div class="recipe-item">
+                                <span class="recipe-name">Ensalada Fresca con Pollo a la Plancha Desmenuzado</span>
+                                <div class="recipe-variants">
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-standard">Estándar (20)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="ensalada-pollo" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                 <div class="recipe-actions-view">
+                                    <a href="recetas.html" class="btn btn-xs btn-outline"><i class='bx bx-detail'></i> Ver Detalle Receta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Tarjeta de Comida: Almuerzo -->
+
+                    <!-- Tarjeta de Comida: Merienda -->
+                     <div class="meal-card" data-meal-type="merienda">
+                        <div class="meal-card-header">
+                            <div class="meal-title-group">
+                                <i class='bx bx-cookie meal-icon' style="color: #D2691E;"></i>
+                                <h3>Merienda</h3>
+                            </div>
+                        </div>
+                        <div class="meal-card-body">
+                            <div class="recipe-item">
+                                <span class="recipe-name">Compota de Manzana y Pera Casera (sin azúcar añadido)</span>
+                                 <div class="recipe-variants">
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-standard">Estándar / Sin Azúcar (30)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="compota-estandar" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                 <div class="recipe-actions-view">
+                                    <a href="recetas.html" class="btn btn-xs btn-outline"><i class='bx bx-detail'></i> Ver Detalle Receta</a>
+                                </div>
+                            </div>
+                            <div class="recipe-item">
+                                <span class="recipe-name">Infusión Digestiva</span>
+                                <div class="recipe-variants">
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-standard">General (35)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="infusion" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- No es necesario "Ver Detalle" para una infusión simple -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Tarjeta de Comida: Merienda -->
+                    
+                    <!-- Tarjeta de Comida: Cena -->
+                    <div class="meal-card" data-meal-type="cena">
+                        <div class="meal-card-header">
+                            <div class="meal-title-group">
+                                <i class='bx bxs-moon meal-icon' style="color: #483D8B;"></i>
+                                <h3>Cena</h3>
+                            </div>
+                        </div>
+                        <div class="meal-card-body">
+                            <div class="recipe-item">
+                                <span class="recipe-name">Sopa Juliana de Verduras Claras</span>
+                                 <div class="recipe-variants">
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-standard">Estándar (28)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="sopa-juliana-estandar" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                     <div class="variant-entry">
+                                        <span class="variant-tag diet-low-sodium">Bajo en Sodio (10)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="sopa-juliana-sodio" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                 <div class="recipe-actions-view">
+                                    <a href="recetas.html" class="btn btn-xs btn-outline"><i class='bx bx-detail'></i> Ver Detalle Receta</a>
+                                </div>
+                            </div>
+                            <div class="recipe-item">
+                                <span class="recipe-name">Pescado Blanco al Vapor con Judías Verdes</span>
+                                <div class="recipe-variants">
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-standard">Estándar (22)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="pescado-vapor-estandar" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                    <div class="variant-entry">
+                                        <span class="variant-tag diet-soft">Textura Suave (desmenuzado) (6)</span>
+                                        <button class="btn btn-sm btn-toggle-prepared" data-recipe-id="pescado-vapor-suave" aria-pressed="false">
+                                            <i class='bx bx-circle'></i> <span class="btn-text">Marcar Preparado</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                 <div class="recipe-actions-view">
+                                    <a href="recetas.html" class="btn btn-xs btn-outline"><i class='bx bx-detail'></i> Ver Detalle Receta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Tarjeta de Comida: Cena -->
+
+                </div> <!-- /meal-plan-grid -->
+
+                <!-- Botón para finalizar todas las recetas del día -->
+                <div class="finalize-day-action" id="finalize-day-container">
+                    <button class="btn btn-success btn-lg" id="btn-finalize-all" disabled>
+                        <i class='bx bx-check-double'></i> Finalizar Todas las Preparaciones del Día
+                    </button>
+                    <p id="finalize-message" class="finalize-message-status" style="display:none;">Todas las recetas del día han sido marcadas como preparadas.</p>
+                </div>
+
+            </div> <!-- /daily-recipes-view -->
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const dateInput = document.getElementById('current-date');
+                    const todayBanner = document.getElementById('today-banner');
+                    const pastDayBanner = document.getElementById('past-day-banner');
+                    const pastDayDateText = document.getElementById('past-day-date-text');
+                    const viewTitleDateText = document.getElementById('view-title-date-text');
+                    const btnFinalizeAll = document.getElementById('btn-finalize-all');
+                    const finalizeMessage = document.getElementById('finalize-message');
+                    const finalizeDayContainer = document.getElementById('finalize-day-container');
+
+                    const today = new Date();
+                    const todayISO = today.toISOString().split('T')[0];
+
+                    function formatDateForDisplay(isoDate) {
+                        const date = new Date(isoDate + 'T00:00:00'); // Asegurar que es local
+                        return date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+                    }
+                    
+                    function updateViewForDate() {
+                        const selectedDateISO = dateInput.value;
+                        const isToday = (selectedDateISO === todayISO);
+                        const isPastDay = selectedDateISO < todayISO;
+
+                        // Actualizar título y banners
+                        if (isToday) {
+                            viewTitleDateText.textContent = 'Recetas de HOY (' + formatDateForDisplay(selectedDateISO) + ')';
+                            todayBanner.style.display = 'block';
+                            pastDayBanner.style.display = 'none';
+                            finalizeDayContainer.style.display = 'flex'; // Mostrar botón de finalizar para hoy
+                        } else if (isPastDay) {
+                            viewTitleDateText.textContent = 'Historial: ' + formatDateForDisplay(selectedDateISO);
+                            todayBanner.style.display = 'none';
+                            pastDayDateText.textContent = formatDateForDisplay(selectedDateISO);
+                            pastDayBanner.style.display = 'block';
+                            finalizeDayContainer.style.display = 'none'; // Ocultar botón de finalizar para días pasados
+                        } else { // Future day
+                             viewTitleDateText.textContent = 'Recetas Programadas: ' + formatDateForDisplay(selectedDateISO);
+                            todayBanner.style.display = 'none';
+                            pastDayBanner.style.display = 'none';
+                            finalizeDayContainer.style.display = 'flex'; // Mostrar botón, aunque quizás deshabilitado si no hay recetas aún
+                        }
+                        
+                        // Habilitar/deshabilitar botones de preparación según la fecha
+                        const preparationButtons = document.querySelectorAll('.btn-toggle-prepared');
+                        preparationButtons.forEach(btn => {
+                            btn.disabled = isPastDay; 
+                            if (isPastDay) {
+                                btn.classList.add('disabled-past');
+                            } else {
+                                btn.classList.remove('disabled-past');
+                            }
+                        });
+
+                        // (Simulación) Cargar recetas para la fecha y actualizar estados de preparación
+                        // En una aplicación real, aquí harías una llamada AJAX para obtener los datos del día
+                        // y luego llamarías a checkAllRecipesPrepared()
+                        checkAllRecipesPrepared(); 
+                    }
+
+                    if (!dateInput.value) {
+                        dateInput.value = todayISO;
+                    }
+                    updateViewForDate(); // Inicializar al cargar
+
+                    dateInput.addEventListener('change', updateViewForDate);
+
+                    document.getElementById('go-to-today').addEventListener('click', function() {
+                        dateInput.value = todayISO;
+                        updateViewForDate();
+                    });
+
+                    document.getElementById('prev-day').addEventListener('click', function() {
+                        const currentDate = new Date(dateInput.value + 'T00:00:00');
+                        currentDate.setDate(currentDate.getDate() - 1);
+                        dateInput.value = currentDate.toISOString().split('T')[0];
+                        updateViewForDate();
+                    });
+
+                    document.getElementById('next-day').addEventListener('click', function() {
+                        const currentDate = new Date(dateInput.value + 'T00:00:00');
+                        currentDate.setDate(currentDate.getDate() + 1);
+                        dateInput.value = currentDate.toISOString().split('T')[0];
+                        updateViewForDate();
+                    });
+
+                    // Lógica para marcar/desmarcar recetas
+                    const mealCards = document.querySelectorAll('.meal-card');
+                    mealCards.forEach(card => {
+                        card.addEventListener('click', function(event) {
+                            const targetButton = event.target.closest('.btn-toggle-prepared');
+                            if (targetButton && !targetButton.disabled) {
+                                const isPressed = targetButton.getAttribute('aria-pressed') === 'true';
+                                targetButton.setAttribute('aria-pressed', !isPressed);
+                                const icon = targetButton.querySelector('i');
+                                const text = targetButton.querySelector('.btn-text');
+                                
+                                if (!isPressed) { // Si se marcó como preparado
+                                    icon.classList.remove('bx-circle');
+                                    icon.classList.add('bx-check-circle');
+                                    text.textContent = 'Preparado';
+                                    targetButton.classList.add('prepared');
+                                } else { // Si se desmarcó
+                                    icon.classList.remove('bx-check-circle');
+                                    icon.classList.add('bx-circle');
+                                    text.textContent = 'Marcar Preparado';
+                                    targetButton.classList.remove('prepared');
+                                }
+                                checkAllRecipesPrepared();
+                            }
+                        });
+                    });
+
+                    function checkAllRecipesPrepared() {
+                        if (dateInput.value < todayISO) { // No verificar para días pasados
+                            btnFinalizeAll.disabled = true;
+                            finalizeMessage.style.display = 'none';
+                            return;
+                        }
+
+                        const allToggleButtons = document.querySelectorAll('.meal-plan-grid .btn-toggle-prepared:not(.disabled-past)');
+                        if (allToggleButtons.length === 0) { // Si no hay recetas cargadas (o son de un día pasado sin botones activos)
+                            btnFinalizeAll.disabled = true;
+                            finalizeMessage.style.display = 'none';
+                            return;
+                        }
+                        
+                        let allPrepared = true;
+                        allToggleButtons.forEach(btn => {
+                            if (btn.getAttribute('aria-pressed') === 'false') {
+                                allPrepared = false;
+                            }
+                        });
+
+                        btnFinalizeAll.disabled = !allPrepared;
+                        if (allPrepared && allToggleButtons.length > 0) {
+                             // Opcional: Si el botón de finalizar ya fue presionado y guardado
+                             // se podría mostrar el mensaje directamente y deshabilitar el botón.
+                             // Por ahora, solo habilitamos/deshabilitamos.
+                        }
+                    }
+
+                    btnFinalizeAll.addEventListener('click', function() {
+                        if (!this.disabled) {
+                            // Aquí iría la lógica para guardar en el backend que el día está finalizado
+                            console.log("Todas las recetas del día marcadas como finalizadas.");
+                            this.disabled = true;
+                            this.innerHTML = "<i class='bx bxs-badge-check'></i> Día Finalizado";
+                            finalizeMessage.textContent = "¡Excelente! Todas las preparaciones del día han sido registradas.";
+                            finalizeMessage.style.display = 'block';
+                            // Opcionalmente deshabilitar todos los botones de preparación individuales
+                             document.querySelectorAll('.btn-toggle-prepared:not(.disabled-past)').forEach(btn => {
+                                btn.disabled = true;
+                                btn.classList.add('disabled-past'); // Para que visualmente se vea como de día pasado
+                            });
+                        }
+                    });
+                    
+                    // Simulación inicial
+                    checkAllRecipesPrepared();
+
+                });
+            </script>
+        </div>
+
+    </div>
+  </div>
+  
+</body>
+
+</html>

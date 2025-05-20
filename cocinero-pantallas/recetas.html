@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administracion</title>
+  <!-- Boxicons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+
+    <link rel="stylesheet" href="css/receta.css">
+
+  <style>
+
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <!-- En vez de incluir directamente -->
+    <!-- sidebar.html -->
+
+
+        <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; align-items: center;">
+            <img src="img/logo.png" alt="" class="logo" />
+            <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+            </div>
+        </div>
+        <div class="sidebar-menu ">
+            
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+            <i class='bx bx-layer'></i>
+            <span>Inventario de Medicamentos</span>
+            </div>
+            <div class="submenu">
+            <a href="IN-ver-invetario.html" class="submenu-item">
+                <span>Ver Inventario</span>
+            </a>
+            <a href="IN-registrar-medicamento.html" class="submenu-item">
+                <span>Registrar Nuevo Medicamento</span>
+            </a>
+            <a href="IN-exportar.html" class="submenu-item">
+                <span>Exportar Stock</span>
+            </a>
+            </div>
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Tratamientos Médicos</span>
+                </div>
+                <div class="submenu">
+                <a href="TR-tratamiento.html" class="submenu-item">
+                    <span>Tratamientos por Residente</span>
+                </a>
+                <a href="TR-actualizar-tratamiento.html" class="submenu-item">
+                    <span>Actualizar Tratamiento</span>
+                </a>
+                <a href="TR-historial-medicaciones.html" class="submenu-item">
+                    <span>Historial de Medicación</span>
+                </a>
+            </div>
+            <!-- Sección de Pedidos y Ventas -->
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Informes</span>
+            </div>
+            <div class="submenu">
+                <a href="#" class="submenu-item">
+                    <span>Informe de Uso Semanal</span>
+                </a>
+                <a href="#" class="submenu-item">
+                    <span>Medicamentos Administrados</span>
+                </a>
+                <a href="INFO-alertas-stock.html" class="submenu-item">
+                    <span>Alertas de stock Bajo</span>
+                </a>
+            </div>
+        </div>
+
+
+        </div>
+        <script>
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            submenu.classList.toggle('expanded');
+            element.classList.toggle('expanded');
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (
+            window.innerWidth <= 768 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target) &&
+            sidebar.classList.contains('open')
+            ) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            if (window.innerWidth > 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        </script>
+
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="main-content">
+        <div class="app-header">
+            <div class="header-info-group">
+              <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+                <i class='bx bx-menu'></i>
+              </button>
+          
+          
+          
+              <div class="page-title-nav"> Administracion</div>
+              <span class="role-badge-nav">Cocinero</span>
+            </div>
+            <!-- Acciones de la barra de navegación superior -->
+            <div class="header-action-list">
+                <!-- ========  Cerrar sesión (POST)  ======== -->
+                <form id="logout-form" action=""  method="post" style="display:inline;">
+
+                  <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <i class='bx bx-log-out'></i>
+                    <span>Cerrar sesión</span>
+                  </button>
+                </form>
+      
+
+              </div>
+        </div>
+          
+        <div class="content-area">
+            <div class="recipe-detail-view">
+                <!-- Encabezado de la Vista de Detalle -->
+                <div class="view-header recipe-detail-header">
+                    <h2 class="view-title">
+                        <i class='bx bx-receipt'></i>
+                        Detalle: <span id="recipe-detail-name">Salmón al Horno con Espárragos y Quinoa</span>
+                    </h2>
+                    <a href="cocinero.html" class="btn btn-secondary"> 
+                        <i class='bx bx-arrow-back'></i> Volver a Recetas del Día
+                    </a>
+                </div>
+
+                <!-- Información General de la Receta -->
+                <div class="recipe-main-info">
+                    <div class="recipe-summary-card">
+                        <h3>Resumen de la Receta</h3>
+                        <p>
+                            Este plato principal es una opción saludable y deliciosa, perfecta para almuerzos o cenas.
+                            Combina las bondades del salmón, rico en Omega-3, con la fibra de los espárragos y la energía de la quinoa.
+                        </p>
+                        <p><strong>Tiempo estimado de preparación:</strong> 15 minutos</p>
+                        <p><strong>Tiempo estimado de cocción:</strong> 15-20 minutos</p>
+                        <p><strong>Total de platos para esta receta (sumando variantes):</strong> <span id="recipe-total-servings">25</span></p>
+                        <!-- Aquí podría ir una imagen de la receta si se desea -->
+                        <!-- <img src="path/to/salmon_image.jpg" alt="Salmón al Horno" class="recipe-image"> -->
+                    </div>
+                </div>
+
+                <!-- Título para la Sección de Variantes -->
+                <h3 class="section-title"><i class='bx bxs-dish'></i> Variantes de la Receta y Preparación Detallada</h3>
+
+                <!-- Grid para las Variantes de la Receta -->
+                <div class="recipe-variants-grid">
+
+                    <!-- Variante 1: Estándar -->
+                    <div class="variant-card">
+                        <div class="variant-card-header">
+                            <div class="variant-title-group">
+                                <h4>Estándar</h4>
+                                <span class="diet-tag diet-standard">Dieta Estándar</span>
+                            </div>
+                            <span class="variant-servings">18 Platos</span>
+                        </div>
+                        <div class="variant-card-body">
+                            <h5><i class='bx bx-list-ul'></i> Ingredientes Específicos:</h5>
+                            <ul>
+                                <li>Filetes de salmón frescos (aprox. 150g por porción)</li>
+                                <li>Espárragos trigueros frescos (aprox. 100g por porción)</li>
+                                <li>Quinoa blanca o tricolor (aprox. 60g cruda por porción)</li>
+                                <li>Aceite de oliva virgen extra</li>
+                                <li>Limón fresco (rodajas y zumo)</li>
+                                <li>Eneldo fresco picado</li>
+                                <li>Sal marina</li>
+                                <li>Pimienta negra recién molida</li>
+                            </ul>
+                            <h5><i class='bx bx-restaurant'></i> Instrucciones de Preparación:</h5>
+                            <ol>
+                                <li>Precalentar el horno a 200°C (390°F).</li>
+                                <li>Lavar bien la quinoa bajo agua fría. Cocinar según las instrucciones del paquete (generalmente 1 parte de quinoa por 2 partes de agua/caldo, hervir y luego cocinar a fuego lento tapado por 15 min).</li>
+                                <li>Lavar los espárragos, cortar la base leñosa. Colocarlos en una bandeja para hornear, rociar con aceite de oliva, sal y pimienta.</li>
+                                <li>Colocar los filetes de salmón en la misma bandeja o en una aparte. Rociar con aceite de oliva, sazonar con sal, pimienta, eneldo fresco y colocar unas rodajas de limón encima.</li>
+                                <li>Hornear los espárragos y el salmón durante 12-15 minutos, o hasta que el salmón esté cocido a su gusto (se desmenuce fácilmente con un tenedor) y los espárragos estén tiernos pero crujientes.</li>
+                                <li>Servir una porción de quinoa, acompañada del filete de salmón y los espárragos. Rociar con un poco de zumo de limón fresco si se desea.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- Fin Variante Estándar -->
+
+                    <!-- Variante 2: Bajo en Sodio -->
+                    <div class="variant-card">
+                        <div class="variant-card-header">
+                            <div class="variant-title-group">
+                                <h4>Bajo en Sodio</h4>
+                                <span class="diet-tag diet-low-sodium">Dieta Baja en Sodio</span>
+                            </div>
+                            <span class="variant-servings">7 Platos</span>
+                        </div>
+                        <div class="variant-card-body">
+                            <h5><i class='bx bx-list-ul'></i> Ingredientes y Modificaciones (Bajo en Sodio):</h5>
+                            <ul>
+                                <li>Filetes de salmón frescos (aprox. 150g por porción)</li>
+                                <li>Espárragos trigueros frescos (aprox. 100g por porción)</li>
+                                <li>Quinoa blanca o tricolor (aprox. 60g cruda por porción)</li>
+                                <li>Aceite de oliva virgen extra</li>
+                                <li>Limón fresco (rodajas y zumo)</li>
+                                <li>Eneldo fresco picado</li>
+                                <li>Pimienta negra recién molida</li>
+                                <li>Hierbas aromáticas adicionales (ej. tomillo, orégano) para potenciar sabor.</li>
+                                <li><strong>Modificación Clave:</strong> Omitir completamente la sal. No usar caldos con sal para la quinoa.</li>
+                            </ul>
+                            <h5><i class='bx bx-restaurant'></i> Instrucciones de Preparación (Bajo en Sodio):</h5>
+                            <ol>
+                                <li>Precalentar el horno a 200°C (390°F).</li>
+                                <li>Lavar bien la quinoa. Cocinar con agua (sin sal) según instrucciones.</li>
+                                <li>Lavar los espárragos, cortar base. Colocar en bandeja, rociar con aceite de oliva y pimienta (y otras hierbas si se usan). <strong>No añadir sal.</strong></li>
+                                <li>Colocar los filetes de salmón. Rociar con aceite de oliva, sazonar con pimienta, eneldo, hierbas y rodajas de limón. <strong>No añadir sal.</strong></li>
+                                <li>Hornear todo por 12-15 minutos.</li>
+                                <li>Servir la quinoa (cocida sin sal), el salmón y los espárragos. Potenciar el sabor con abundante zumo de limón fresco y más eneldo.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- Fin Variante Bajo en Sodio -->
+
+                    <!-- Aquí podrían ir más tarjetas de variantes como 'Textura Suave', 'Diabético', etc. -->
+                    <!-- Ejemplo de otra variante (simulada) -->
+                    <div class="variant-card">
+                        <div class="variant-card-header">
+                            <div class="variant-title-group">
+                                <h4>Textura Suave (Adaptado)</h4>
+                                <span class="diet-tag diet-soft">Dieta Blanda / Textura Suave</span>
+                            </div>
+
+                        </div>
+                        <div class="variant-card-body">
+                            <h5><i class='bx bx-list-ul'></i> Ingredientes y Modificaciones (Textura Suave):</h5>
+                            <ul>
+                                <li>Salmón cocido y desmenuzado finamente, sin piel ni espinas.</li>
+                                <li>Espárragos cocidos hasta estar muy tiernos, puntas preferiblemente, y picados finamente o en puré.</li>
+                                <li>Quinoa muy bien cocida, incluso un poco pasada para mayor suavidad.</li>
+                                <li>Caldo de verduras suave (bajo en sodio) para humedecer si es necesario.</li>
+                                <li><strong>Modificación Clave:</strong> Todos los componentes deben ser fáciles de masticar y tragar. Evitar partes crujientes o duras.</li>
+                            </ul>
+                            <h5><i class='bx bx-restaurant'></i> Instrucciones de Preparación (Textura Suave):</h5>
+                            <ol>
+                                <li>Cocinar el salmón (al vapor o hervido suavemente) hasta que esté bien hecho. Dejar enfriar un poco y desmenuzar cuidadosamente, retirando piel y espinas.</li>
+                                <li>Cocinar los espárragos hasta que estén muy blandos. Picar muy finamente o hacer un puré ligero.</li>
+                                <li>Cocinar la quinoa con extra agua/caldo para que quede muy suave.</li>
+                                <li>Mezclar con cuidado el salmón desmenuzado, los espárragos procesados y la quinoa. Añadir un poco de caldo si la mezcla está muy seca.</li>
+                                <li>Asegurar que no haya trozos grandes. Servir tibio.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- Fin Variante Textura Suave -->
+
+                </div> <!-- /recipe-variants-grid -->
+            </div> <!-- /recipe-detail-view -->
+        </div>
+
+
+    </div>
+  </div>
+  
+</body>
+
+</html>
