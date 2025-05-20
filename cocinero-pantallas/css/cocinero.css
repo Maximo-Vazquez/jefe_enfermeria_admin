@@ -200,8 +200,6 @@
     padding: 6px 12px;
     font-size: 0.85rem;
 }
-.btn-today i {
-}
 
 /* Grid para las tarjetas de comidas */
 .meal-plan-grid {
@@ -403,9 +401,6 @@
 }
 
 
-/* Tarjeta de Comida - Simplificada */
-.meal-card-header {
-}
 
 
 /* Item de Receta Individual */
