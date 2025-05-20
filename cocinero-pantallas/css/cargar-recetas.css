@@ -1,0 +1,496 @@
+/* Archivo: css/cocina/receta-formulario.css */
+
+/* Variables de color y estilos base (Reutilizadas de tu CSS original) */
+:root {
+    --primary-color: #6a5acd;
+    --primary-light: #e8e6f8;
+    --success-color: #28a745;
+    --success-light-bg: #eaf6ec;
+    --warning-color: #ffc107;
+    --warning-light-bg: #fff8e1;
+    --info-color: #17a2b8;
+    --info-light-bg: #e2f6f9;
+    --danger-color: #dc3545;
+    --danger-light-bg: #f8d7da;
+
+    --text-color: #333;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --background-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --table-row-hover-bg: #f1f1f1;
+
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --border-radius: 8px;
+    --border-radius-sm: 6px;
+    
+    /* Colores específicos para etiquetas de dieta */
+    --diet-standard-bg: #e0eaff; 
+    --diet-standard-text: #4a69bb;
+    --diet-diabetic-bg: #e0f8e0; 
+    --diet-diabetic-text: #38761d;
+    --diet-low-sodium-bg: #fff0e0; 
+    --diet-low-sodium-text: #c2780e;
+    --diet-soft-bg: #fce4ec; 
+    --diet-soft-text: #880e4f;
+    --diet-pureed-bg: #e8e6f8; 
+    --diet-pureed-text: #6a5acd; 
+}
+
+/* Estilos base generales */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Estilos para la vista de Formulario de Receta */
+.recipe-form-view {
+    padding: 25px;
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.view-header.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+.view-header.form-header .view-title {
+    margin-bottom: 0;
+    font-size: 1.6rem;
+}
+.view-header.form-header .view-title i {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    vertical-align: middle;
+}
+.form-actions-main button {
+    margin-left: 10px;
+}
+
+/* General Button Styles */
+.btn, .btn-action, .btn-icon-text {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    font-weight: 500;
+    text-decoration: none;
+    line-height: 1.5;
+}
+.btn i, .btn-action i, .btn-icon-text i {
+    font-size: 1.2em; /* Icono un poco más grande que el texto */
+}
+.btn-text-sm { /* Para ocultar texto en botones pequeños en pantallas pequeñas */
+    display: inline;
+}
+
+
+.btn-primary { background-color: var(--primary-color); color: white; }
+.btn-primary:hover { background-color: #5847b0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+.btn-secondary { background-color: #6c757d; color: white; }
+.btn-secondary:hover { background-color: #5a6268; }
+
+.btn-success { background-color: var(--success-color); color: white; }
+.btn-success:hover { background-color: #1e7e34; }
+
+.btn-danger { background-color: var(--danger-color); color: white; }
+.btn-danger:hover { background-color: #c82333; }
+
+.btn-sm {
+    padding: 6px 10px !important; /* Ajustado para mejor apariencia con iconos */
+    font-size: 0.8rem !important;
+    gap: 5px;
+}
+.btn-sm i {
+    font-size: 1.1em !important;
+}
+
+.btn-outline-danger {
+    background-color: transparent;
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+}
+.btn-outline-danger:hover {
+    background-color: var(--danger-light-bg);
+    color: var(--danger-color); /* Mantener color del texto */
+}
+.btn-icon-text.btn-outline-danger i { /* Asegurar que el icono también tome el color */
+    color: var(--danger-color);
+}
+.btn-icon-text.btn-outline-danger:hover i {
+    color: var(--danger-color);
+}
+
+
+/* Estilos de Formulario */
+.form-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius-sm);
+    background-color: #fdfdfd;
+}
+.form-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--primary-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.form-section-title i {
+    font-size: 1.3em;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; 
+}
+.form-group label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-light);
+}
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+
+/* Estilos para Variantes */
+.variants-list-container {
+    margin-top: 15px;
+}
+.variant-form-item {
+    background-color: var(--card-bg);
+    border: 1px solid #d8dcdf;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 25px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.variant-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed var(--border-color);
+}
+.variant-title-input {
+    font-size: 1.1rem;
+    font-weight: 600;
+    flex-grow: 1;
+    margin-right: 15px;
+    border: none;
+    border-bottom: 2px solid transparent; /* Era var(--border-color), ahora transparent */
+    padding: 8px 0; /* Ajustado */
+    background-color: transparent;
+    color: var(--text-color);
+}
+.variant-title-input::placeholder {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+.variant-title-input:focus {
+    outline: none;
+    border-bottom-color: var(--primary-color);
+    box-shadow: none; /* Quitar box-shadow de form-control general si se aplica */
+}
+
+
+/* Estilos para Ingredientes dentro de una Variante */
+.variant-ingredients-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed #e0e0e0;
+}
+.variant-ingredients-header, .variant-instructions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.variant-ingredients-header h6, .variant-instructions-header h6 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.ingredient-form-item {
+    display: grid;
+    /* Ingrediente (input+datalist) | Cantidad (input+span) | Acción (button) */
+    grid-template-columns: 3fr 1.5fr auto; 
+    gap: 15px;
+    align-items: flex-end; /* Alinear elementos en la base, especialmente el botón */
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #fcfcfc;
+    border: 1px solid #f0f0f0;
+    border-radius: var(--border-radius-sm);
+}
+.ingredient-form-item .form-group {
+    margin-bottom: 0; 
+}
+.quantity-input-group {
+    display: flex;
+    align-items: baseline; /* Alinear input y span de unidad */
+    gap: 8px;
+}
+.quantity-input-group .form-control.quantity-input {
+    flex-grow: 1;
+    min-width: 80px; /* Para que no se encoja demasiado */
+}
+.quantity-input-group .quantity-unit {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+.ingredient-form-item .remove-ingredient-btn {
+    margin-bottom: 0; /* Alineado con inputs gracias a align-items: flex-end en el grid */
+    padding: 8px 10px !important; /* Asegurar que tenga el mismo alto que form-control */
+}
+
+
+/* Estilos para Instrucciones */
+.variant-instructions-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed #e0e0e0;
+}
+.instruction-steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+.instruction-step-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: #fcfcfc;
+    border: 1px solid #f0f0f0;
+    border-radius: var(--border-radius-sm);
+}
+.instruction-step-item .step-number {
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 20px; /* Para alineación si los números crecen */
+}
+.instruction-step-item .step-text {
+    flex-grow: 1;
+}
+.instruction-step-item .remove-instruction-step-btn {
+    padding: 8px 10px !important; /* Mismo alto que el input */
+}
+.add-instruction-step-btn {
+    margin-top: 15px;
+}
+
+/* Nutrición (si se usa en el futuro, mantener como referencia) */
+.variant-nutrition-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed #e0e0e0;
+}
+.variant-nutrition-section .form-grid { 
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+/* Botones de Añadir/Eliminar (general) */
+.add-item-btn { /* E.g. Añadir variante, añadir ingrediente */
+    margin-top: 15px;
+}
+
+/* Contenedor para los botones de acción finales del formulario */
+.form-submission-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    text-align: right;
+}
+.form-submission-actions .btn {
+    margin-left: 10px;
+}
+
+/* Diet Tags */
+.diet-tag {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.diet-tag.diet-standard { background-color: var(--diet-standard-bg); color: var(--diet-standard-text); }
+.diet-tag.diet-diabetic { background-color: var(--diet-diabetic-bg); color: var(--diet-diabetic-text); }
+.diet-tag.diet-low-sodium { background-color: var(--diet-low-sodium-bg); color: var(--diet-low-sodium-text); }
+.diet-tag.diet-soft { background-color: var(--diet-soft-bg); color: var(--diet-soft-text); }
+.diet-tag.diet-pureed { background-color: var(--diet-pureed-bg); color: var(--diet-pureed-text); }
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ingredient-form-item {
+        grid-template-columns: 1fr; /* Apilar en pantallas pequeñas */
+        gap: 10px;
+    }
+    .ingredient-form-item .remove-ingredient-btn,
+    .instruction-step-item .remove-instruction-step-btn {
+        width: 100%;
+        justify-content: center;
+    }
+     .ingredient-form-item .form-group { /* Para que los labels estén encima de los inputs al apilar */
+        margin-bottom: 5px;
+    }
+    .quantity-input-group {
+        width: 100%; /* Para que ocupe el ancho completo */
+    }
+    .instruction-step-item {
+        flex-wrap: wrap; /* Permitir que el botón de eliminar baje si no cabe */
+    }
+    .instruction-step-item .step-text {
+        min-width: calc(100% - 80px); /* Ajustar si el botón y número ocupan espacio */
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr; 
+    }
+    .view-header.form-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .view-header.form-header .form-actions-main {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start; /* O space-between si se prefiere */
+    }
+    .view-header.form-header .form-actions-main button {
+        margin-left: 0;
+        margin-right: 10px;
+        flex-grow: 1; /* Para que los botones ocupen el espacio */
+    }
+     .view-header.form-header .form-actions-main button:last-child {
+        margin-right: 0;
+    }
+
+     .form-submission-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .form-submission-actions .btn {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .variant-header {
+        flex-direction: column;
+        align-items: stretch; /* Para que el input y el botón ocupen todo el ancho */
+        gap: 10px;
+    }
+    .variant-title-input {
+        margin-right: 0;
+    }
+    .variant-header .btn-sm { /* Botón eliminar variante */
+        align-self: flex-end;
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    .recipe-form-view {
+        padding: 15px;
+    }
+    .form-section {
+        padding: 15px;
+    }
+    .variant-form-item {
+        padding: 15px;
+    }
+    .ingredient-form-item {
+        padding: 10px;
+    }
+    .instruction-step-item {
+        padding: 8px;
+    }
+    .variant-title-input {
+        font-size: 1rem;
+    }
+    .view-header.form-header .view-title {
+        font-size: 1.4rem;
+    }
+    .view-header.form-header .view-title i {
+        font-size: 1.6rem;
+    }
+    .form-section-title {
+        font-size: 1.15rem;
+    }
+    .btn, .btn-action, .btn-icon-text {
+        font-size: 0.85rem; /* Reducir un poco el texto de botones */
+        padding: 7px 12px;
+    }
+    .btn i, .btn-action i, .btn-icon-text i {
+        font-size: 1.1em;
+    }
+    .btn-text-sm { /* Para pantallas muy pequeñas, es más probable que quieras ocultar */
+         display: none; 
+    }
+    .btn-sm { /* Reajuste para asegurar que el icono tenga espacio si el texto se oculta */
+        gap: 0;
+    }
+
+}

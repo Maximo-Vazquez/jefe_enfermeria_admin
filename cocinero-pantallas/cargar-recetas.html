@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administracion</title>
+  <!-- Boxicons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+
+    <link rel="stylesheet" href="css/cargar-recetas.css">
+
+  <style>
+
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <!-- En vez de incluir directamente -->
+    <!-- sidebar.html -->
+
+
+        <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; align-items: center;">
+            <img src="img/logo.png" alt="" class="logo" />
+            <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+            </div>
+        </div>
+        <div class="sidebar-menu ">
+            
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+            <i class='bx bx-layer'></i>
+            <span>Inventario de Medicamentos</span>
+            </div>
+            <div class="submenu">
+            <a href="IN-ver-invetario.html" class="submenu-item">
+                <span>Ver Inventario</span>
+            </a>
+            <a href="IN-registrar-medicamento.html" class="submenu-item">
+                <span>Registrar Nuevo Medicamento</span>
+            </a>
+            <a href="IN-exportar.html" class="submenu-item">
+                <span>Exportar Stock</span>
+            </a>
+            </div>
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Tratamientos Médicos</span>
+                </div>
+                <div class="submenu">
+                <a href="TR-tratamiento.html" class="submenu-item">
+                    <span>Tratamientos por Residente</span>
+                </a>
+                <a href="TR-actualizar-tratamiento.html" class="submenu-item">
+                    <span>Actualizar Tratamiento</span>
+                </a>
+                <a href="TR-historial-medicaciones.html" class="submenu-item">
+                    <span>Historial de Medicación</span>
+                </a>
+            </div>
+            <!-- Sección de Pedidos y Ventas -->
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Informes</span>
+            </div>
+            <div class="submenu">
+                <a href="#" class="submenu-item">
+                    <span>Informe de Uso Semanal</span>
+                </a>
+                <a href="#" class="submenu-item">
+                    <span>Medicamentos Administrados</span>
+                </a>
+                <a href="INFO-alertas-stock.html" class="submenu-item">
+                    <span>Alertas de stock Bajo</span>
+                </a>
+            </div>
+        </div>
+
+
+        </div>
+        <script>
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            submenu.classList.toggle('expanded');
+            element.classList.toggle('expanded');
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (
+            window.innerWidth <= 768 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target) &&
+            sidebar.classList.contains('open')
+            ) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            if (window.innerWidth > 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        </script>
+
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="main-content">
+        <div class="app-header">
+            <div class="header-info-group">
+              <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+                <i class='bx bx-menu'></i>
+              </button>
+          
+          
+          
+              <div class="page-title-nav"> Administracion</div>
+              <span class="role-badge-nav">Cocinero</span>
+            </div>
+            <!-- Acciones de la barra de navegación superior -->
+            <div class="header-action-list">
+                <!-- ========  Cerrar sesión (POST)  ======== -->
+                <form id="logout-form" action=""  method="post" style="display:inline;">
+
+                  <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <i class='bx bx-log-out'></i>
+                    <span>Cerrar sesión</span>
+                  </button>
+                </form>
+      
+
+              </div>
+        </div>
+          
+    <div class="content-area">
+        <form class="recipe-form-view" id="recipeForm">
+            <div class="view-header form-header">
+                <h2 class="view-title">
+                    <i class='bx bxs-edit-alt'></i>
+                    <span id="form-title">Cargar Nueva Receta</span>
+                </h2>
+                <div class="form-actions-main">
+                    <button type="button" class="btn btn-secondary" id="cancelRecipeBtn">
+                        <i class='bx bx-x'></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="saveRecipeBtn">
+                        <i class='bx bx-save'></i> Guardar Receta
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sección de Información General de la Receta -->
+            <div class="form-section" id="general-recipe-info">
+                <h3 class="form-section-title"><i class='bx bx-food-menu'></i> Información General</h3>
+                <div class="form-group">
+                    <label for="recipeName">Nombre de la Receta</label>
+                    <input type="text" id="recipeName" name="recipeName" class="form-control" placeholder="Ej: Salmón al Horno con Espárragos" required>
+                </div>
+                <div class="form-group">
+                    <label for="recipeDescription">Descripción / Resumen</label>
+                    <textarea id="recipeDescription" name="recipeDescription" class="form-control" placeholder="Breve descripción del plato, sus características principales..."></textarea>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="prepTime">Tiempo de Preparación</label>
+                        <input type="text" id="prepTime" name="prepTime" class="form-control" placeholder="Ej: 15 minutos">
+                    </div>
+                    <div class="form-group">
+                        <label for="cookTime">Tiempo de Cocción</label>
+                        <input type="text" id="cookTime" name="cookTime" class="form-control" placeholder="Ej: 20 minutos">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Variantes de la Receta -->
+            <div class="form-section" id="recipe-variants-section">
+                <h3 class="form-section-title"><i class='bx bxs-dish'></i> Variantes de la Receta</h3>
+                <div id="variantsListContainer" class="variants-list-container">
+                    <!-- Plantilla de ejemplo para una variante (se clonaría con JS) -->
+                    <div class="variant-form-item" data-variant-index="0">
+                        <div class="variant-header">
+                            <input type="text" name="variants[0][title]" class="variant-title-input" placeholder="Nombre de la Variante (Ej: Estándar, Para Diabéticos)">
+                            <button type="button" class="btn btn-sm btn-outline-danger remove-variant-btn" title="Eliminar Variante">
+                                <i class='bx bx-trash'></i> <span class="btn-text-sm">Eliminar Variante</span>
+                            </button>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="variantDietType_0">Tipo de Dieta Asociada</label>
+                                <select id="variantDietType_0" name="variants[0][dietType]" class="form-control">
+                                    <option value="">Seleccionar dieta...</option>
+                                    <option value="standard">Estándar</option>
+                                    <option value="diabetic">Diabético</option>
+                                    <option value="low-sodium">Bajo en Sodio</option>
+                                    <option value="soft">Blanda / Textura Suave</option>
+                                    <option value="pureed">Puré / Triturada</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Ingredientes para esta variante -->
+                        <div class="variant-ingredients-section">
+                            <div class="variant-ingredients-header">
+                                <h6><i class='bx bx-list-ul'></i> Ingredientes de la Variante</h6>
+                                <button type="button" class="btn btn-sm btn-success add-ingredient-btn">
+                                    <i class='bx bx-plus-circle'></i> <span class="btn-text-sm">Añadir Ingrediente</span>
+                                </button>
+                            </div>
+                            <div class="variant-ingredients-list">
+                                <!-- Plantilla de ejemplo para un ingrediente (se clonaría con JS) -->
+                                <div class="ingredient-form-item" data-ingredient-index="0">
+                                    <div class="form-group">
+                                        <label for="variant_0_ingredient_0_name">Ingrediente</label>
+                                        <input type="text" id="variant_0_ingredient_0_name" name="variants[0][ingredients][0][name]" class="form-control ingredient-search" placeholder="Buscar y seleccionar ingrediente..." list="ingredientDataList_0_0">
+                                        <datalist id="ingredientDataList_0_0">
+                                            <!-- Opciones cargadas por JS o estáticas -->
+                                            <option value="Salmón Fresco (gr)">
+                                            <option value="Espárragos Trigueros (gr)">
+                                            <option value="Quinoa (gr)">
+                                            <option value="Aceite de Oliva VE (ml)">
+                                            <option value="Limón (unidad)">
+                                            <option value="Pollo (Pechuga) (gr)">
+                                            <option value="Arroz Blanco (gr)">
+                                            <option value="Patata (gr)">
+                                        </datalist>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="variant_0_ingredient_0_quantity">Cantidad</label>
+                                        <div class="quantity-input-group">
+                                            <input type="number" id="variant_0_ingredient_0_quantity" name="variants[0][ingredients][0][quantity]" class="form-control quantity-input" placeholder="Ej: 150">
+                                            <span class="quantity-unit">gr</span> <!-- Unidad se actualizaría con JS -->
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-icon-text btn-outline-danger remove-ingredient-btn" title="Eliminar Ingrediente">
+                                        <i class='bx bx-x-circle'></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Instrucciones para esta variante -->
+                        <div class="variant-instructions-section">
+                            <div class="variant-instructions-header">
+                                <h6><i class='bx bx-restaurant'></i> Instrucciones de Preparación</h6>
+                                <button type="button" class="btn btn-sm btn-success add-instruction-step-btn">
+                                    <i class='bx bx-plus-circle'></i> <span class="btn-text-sm">Añadir Paso</span>
+                                </button>
+                            </div>
+                            <div class="instruction-steps-list">
+                                <!-- Plantilla de ejemplo para un paso de instrucción (se clonaría con JS) -->
+                                <div class="instruction-step-item" data-step-index="0">
+                                    <span class="step-number">1.</span>
+                                    <input type="text" name="variants[0][instructions][0][text]" class="form-control step-text" placeholder="Describir este paso de la preparación...">
+                                    <button type="button" class="btn btn-sm btn-icon-text btn-outline-danger remove-instruction-step-btn" title="Eliminar Paso">
+                                        <i class='bx bx-trash'></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- Fin de una plantilla de variante -->
+                </div>
+                <button type="button" class="btn btn-success add-item-btn" id="addVariantBtn">
+                    <i class='bx bx-plus'></i> Añadir Nueva Variante
+                </button>
+            </div>
+
+            <div class="form-submission-actions">
+                <button type="button" class="btn btn-secondary" id="cancelRecipeBtnBottom">
+                    <i class='bx bx-x'></i> Cancelar
+                </button>
+                <button type="submit" class="btn btn-primary" id="saveRecipeBtnBottom">
+                    <i class='bx bx-save'></i> Guardar Receta
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+    </div>
+  </div>
+  
+</body>
+
+</html>

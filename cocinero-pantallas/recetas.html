@@ -160,7 +160,7 @@
                         <i class='bx bx-receipt'></i>
                         Detalle: <span id="recipe-detail-name">Salmón al Horno con Espárragos y Quinoa</span>
                     </h2>
-                    <a href="cocinero.html" class="btn btn-secondary"> 
+                    <a href="cocinero.html" class="btn btn-secondary">
                         <i class='bx bx-arrow-back'></i> Volver a Recetas del Día
                     </a>
                 </div>
@@ -168,7 +168,7 @@
                 <!-- Información General de la Receta -->
                 <div class="recipe-main-info">
                     <div class="recipe-summary-card">
-                        <h3>Resumen de la Receta</h3>
+                        <h3><i class='bx bx-info-circle'></i> Resumen de la Receta</h3>
                         <p>
                             Este plato principal es una opción saludable y deliciosa, perfecta para almuerzos o cenas.
                             Combina las bondades del salmón, rico en Omega-3, con la fibra de los espárragos y la energía de la quinoa.
@@ -176,8 +176,6 @@
                         <p><strong>Tiempo estimado de preparación:</strong> 15 minutos</p>
                         <p><strong>Tiempo estimado de cocción:</strong> 15-20 minutos</p>
                         <p><strong>Total de platos para esta receta (sumando variantes):</strong> <span id="recipe-total-servings">25</span></p>
-                        <!-- Aquí podría ir una imagen de la receta si se desea -->
-                        <!-- <img src="path/to/salmon_image.jpg" alt="Salmón al Horno" class="recipe-image"> -->
                     </div>
                 </div>
 
@@ -197,26 +195,90 @@
                             <span class="variant-servings">18 Platos</span>
                         </div>
                         <div class="variant-card-body">
-                            <h5><i class='bx bx-list-ul'></i> Ingredientes Específicos:</h5>
-                            <ul>
-                                <li>Filetes de salmón frescos (aprox. 150g por porción)</li>
-                                <li>Espárragos trigueros frescos (aprox. 100g por porción)</li>
-                                <li>Quinoa blanca o tricolor (aprox. 60g cruda por porción)</li>
-                                <li>Aceite de oliva virgen extra</li>
-                                <li>Limón fresco (rodajas y zumo)</li>
-                                <li>Eneldo fresco picado</li>
-                                <li>Sal marina</li>
-                                <li>Pimienta negra recién molida</li>
-                            </ul>
+                            <h5><i class='bx bx-food-menu'></i> Ingredientes Específicos:</h5>
+                            <div class="ingredients-list">
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Salmón</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">150g/porción</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Espárragos Trigueros</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">100g/porción</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Quinoa</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">60g/porción</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Aceite de Oliva Virgen Extra</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">c/s</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Limón</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">c/s</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Eneldo</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">c/s</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Sal Marina</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">c/s</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Pimienta Negra</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">c/s</span>
+                                </div>
+                            </div>
+
                             <h5><i class='bx bx-restaurant'></i> Instrucciones de Preparación:</h5>
                             <ol>
                                 <li>Precalentar el horno a 200°C (390°F).</li>
-                                <li>Lavar bien la quinoa bajo agua fría. Cocinar según las instrucciones del paquete (generalmente 1 parte de quinoa por 2 partes de agua/caldo, hervir y luego cocinar a fuego lento tapado por 15 min).</li>
-                                <li>Lavar los espárragos, cortar la base leñosa. Colocarlos en una bandeja para hornear, rociar con aceite de oliva, sal y pimienta.</li>
-                                <li>Colocar los filetes de salmón en la misma bandeja o en una aparte. Rociar con aceite de oliva, sazonar con sal, pimienta, eneldo fresco y colocar unas rodajas de limón encima.</li>
-                                <li>Hornear los espárragos y el salmón durante 12-15 minutos, o hasta que el salmón esté cocido a su gusto (se desmenuce fácilmente con un tenedor) y los espárragos estén tiernos pero crujientes.</li>
-                                <li>Servir una porción de quinoa, acompañada del filete de salmón y los espárragos. Rociar con un poco de zumo de limón fresco si se desea.</li>
+                                <li>Lavar bien la quinoa. Cocinar según instrucciones del paquete (1 parte quinoa : 2 partes agua/caldo), hervir y cocinar a fuego lento tapado por 15 min.</li>
+                                <li>Lavar los espárragos, cortar base leñosa. En bandeja para hornear, rociar con aceite de oliva, sal y pimienta.</li>
+                                <li>Colocar filetes de salmón. Rociar con aceite, sazonar con sal, pimienta, eneldo y rodajas de limón.</li>
+                                <li>Hornear espárragos y salmón 12-15 min, hasta que el salmón esté cocido y los espárragos tiernos.</li>
+                                <li>Servir quinoa, salmón y espárragos. Rociar con zumo de limón si se desea.</li>
                             </ol>
+
+                            <div class="variant-nutritional-summary">
+                                <h6><i class='bx bx-dna'></i> Información Nutricional (Estimada por Porción):</h6>
+                                <div class="nutrition-details">
+                                    <span class="nutrition-item">Calorías: <strong>450 kcal</strong></span>
+                                    <span class="nutrition-item">Proteínas: <strong>35 g</strong></span>
+                                    <span class="nutrition-item">Grasas Totales: <strong>22 g</strong></span>
+                                    <span class="nutrition-item">Grasas Saturadas: <strong>4 g</strong></span>
+                                    <span class="nutrition-item">Carbohidratos: <strong>28 g</strong></span>
+                                    <span class="nutrition-item">Fibra: <strong>5 g</strong></span>
+                                    <span class="nutrition-item">Azúcares: <strong>3 g</strong></span>
+                                    <span class="nutrition-item">Sodio: <strong>300 mg</strong></span>
+                                </div>
+                                <small class="calories-note"><em>Valores aproximados.</em></small>
+                            </div>
                         </div>
                     </div>
                     <!-- Fin Variante Estándar -->
@@ -231,65 +293,179 @@
                             <span class="variant-servings">7 Platos</span>
                         </div>
                         <div class="variant-card-body">
-                            <h5><i class='bx bx-list-ul'></i> Ingredientes y Modificaciones (Bajo en Sodio):</h5>
-                            <ul>
-                                <li>Filetes de salmón frescos (aprox. 150g por porción)</li>
-                                <li>Espárragos trigueros frescos (aprox. 100g por porción)</li>
-                                <li>Quinoa blanca o tricolor (aprox. 60g cruda por porción)</li>
-                                <li>Aceite de oliva virgen extra</li>
-                                <li>Limón fresco (rodajas y zumo)</li>
-                                <li>Eneldo fresco picado</li>
-                                <li>Pimienta negra recién molida</li>
-                                <li>Hierbas aromáticas adicionales (ej. tomillo, orégano) para potenciar sabor.</li>
-                                <li><strong>Modificación Clave:</strong> Omitir completamente la sal. No usar caldos con sal para la quinoa.</li>
-                            </ul>
-                            <h5><i class='bx bx-restaurant'></i> Instrucciones de Preparación (Bajo en Sodio):</h5>
+                            <h5><i class='bx bx-food-menu'></i> Ingredientes Específicos:</h5>
+                            <div class="ingredients-list">
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Salmón</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">150g/porción</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Espárragos Trigueros</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">100g/porción</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Quinoa</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">60g/porción</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Aceite de Oliva Virgen Extra</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">c/s</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Limón</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">c/s</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Eneldo</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">c/s</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Pimienta Negra</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">c/s</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Hierbas Aromáticas</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">c/s</span>
+                                </div>
+                            </div>
+                            <div class="variant-modification-note">
+                                <strong>Modificación Clave:</strong> Omitir completamente la sal. No usar caldos con sal para la quinoa. Potenciar sabor con hierbas y abundante limón.
+                            </div>
+
+                            <h5><i class='bx bx-restaurant'></i> Instrucciones de Preparación:</h5>
                             <ol>
-                                <li>Precalentar el horno a 200°C (390°F).</li>
-                                <li>Lavar bien la quinoa. Cocinar con agua (sin sal) según instrucciones.</li>
-                                <li>Lavar los espárragos, cortar base. Colocar en bandeja, rociar con aceite de oliva y pimienta (y otras hierbas si se usan). <strong>No añadir sal.</strong></li>
-                                <li>Colocar los filetes de salmón. Rociar con aceite de oliva, sazonar con pimienta, eneldo, hierbas y rodajas de limón. <strong>No añadir sal.</strong></li>
-                                <li>Hornear todo por 12-15 minutos.</li>
-                                <li>Servir la quinoa (cocida sin sal), el salmón y los espárragos. Potenciar el sabor con abundante zumo de limón fresco y más eneldo.</li>
+                                <li>Precalentar horno a 200°C.</li>
+                                <li>Lavar quinoa. Cocinar con agua (sin sal) según instrucciones.</li>
+                                <li>Lavar espárragos, cortar base. En bandeja, rociar con aceite y pimienta (y hierbas). <strong>No añadir sal.</strong></li>
+                                <li>Colocar filetes de salmón. Rociar con aceite, sazonar con pimienta, eneldo, hierbas y limón. <strong>No añadir sal.</strong></li>
+                                <li>Hornear 12-15 minutos.</li>
+                                <li>Servir quinoa, salmón y espárragos. Potenciar con zumo de limón y eneldo.</li>
                             </ol>
+
+                            <div class="variant-nutritional-summary">
+                                <h6><i class='bx bx-dna'></i> Información Nutricional (Estimada por Porción):</h6>
+                                <div class="nutrition-details">
+                                    <span class="nutrition-item">Calorías: <strong>440 kcal</strong></span>
+                                    <span class="nutrition-item">Proteínas: <strong>35 g</strong></span>
+                                    <span class="nutrition-item">Grasas Totales: <strong>22 g</strong></span>
+                                    <span class="nutrition-item">Grasas Saturadas: <strong>4 g</strong></span>
+                                    <span class="nutrition-item">Carbohidratos: <strong>28 g</strong></span>
+                                    <span class="nutrition-item">Fibra: <strong>5 g</strong></span>
+                                    <span class="nutrition-item">Azúcares: <strong>3 g</strong></span>
+                                    <span class="nutrition-item">Sodio: <strong>70 mg</strong></span>
+                                </div>
+                                <small class="calories-note"><em>Valores aproximados.</em></small>
+                            </div>
                         </div>
                     </div>
                     <!-- Fin Variante Bajo en Sodio -->
 
-                    <!-- Aquí podrían ir más tarjetas de variantes como 'Textura Suave', 'Diabético', etc. -->
-                    <!-- Ejemplo de otra variante (simulada) -->
+                    <!-- Variante 3: Textura Suave -->
                     <div class="variant-card">
                         <div class="variant-card-header">
                             <div class="variant-title-group">
                                 <h4>Textura Suave (Adaptado)</h4>
                                 <span class="diet-tag diet-soft">Dieta Blanda / Textura Suave</span>
                             </div>
-
+                            <!-- <span class="variant-servings">X Platos</span> -->
                         </div>
                         <div class="variant-card-body">
-                            <h5><i class='bx bx-list-ul'></i> Ingredientes y Modificaciones (Textura Suave):</h5>
-                            <ul>
-                                <li>Salmón cocido y desmenuzado finamente, sin piel ni espinas.</li>
-                                <li>Espárragos cocidos hasta estar muy tiernos, puntas preferiblemente, y picados finamente o en puré.</li>
-                                <li>Quinoa muy bien cocida, incluso un poco pasada para mayor suavidad.</li>
-                                <li>Caldo de verduras suave (bajo en sodio) para humedecer si es necesario.</li>
-                                <li><strong>Modificación Clave:</strong> Todos los componentes deben ser fáciles de masticar y tragar. Evitar partes crujientes o duras.</li>
-                            </ul>
-                            <h5><i class='bx bx-restaurant'></i> Instrucciones de Preparación (Textura Suave):</h5>
+                            <h5><i class='bx bx-food-menu'></i> Ingredientes Específicos:</h5>
+                            <div class="ingredients-list">
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Salmón</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">140g/porción</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Espárragos</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">80g/porción</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Quinoa</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">50g cruda/porción</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Caldo de Verduras</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">c/s</span>
+                                </div>
+                                <div class="ingredient-item">
+                                    <div class="ingredient-info">
+                                        <span class="ingredient-name-main">Aceite de Oliva</span>
+
+                                    </div>
+                                    <span class="ingredient-quantity">c/s</span>
+                                </div>
+                            </div>
+                            <div class="variant-modification-note">
+                                <strong>Modificación Clave:</strong> Todos los componentes deben ser fáciles de masticar y tragar. Evitar partes crujientes, duras, pieles o espinas.
+                            </div>
+
+                            <h5><i class='bx bx-restaurant'></i> Instrucciones de Preparación:</h5>
                             <ol>
-                                <li>Cocinar el salmón (al vapor o hervido suavemente) hasta que esté bien hecho. Dejar enfriar un poco y desmenuzar cuidadosamente, retirando piel y espinas.</li>
-                                <li>Cocinar los espárragos hasta que estén muy blandos. Picar muy finamente o hacer un puré ligero.</li>
-                                <li>Cocinar la quinoa con extra agua/caldo para que quede muy suave.</li>
-                                <li>Mezclar con cuidado el salmón desmenuzado, los espárragos procesados y la quinoa. Añadir un poco de caldo si la mezcla está muy seca.</li>
+                                <li>Cocinar salmón (vapor o hervido suave) hasta bien hecho. Enfriar y desmenuzar cuidadosamente.</li>
+                                <li>Cocinar espárragos hasta muy blandos. Procesar (picar fino o puré).</li>
+                                <li>Cocinar quinoa con extra agua/caldo para textura muy suave.</li>
+                                <li>Mezclar con cuidado salmón, espárragos procesados y quinoa. Añadir caldo si es necesario.</li>
                                 <li>Asegurar que no haya trozos grandes. Servir tibio.</li>
                             </ol>
+
+                            <div class="variant-nutritional-summary">
+                                <h6><i class='bx bx-dna'></i> Información Nutricional (Estimada por Porción):</h6>
+                                <div class="nutrition-details">
+                                    <span class="nutrition-item">Calorías: <strong>380 kcal</strong></span>
+                                    <span class="nutrition-item">Proteínas: <strong>30 g</strong></span>
+                                    <span class="nutrition-item">Grasas Totales: <strong>18 g</strong></span>
+                                    <span class="nutrition-item">Grasas Saturadas: <strong>3 g</strong></span>
+                                    <span class="nutrition-item">Carbohidratos: <strong>25 g</strong></span>
+                                    <span class="nutrition-item">Fibra: <strong>3 g</strong></span>
+                                    <span class="nutrition-item">Azúcares: <strong>2 g</strong></span>
+                                    <span class="nutrition-item">Sodio: <strong>60 mg</strong></span>
+                                </div>
+                                <small class="calories-note"><em>Valores aproximados.</em></small>
+                            </div>
                         </div>
                     </div>
                     <!-- Fin Variante Textura Suave -->
 
                 </div> <!-- /recipe-variants-grid -->
             </div> <!-- /recipe-detail-view -->
-        </div>
+        </div> <!-- /content-area -->
 
 
     </div>
