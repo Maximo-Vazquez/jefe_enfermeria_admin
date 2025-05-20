@@ -38,14 +38,6 @@
     --diet-pureed-text: #6a5acd; 
 }
 
-/* Estilos base generales */
-body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    line-height: 1.5;
-}
 
 /* Estilos para la vista de Formulario de Receta */
 .recipe-form-view {
