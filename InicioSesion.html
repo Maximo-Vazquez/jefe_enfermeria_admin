@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar Sesión - ElderCare</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <style>
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px; /* Podés ajustar el valor a gusto */
+      font-weight: 500;
+    }
+
+    body {
+      background-color: #f5f7fa;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    .login-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background-color: #ffffff;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .login-logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .login-logo span {
+      font-size: 22px;
+      font-weight: 600;
+      color: #1a73e8;
+    }
+
+    .login-title {
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+
+    .btn-primary {
+      background-color: #1a73e8;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .btn-primary:hover {
+      background-color: #1665c1;
+    }
+
+    .login-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .login-footer a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-box">
+      <div class="login-logo">
+        <img src="img/logo.png" alt="Logo" />
+        <span>ElderCare</span>
+      </div>
+      <h2 class="login-title"><i class='bx bx-user-circle'></i> Iniciar Sesión</h2>
+
+      <form action="/ruta/login" method="POST">
+        <div class="form-group">
+          <label for="username"><i class='bx bx-user'></i> Usuario</label>
+          <input type="text" id="username" name="username" class="form-input" required placeholder="Correo o nombre de usuario">
+        </div>
+
+        <div class="form-group">
+          <label for="password"><i class='bx bx-lock'></i> Contraseña</label>
+          <input type="password" id="password" name="password" class="form-input" required placeholder="Ingrese su contraseña">
+        </div>
+
+        <button type="submit" class="btn-primary"><i class='bx bx-log-in'></i> Ingresar</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

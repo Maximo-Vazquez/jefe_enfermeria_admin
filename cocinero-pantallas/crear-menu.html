@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administracion</title>
+  <!-- Boxicons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/../css/nav.css" />
+    <link rel="stylesheet" href="/../css/sidebar.css" />
+    <link rel="stylesheet" href="/../css/base.css" />
+  <style>
+
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <!-- En vez de incluir directamente -->
+    <!-- sidebar.html -->
+
+
+        <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; align-items: center;">
+            <img src="img/logo.png" alt="CS2 Investment" class="logo" />
+            <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+            </div>
+        </div>
+        <div class="sidebar-menu ">
+            
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+            <i class='bx bx-layer'></i>
+            <span>Inventario de Medicamentos</span>
+            </div>
+            <div class="submenu">
+            <a href="IN-ver-invetario.html" class="submenu-item">
+                <span>Ver Inventario</span>
+            </a>
+            <a href="IN-registrar-medicamento.html" class="submenu-item">
+                <span>Registrar Nuevo Medicamento</span>
+            </a>
+            <a href="IN-exportar.html" class="submenu-item">
+                <span>Exportar Stock</span>
+            </a>
+            </div>
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Tratamientos Médicos</span>
+                </div>
+                <div class="submenu">
+                <a href="TR-tratamiento.html" class="submenu-item">
+                    <span>Tratamientos por Residente</span>
+                </a>
+                <a href="TR-actualizar-tratamiento.html" class="submenu-item">
+                    <span>Actualizar Tratamiento</span>
+                </a>
+                <a href="TR-historial-medicaciones.html" class="submenu-item">
+                    <span>Historial de Medicación</span>
+                </a>
+            </div>
+            <!-- Sección de Pedidos y Ventas -->
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Informes</span>
+            </div>
+            <div class="submenu">
+                <a href="#" class="submenu-item">
+                    <span>Informe de Uso Semanal</span>
+                </a>
+                <a href="#" class="submenu-item">
+                    <span>Medicamentos Administrados</span>
+                </a>
+                <a href="INFO-alertas-stock.html" class="submenu-item">
+                    <span>Alertas de stock Bajo</span>
+                </a>
+            </div>
+        </div>
+
+
+        </div>
+        <script>
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            submenu.classList.toggle('expanded');
+            element.classList.toggle('expanded');
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (
+            window.innerWidth <= 768 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target) &&
+            sidebar.classList.contains('open')
+            ) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            if (window.innerWidth > 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        </script>
+
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="main-content">
+        <div class="app-header">
+            <div class="header-info-group">
+              <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+                <i class='bx bx-menu'></i>
+              </button>
+          
+          
+          
+              <div class="page-title-nav"> Administracion</div>
+              <span class="role-badge-nav">Jefe Enfermeria</span>
+            </div>
+            <!-- Acciones de la barra de navegación superior -->
+            <div class="header-action-list">
+                <!-- ========  Cerrar sesión (POST)  ======== -->
+                <form id="logout-form" action=""  method="post" style="display:inline;">
+
+                  <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <i class='bx bx-log-out'></i>
+                    <span>Cerrar sesión</span>
+                  </button>
+                </form>
+      
+
+              </div>
+        </div>
+          
+        <!-- Contenido Principal -->
+        <div class="content-area">
+            <div class="menu-creation-view">
+
+                <!-- 1. Encabezado con Título y Nuevo Selector de Fecha -->
+                <div class="menu-header-main">
+                    <div class="menu-title-section">
+                        <i class='bx bx-calendar-edit'></i>
+                        <h2 class="view-title-main">Planificación de Menú</h2>
+                    </div>
+                    <div class="menu-date-selector">
+                        <span class="current-menu-date-display" id="current-menu-date-text">
+                            Para el día: <strong>Martes, 21 de Mayo de 2025</strong>
+                        </span>
+                        <button class="btn btn-secondary btn-sm" id="change-menu-date-btn" title="Cambiar fecha del menú">
+                            <i class='bx bx-calendar-alt'></i> Cambiar Fecha
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Panel de Resumen de Residentes por Dieta -->
+                <div class="resident-summary-panel-alt">
+                    <h3><i class='bx bx-user-check'></i> Residentes por Dieta</h3>
+                    <div class="diet-counts-alt">
+                        <span class="diet-count-item-alt diet-tag diet-standard">Estándar: <strong>20</strong></span>
+                        <span class="diet-count-item-alt diet-tag diet-low-sodium">Bajo Sodio: <strong>10</strong></span>
+                        <span class="diet-count-item-alt diet-tag diet-vegana">Vegana: <strong>4</strong></span>
+                        <span class="diet-count-item-alt diet-tag diet-diabetic">Diabética: <strong>8</strong></span>
+                        <span class="diet-count-item-alt diet-tag diet-soft">Textura Suave: <strong>5</strong></span>
+
+                    </div>
+                </div>
+
+                <!-- 3. Grid para las Comidas (Desayuno, Almuerzo, Merienda, Cena) -->
+                <div class="meal-setup-grid-alt">
+
+                    <!-- Tarjeta para DESAYUNO -->
+                    <div class="meal-setup-card-alt">
+                        <div class="meal-card-header-alt">
+                            <div class="meal-title-group-alt">
+                                <i class='bx bx-cafe meal-icon-alt' style="color: #A0522D;"></i> <!-- Marrón más oscuro para café -->
+                                <h3>Desayuno</h3>
+                            </div>
+                            <a href="seleccionar-recetas.html" class="btn btn-primary btn-sm add-recipe-btn-alt">
+                                <i class='bx bx-plus-circle'></i> Añadir Receta
+                            </a>
+                        </div>
+                        <div class="meal-card-body-alt">
+                            <div class="assigned-recipe-card-alt">
+                                <div class="assigned-recipe-header-alt">
+                                    <h4>Avena Caliente con Frutas</h4>
+                                    <div class="recipe-card-actions-alt">
+                                
+                                        <button class="btn btn-danger btn-xs remove-recipe-btn-alt" title="Quitar receta"><i class='bx bx-trash'></i></button>
+                                    </div>
+                                </div>
+                                <div class="assigned-recipe-body-alt">
+                                    <h5 class="variant-title-alt"><i class='bx bx-bowl-hot'></i> Variantes y Cantidades</h5>
+                                    <div class="variant-quantity-list-alt">
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-standard">Estándar</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="20" aria-label="Cantidad Estándar">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-diabetic">Diabética</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="8" aria-label="Cantidad Diabética">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="no-recipes-message-alt" style="display:none;">No hay recetas para el desayuno.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta para ALMUERZO -->
+                    <div class="meal-setup-card-alt">
+                        <div class="meal-card-header-alt">
+                            <div class="meal-title-group-alt">
+                                <i class='bx bx-restaurant meal-icon-alt' style="color: #FF8C00;"></i>
+                                <h3>Almuerzo</h3>
+                            </div>
+                            <a href="seleccionar-recetas.html" class="btn btn-primary btn-sm add-recipe-btn-alt">
+                                <i class='bx bx-plus-circle'></i> Añadir Receta
+                            </a>
+                        </div>
+                        <div class="meal-card-body-alt">
+                            <div class="assigned-recipe-card-alt">
+                                <div class="assigned-recipe-header-alt">
+                                    <h4>Pollo al Limón con Patatas</h4>
+                                    <div class="recipe-card-actions-alt">
+                                
+                                        <button class="btn btn-danger btn-xs remove-recipe-btn-alt" title="Quitar receta"><i class='bx bx-trash'></i></button>
+                                    </div>
+                                </div>
+                                <div class="assigned-recipe-body-alt">
+                                    <h5 class="variant-title-alt"><i class='bx bx-dish'></i> Variantes y Cantidades</h5>
+                                    <div class="variant-quantity-list-alt">
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-standard">Estándar</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="20" aria-label="Cantidad Estándar">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-low-sodium">Bajo Sodio</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="10" aria-label="Cantidad Bajo Sodio">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-soft">Textura Suave</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="5" aria-label="Cantidad Textura Suave">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="assigned-recipe-card-alt">
+                                <div class="assigned-recipe-header-alt">
+                                    <h4>Ensalada de Quinoa Vegana</h4>
+                                    <div class="recipe-card-actions-alt">
+                                
+                                        <button class="btn btn-danger btn-xs remove-recipe-btn-alt" title="Quitar receta"><i class='bx bx-trash'></i></button>
+                                    </div>
+                                </div>
+                                <div class="assigned-recipe-body-alt">
+                                    <h5 class="variant-title-alt"><i class='bx bxs-leaf'></i> Variantes y Cantidades</h5>
+                                    <div class="variant-quantity-list-alt">
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-vegana">Vegana</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="4" aria-label="Cantidad Vegana">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-diabetic">Diabética (Apta)</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="8" aria-label="Cantidad Diabética">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="no-recipes-message-alt" style="display:none;">No hay recetas para el almuerzo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta para MERIENDA -->
+                    <div class="meal-setup-card-alt">
+                        <div class="meal-card-header-alt">
+                            <div class="meal-title-group-alt">
+                                <i class='bx bx-cookie meal-icon-alt' style="color: #D2691E;"></i>
+                                <h3>Merienda</h3>
+                            </div>
+                            <a href="seleccionar-recetas.html" class="btn btn-primary btn-sm add-recipe-btn-alt">
+                                <i class='bx bx-plus-circle'></i> Añadir Receta
+                            </a>
+                        </div>
+                        <div class="meal-card-body-alt">
+                            <div class="assigned-recipe-card-alt">
+                                <div class="assigned-recipe-header-alt">
+                                    <h4>Yogur Natural con Fruta</h4>
+                                    <div class="recipe-card-actions-alt">
+                                
+                                        <button class="btn btn-danger btn-xs remove-recipe-btn-alt" title="Quitar receta"><i class='bx bx-trash'></i></button>
+                                    </div>
+                                </div>
+                                <div class="assigned-recipe-body-alt">
+                                    <h5 class="variant-title-alt"><i class='bx bxs-fridge'></i> Variantes y Cantidades</h5>
+                                    <div class="variant-quantity-list-alt">
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-standard">Estándar</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="20" aria-label="Cantidad Estándar">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-diabetic">Sin Azúcar</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="8" aria-label="Cantidad Diabética">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-pureed">Triturado con Fruta</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="3" aria-label="Cantidad Triturado">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="no-recipes-message-alt" style="display:none;">No hay recetas para la merienda.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta para CENA -->
+                    <div class="meal-setup-card-alt">
+                        <div class="meal-card-header-alt">
+                            <div class="meal-title-group-alt">
+                                <i class='bx bxs-moon meal-icon-alt' style="color: #4682B4;"></i> <!-- Azul acero para noche -->
+                                <h3>Cena</h3>
+                            </div>
+                            <a href="seleccionar-recetas.html" class="btn btn-primary btn-sm add-recipe-btn-alt">
+                                <i class='bx bx-plus-circle'></i> Añadir Receta
+                            </a>
+                        </div>
+                        <div class="meal-card-body-alt">
+                            <div class="assigned-recipe-card-alt">
+                                <div class="assigned-recipe-header-alt">
+                                    <h4>Crema de Calabacín</h4>
+                                    <div class="recipe-card-actions-alt">
+                                
+                                        <button class="btn btn-danger btn-xs remove-recipe-btn-alt" title="Quitar receta"><i class='bx bx-trash'></i></button>
+                                    </div>
+                                </div>
+                                <div class="assigned-recipe-body-alt">
+                                    <h5 class="variant-title-alt"><i class='bx bx-pot'></i> Variantes y Cantidades</h5>
+                                    <div class="variant-quantity-list-alt">
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-standard">Estándar</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="20" aria-label="Cantidad Estándar">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-low-sodium">Bajo Sodio</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="10" aria-label="Cantidad Bajo Sodio">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                        <div class="variant-quantity-item-alt">
+                                            <span class="diet-tag diet-pureed">Triturada (Base)</span>
+                                            <div class="quantity-controls-alt">
+                                                <input type="number" class="quantity-input-alt" min="0" placeholder="3" aria-label="Cantidad Triturada">
+                                                <span>porc.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="no-recipes-message-alt" style="display:none;">No hay recetas para la cena.</p>
+                        </div>
+                    </div>
+
+                </div> <!-- Fin meal-setup-grid-alt -->
+
+                <!-- 4. Acciones Globales del Menú -->
+                <div class="menu-creation-actions-alt">
+                    <button class="btn btn-secondary btn-lg" type="button" onclick="alert('Acción Cancelar Menú')">
+                        <i class='bx bx-x-circle'></i> Cancelar
+                    </button>
+                    <button class="btn btn-success btn-lg" type="submit" onclick="alert('Acción Guardar Menú')">
+                        <i class='bx bx-save'></i> Guardar Menú
+                    </button>
+                </div>
+            </div> <!-- Fin menu-creation-view -->
+
+
+        </div>
+    </div>
+  </div>
+  
+</body>
+
+</html>
+
+
+<style>
+/* ==========================================================================
+   Variables de Color y Estilos Base (Autocontenidas para esta sección)
+   ========================================================================== */
+:root {
+    --primary-color: #6a5acd; /* SlateBlue */
+    --primary-dark: #483D8B; /* DarkSlateBlue */
+    --primary-light: white; /* Lavender (Primary Light) */
+    
+    --secondary-color: #6c757d; /* Gray */
+    --secondary-light: white; /* Very Light Gray (Background) */
+    
+    --success-color: #28a745; /* Green */
+    --success-dark: #1e7e34; /* Darker Green */
+    --success-light-bg: #eaf6ec;
+    
+    --danger-color: #dc3545; /* Red */
+    --danger-dark: #c82333; /* Darker Red */
+    --danger-light-bg: #f8d7da;
+
+    --warning-color: #ffc107; /* Yellow */
+    --info-color: #17a2b8; /* Teal */
+
+    --text-color: #343a40; /* Dark Gray (casi negro) */
+    --text-light: #ffffff;
+    --text-muted: #6c757d; /* Gray (para texto secundario) */
+    --border-color: #dee2e6; /* Light Gray (para bordes) */
+    --border-color-light: #f1f3f5; /* Incluso más claro para separadores sutiles */
+    
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --view-bg: #ffffff; /* Un fondo ligeramente diferente para la vista general */
+
+    --box-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --box-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra más suave y difusa */
+    --box-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.1);
+    
+    --border-radius: 10px; /* Un poco más redondeado */
+    --border-radius-sm: 6px;
+    
+    /* Colores específicos para etiquetas de dieta */
+    --diet-standard-bg: #e0eaff; 
+    --diet-standard-text: #4a69bb;
+    --diet-diabetic-bg: #e0f8e0; 
+    --diet-diabetic-text: #38761d;
+    --diet-low-sodium-bg: #fff0e0; 
+    --diet-low-sodium-text: #c2780e;
+    --diet-soft-bg: #fce4ec; 
+    --diet-soft-text: #880e4f;
+    --diet-pureed-bg: var(--primary-light);
+    --diet-pureed-text: var(--primary-color); 
+    --diet-vegan-bg: #d4f8d4; 
+    --diet-vegan-text: #228b22;
+}
+
+/* ==========================================================================
+   Estilos Generales (Botones, Etiquetas, etc.)
+   ========================================================================== */
+body { /* Asumiendo que estos estilos se aplican dentro de un body o un contenedor con fuente definida */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.btn {
+    padding: 10px 18px; /* Un poco más de padding */
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.5; /* Para mejor alineación vertical del texto */
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    border: 1px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; 
+    transition: all 0.25s ease-in-out;
+    text-decoration: none;
+    white-space: nowrap; /* Evitar que el texto del botón se parta */
+}
+.btn i {
+    font-size: 1.2em; /* Iconos un poco más grandes */
+    line-height: 1; /* Para que no afecte la altura del botón */
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border-color: var(--primary-color);
+}
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    box-shadow: 0 2px 8px rgba(var(--primary-color), 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--card-bg);
+    color: var(--text-muted);
+    border-color: var(--border-color);
+}
+.btn-secondary:hover {
+    background-color: var(--secondary-light);
+    border-color: #adb5bd; 
+    color: var(--text-color);
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: var(--text-light);
+    border-color: var(--success-color);
+}
+.btn-success:hover {
+    background-color: var(--success-dark);
+    border-color: var(--success-dark);
+    box-shadow: 0 2px 8px rgba(var(--success-color), 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: var(--text-light);
+    border-color: var(--danger-color);
+}
+.btn-danger:hover {
+    background-color: var(--danger-dark);
+    border-color: var(--danger-dark);
+    box-shadow: 0 2px 8px rgba(var(--danger-color), 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-sm {
+    padding: 6px 12px !important;
+    font-size: 0.8rem !important;
+}
+.btn-xs {
+    padding: 4px 8px !important;
+    font-size: 0.75rem !important;
+    gap: 5px !important;
+}
+.btn-xs i {
+    font-size: 1.1em !important;
+}
+
+.btn-outline-alt {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+.btn-outline-alt:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+
+/* Diet Tags */
+.diet-tag {
+    font-size: 0.78rem; /* Ligeramente más grande para legibilidad */
+    padding: 5px 10px; 
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+    white-space: nowrap;
+    line-height: 1.2; 
+    display: inline-block; /* Para que se comporte bien en flujos */
+}
+.diet-tag.diet-standard { background-color: var(--diet-standard-bg); color: var(--diet-standard-text); }
+.diet-tag.diet-diabetic { background-color: var(--diet-diabetic-bg); color: var(--diet-diabetic-text); }
+.diet-tag.diet-low-sodium { background-color: var(--diet-low-sodium-bg); color: var(--diet-low-sodium-text); }
+.diet-tag.diet-soft { background-color: var(--diet-soft-bg); color: var(--diet-soft-text); }
+.diet-tag.diet-pureed { background-color: var(--diet-pureed-bg); color: var(--diet-pureed-text); }
+.diet-tag.diet-vegana { background-color: var(--diet-vegan-bg); color: var(--diet-vegan-text); } /* Tuve que añadir .diet-vegana aquí, antes estaba como diet-vegan */
+
+.sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+}
+/* ==========================================================================
+   Estilos Específicos para la Vista de Creación de Menú (menu-creation-view)
+   ========================================================================== */
+.menu-creation-view {
+    padding: 30px; /* Más padding general */
+    max-width: 1400px;
+    margin: 20px auto; /* Margen para centrar y separar de bordes de ventana */
+    background-color: var(--view-bg); 
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-lg); /* Sombra más prominente para la vista completa */
+}
+
+/* 1. Encabezado Principal con Título y Selector de Fecha */
+.menu-header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px; /* Aumentar padding */
+    margin: -30px -30px 30px -30px; /* Extender al borde de .menu-creation-view */
+    background: linear-gradient(to right, var(--primary-color), var(--primary-dark)); /* Gradiente sutil */
+    color: var(--text-light);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.menu-title-section {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Más espacio */
+}
+.menu-title-section i {
+    font-size: 2.5rem; /* Icono de título más grande */
+}
+.view-title-main {
+    font-size: 1.8rem; 
+    font-weight: 600;
+    margin: 0;
+}
+.menu-date-selector {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.current-menu-date-display {
+    font-size: 1rem; /* Un poco más grande */
+    background-color: rgba(255,255,255,0.15); /* Más contraste */
+    padding: 8px 14px; /* Más padding */
+    border-radius: var(--border-radius-sm);
+}
+.current-menu-date-display strong {
+    font-weight: 600;
+}
+#change-menu-date-btn {
+    background-color: rgba(255,255,255,0.25);
+    border-color: rgba(255,255,255,0.4);
+    color: var(--text-light);
+    font-weight: 500;
+}
+#change-menu-date-btn:hover {
+    background-color: rgba(255,255,255,0.4);
+    border-color: rgba(255,255,255,0.6);
+}
+
+
+/* 2. Panel de Resumen de Residentes */
+.resident-summary-panel-alt {
+    background-color: var(--card-bg);
+    padding: 25px; /* Más padding */
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-md);
+    margin-bottom: 35px; /* Más separación */
+    border: 1px solid var(--border-color-light);
+}
+.resident-summary-panel-alt h3 {
+    font-size: 1.25rem; 
+    color: var(--text-color);
+    margin-top: 0; 
+    margin-bottom: 20px; /* Más espacio antes de las etiquetas */
+    display: flex; 
+    align-items: center; 
+    gap: 12px;
+    font-weight: 600;
+    padding-bottom: 15px; /* Más padding */
+    border-bottom: 1px solid var(--border-color);
+}
+.resident-summary-panel-alt h3 i {
+    font-size: 1.6em; /* Icono más grande */
+    color: var(--primary-color);
+}
+.diet-counts-alt {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px; /* Más espacio entre etiquetas */
+}
+.diet-count-item-alt {
+    font-size: 0.9rem; 
+    padding: 6px 12px;
+}
+.diet-count-item-alt strong { 
+    font-weight: 700; /* Más bold */
+    margin-left: 5px;
+}
+
+/* 3. Grid para las Comidas */
+.meal-setup-grid-alt {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr)); /* minmax un poco menor para 3 columnas antes */
+    gap: 30px; /* Más gap */
+    margin-bottom: 35px;
+}
+.meal-setup-card-alt {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color-light);
+    box-shadow: var(--box-shadow-md);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.meal-setup-card-alt:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-lg);
+}
+
+.meal-card-header-alt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px; 
+    border-bottom: 1px solid var(--border-color-light);
+    background-color: var(--secondary-light); 
+}
+.meal-title-group-alt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.meal-title-group-alt h3 {
+    font-size: 1.3rem; /* Más grande */
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+}
+.meal-icon-alt {
+    font-size: 1.8rem; /* Iconos de comida más grandes */
+}
+.add-recipe-btn-alt i { 
+    margin-right: 5px;
+}
+.meal-card-body-alt {
+    padding: 25px; /* Más padding */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Más espacio entre recetas asignadas */
+}
+.no-recipes-message-alt {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 25px; /* Más padding */
+    border: 2px dashed var(--border-color); /* Borde más visible */
+    border-radius: var(--border-radius-sm);
+    font-style: italic;
+    font-size: 0.95rem;
+    margin-top: 15px; 
+    background-color: #fdfdfd; /* Fondo muy sutil */
+}
+
+/* Tarjeta de Receta Asignada */
+.assigned-recipe-card-alt {
+    background-color: var(--card-bg); /* Usar blanco para contraste con el body de meal-card */
+    border: 1px solid var(--border-color-light); /* Borde más sutil */
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--box-shadow-sm);
+    transition: box-shadow 0.2s ease;
+}
+.assigned-recipe-card-alt:hover {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+.assigned-recipe-header-alt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px; /* Más padding */
+    background-color: #fdfdfe; /* Un blanco apenas distinto, o var(--secondary-light) */
+    border-bottom: 1px solid var(--border-color-light);
+}
+.assigned-recipe-header-alt h4 {
+    margin: 0;
+    font-size: 1.05rem; 
+    font-weight: 600;
+    color: var(--primary-dark); /* Color primario oscuro para títulos de receta */
+}
+.recipe-card-actions-alt { 
+    display: flex; 
+    gap: 8px; 
+}
+.assigned-recipe-body-alt { 
+    padding: 18px; /* Más padding */
+}
+.variant-title-alt { 
+    font-size: 0.85rem; /* Un poco más pequeño */
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-top: 0; 
+    margin-bottom: 15px; /* Más espacio */
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px; /* Más espaciado */
+}
+.variant-title-alt i {
+    font-size: 1.3em; /* Icono un poco más grande */
+    color: var(--secondary-color);
+}
+
+.variant-quantity-list-alt { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; /* Más espacio */
+}
+.variant-quantity-item-alt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px; /* Más padding */
+    background-color: var(--secondary-light); 
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color-light); 
+    gap: 12px;
+}
+.variant-quantity-item-alt .diet-tag {
+    flex-shrink: 0; 
+}
+
+.quantity-controls-alt { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; /* Más gap */
+}
+.quantity-input-alt {
+    width: 65px; /* Un poco más ancho */
+    padding: 6px 8px; /* Más padding */
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 0.9rem; /* Fuente más grande */
+    background-color: var(--input-bg);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.quantity-input-alt:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light); /* Sombra de focus más notoria */
+}
+.quantity-controls-alt span { 
+    font-size: 0.85rem; 
+    color: var(--text-muted); 
+}
+
+/* 4. Acciones Globales del Menú */
+.menu-creation-actions-alt {
+    display: flex;
+    justify-content: flex-end;
+    gap: 18px; /* Más gap */
+    padding: 25px 0 0 0; 
+    margin-top: 30px; /* Más margen superior */
+    border-top: 1px solid var(--border-color);
+}
+.menu-creation-actions-alt .btn-lg { /* Usar una clase real .btn-lg o definirla aquí */
+    padding: 12px 25px !important;
+    font-size: 1.05rem !important;
+    font-weight: 600;
+}
+.menu-creation-actions-alt .btn-lg i {
+    font-size: 1.2em !important;
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+@media (max-width: 992px) {
+    .meal-setup-grid-alt {
+         grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+    }
+     .menu-header-main {
+        padding: 15px 20px;
+        margin: -30px -30px 25px -30px;
+    }
+    .view-title-main {
+        font-size: 1.6rem;
+    }
+    .menu-title-section i {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-creation-view {
+        padding: 20px;
+        margin: 15px auto;
+    }
+    .menu-header-main {
+        flex-direction: column;
+        align-items: stretch; /* Para que los elementos ocupen todo el ancho */
+        gap: 15px;
+        padding: 20px;
+        margin: -20px -20px 20px -20px; /* Ajustar margen negativo */
+    }
+    .menu-title-section {
+        justify-content: center; /* Centrar título en móvil */
+    }
+    .menu-date-selector {
+        width: 100%;
+        flex-direction: column; /* Apilar selector de fecha */
+        gap: 10px;
+    }
+    .current-menu-date-display {
+        text-align: center;
+        width: 100%;
+    }
+    #change-menu-date-btn {
+        width: 100%;
+    }
+    .view-title-main {
+        font-size: 1.5rem; /* Ajustar tamaño de título */
+    }
+    .resident-summary-panel-alt {
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+    .resident-summary-panel-alt h3 {
+        font-size: 1.15rem;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+    .meal-card-body-alt {
+        padding: 20px;
+    }
+    .meal-setup-grid-alt {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .menu-creation-view {
+        border-radius: 0; /* Sin radios en pantallas muy pequeñas si ocupa toda la pantalla */
+        margin: 0 auto;
+        box-shadow: none;
+    }
+     .menu-header-main {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        margin: 0 0 20px 0; /* Sin margen negativo horizontal */
+    }
+    .assigned-recipe-header-alt {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .recipe-card-actions-alt {
+        width: 100%;
+        justify-content: flex-start; /* Alinear botones a la izquierda */
+    }
+    .variant-quantity-item-alt {
+        flex-direction: column;
+        align-items: stretch; /* Para que la etiqueta y los controles ocupen ancho */
+        gap: 10px;
+    }
+    .variant-quantity-item-alt .diet-tag {
+        text-align: center; /* Centrar texto de la etiqueta */
+    }
+    .quantity-controls-alt {
+        width: 100%;
+        justify-content: space-between; 
+    }
+    .quantity-input-alt {
+        flex-grow: 1; /* Permitir que el input crezca */
+        max-width: 100px; 
+    }
+    .menu-creation-actions-alt {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .menu-creation-actions-alt .btn {
+        width: 100%;
+    }
+    .meal-card-header-alt {
+        flex-direction: column;
+        align-items: stretch; /* Que ocupen todo el ancho */
+        gap: 12px;
+    }
+    .meal-title-group-alt {
+        justify-content: center; /* Centrar titulo de comida */
+    }
+    .add-recipe-btn-alt {
+        width: 100%; /* Botón de añadir receta al 100% */
+    }
+    .current-menu-date-display {
+        font-size: 0.9rem;
+    }
+    .btn { /* Botones un poco más pequeños en móvil */
+        padding: 8px 15px;
+        font-size: 0.85rem;
+    }
+    .btn i { font-size: 1.1em; }
+    .menu-creation-actions-alt .btn-lg {
+        padding: 10px 20px !important;
+        font-size: 1rem !important;
+    }
+}
+</style>
+

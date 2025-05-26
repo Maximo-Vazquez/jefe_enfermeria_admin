@@ -1,0 +1,704 @@
+/* Archivo: css/cocina/receta.css (o similar) */
+
+/* ==========================================================================
+   Variables de Color y Estilos Base
+   ========================================================================== */
+:root {
+    --primary-color: #6a5acd; /* SlateBlue */
+    --primary-dark: #483D8B; /* DarkSlateBlue para hovers más oscuros */
+    --primary-light: #e8e6f8; /* Lavender (Primary Light) */
+    
+    --secondary-color: #6c757d; /* Gray */
+    --secondary-light: #f8f9fa; /* Very Light Gray (Background for some elements) */
+    
+    --success-color: #28a745; /* Green */
+    --success-light-bg: #eaf6ec;
+    
+    --warning-color: #ffc107; /* Yellow */
+    --warning-light-bg: #fff8e1;
+    
+    --info-color: #17a2b8; /* Teal */
+    --info-light-bg: #e2f6f9;
+    
+    --danger-color: #dc3545; /* Red */
+    --danger-light-bg: #f8d7da;
+
+    --text-color: #343a40; /* Dark Gray (casi negro) */
+    --text-muted: #6c757d; /* Gray (para texto secundario) */
+    --text-light: #ffffff;
+
+    --border-color: #dee2e6; /* Light Gray (para bordes) */
+    --border-color-light: #f1f3f5; /* Para bordes aún más sutiles */
+
+    --background-color: #f4f7f9; /* Fondo general de la vista/página */
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --table-row-hover-bg: #f1f1f1; /* Considerar --secondary-light o similar */
+
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --box-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --border-radius: 10px; /* Un poco más redondeado */
+    --border-radius-sm: 6px;
+    
+    /* Colores específicos para etiquetas de dieta */
+    --diet-standard-bg: #e0eaff; 
+    --diet-standard-text: #4a69bb;
+    --diet-diabetic-bg: #e0f8e0; 
+    --diet-diabetic-text: #38761d;
+    --diet-low-sodium-bg: #fff0e0; 
+    --diet-low-sodium-text: #c2780e;
+    --diet-soft-bg: #fce4ec; 
+    --diet-soft-text: #880e4f;
+    --diet-pureed-bg: #e8e6f8; 
+    --diet-pureed-text: var(--primary-color); 
+    --diet-vegan-bg: #d4f8d4; 
+    --diet-vegan-text: #228b22;
+}
+
+/* ==========================================================================
+   Estilos Generales de Componentes (Reutilizables)
+   ========================================================================== */
+
+body { /* Asumiendo que estos estilos se aplican dentro de un body o un contenedor con fuente definida */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--background-color); /* Fondo para toda la página */
+}
+
+.view-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.view-title i {
+    font-size: 1.9rem; 
+    color: var(--primary-color);
+}
+
+/* Botones */
+.btn, .btn-action {
+    padding: 9px 16px; /* Un poco más de padding */
+    font-size: 0.9rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    border: 1px solid transparent; /* Añadir borde transparente para consistencia */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Más espacio en gap */
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
+    text-decoration: none;
+    line-height: 1.5;
+}
+.btn i, .btn-action i {
+    font-size: 1.2em; /* Iconos un poco más grandes */
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border-color: var(--primary-color);
+}
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-secondary {
+    background-color: var(--card-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+    background-color: var(--secondary-light);
+    border-color: #adb5bd;
+    color: var(--text-color);
+}
+
+.btn-outline-alt {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+.btn-outline-alt:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+/* Diet Tags */
+.diet-tag {
+    font-size: 0.78rem;
+    padding: 4px 9px; /* Ajustar padding */
+    border-radius: var(--border-radius-sm); /* Usar variable */
+    font-weight: 500;
+    white-space: nowrap;
+    display: inline-block;
+    line-height: 1.3;
+}
+.diet-tag.diet-standard { background-color: var(--diet-standard-bg); color: var(--diet-standard-text); }
+.diet-tag.diet-diabetic { background-color: var(--diet-diabetic-bg); color: var(--diet-diabetic-text); }
+.diet-tag.diet-low-sodium { background-color: var(--diet-low-sodium-bg); color: var(--diet-low-sodium-text); }
+.diet-tag.diet-soft { background-color: var(--diet-soft-bg); color: var(--diet-soft-text); }
+.diet-tag.diet-pureed { background-color: var(--diet-pureed-bg); color: var(--diet-pureed-text); }
+.diet-tag.diet-vegan { background-color: var(--diet-vegan-bg); color: var(--diet-vegan-text); } /* Asegúrate que esta clase exista si usas 'diet-vegan' en el HTML */
+
+
+/* Form Controls (para inputs, selects) */
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: var(--input-bg);
+    background-clip: padding-box;
+    border: 1px solid var(--border-color);
+    appearance: none; /* Quitar apariencia nativa donde sea posible */
+    border-radius: var(--border-radius-sm);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.form-control:focus {
+    color: var(--text-color);
+    background-color: var(--input-bg);
+    border-color: var(--primary-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem var(--primary-light);
+}
+select.form-control { /* Estilo para flecha de select si es necesario */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    padding-right: 2.5rem; /* Espacio para la flecha */
+}
+
+
+/* ==========================================================================
+   Estilos específicos para la vista de DETALLE DE RECETA
+   ========================================================================== */
+.recipe-detail-view {
+    padding: 30px; /* Más padding */
+    max-width: 1200px;
+    margin: 20px auto; /* Margen para centrar */
+    background-color: var(--card-bg); /* Fondo blanco para esta vista específica */
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-md);
+}
+
+.recipe-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px; /* Aumentar gap */
+    padding-bottom: 25px; /* Aumentar padding */
+    border-bottom: 1px solid var(--border-color);
+}
+.recipe-detail-header .view-title {
+    margin-bottom: 0; 
+}
+.recipe-detail-header .view-title i.bx-receipt {
+    color: var(--primary-color);
+}
+
+.recipe-main-info {
+    margin-bottom: 40px; /* Más espacio */
+}
+
+.recipe-summary-card {
+    background-color: var(--secondary-light); /* Fondo ligeramente diferente */
+    padding: 30px; /* Más padding */
+    border-radius: var(--border-radius);
+    /* box-shadow: none;  Ya no necesita sombra propia si la vista tiene una */
+    border: 1px solid var(--border-color-light);
+}
+.recipe-summary-card h3 {
+    font-size: 1.4rem; /* Más grande */
+    color: var(--primary-dark); /* Color más oscuro */
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--primary-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.recipe-summary-card h3 i {
+    font-size: 1.25em;
+}
+.recipe-summary-card p {
+    margin-bottom: 15px; /* Más espacio */
+    line-height: 1.75; /* Mejor interlineado */
+    color: var(--text-muted);
+}
+.recipe-summary-card p strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.section-title {
+    font-size: 1.6rem; /* Más grande */
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 40px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+}
+.section-title i {
+    color: var(--primary-color);
+    margin-right: 15px; /* Más espacio */
+    font-size: 1.7em; /* Icono más grande */
+}
+
+.recipe-variants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); /* Ajustar minmax */
+    gap: 30px;
+}
+
+.variant-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--border-color-light); /* Borde más sutil */
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+    overflow: hidden; /* Para que el header no se salga con border-radius */
+}
+.variant-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-md); /* Sombra más pronunciada al hover */
+}
+
+.variant-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px; /* Más padding */
+    border-bottom: 1px solid var(--border-color-light);
+    background-color: var(--secondary-light); /* Fondo consistente */
+}
+
+.variant-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Más gap */
+}
+.variant-title-group h4 {
+    font-size: 1.3rem; /* Más grande */
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
+.variant-title-group .diet-tag {
+    align-self: flex-start;
+}
+
+.variant-servings {
+    font-size: 0.9rem;
+    font-weight: 500;
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    padding: 6px 14px; /* Más padding */
+    border-radius: var(--border-radius-sm);
+    white-space: nowrap;
+}
+
+.variant-card-body {
+    padding: 25px; /* Más padding */
+    flex-grow: 1;
+}
+.variant-card-body h5 {
+    font-size: 1.15rem; /* Más grande */
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 18px; /* Más espacio */
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+.variant-card-body h5 i {
+    margin-right: 12px; /* Más espacio */
+    color: var(--primary-color);
+    font-size: 1.45em; /* Icono más grande */
+}
+
+.ingredients-list {
+    margin-bottom: 25px;
+    padding-left: 0;
+    list-style: none;
+}
+.ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 14px; /* Más padding */
+    margin-bottom: 12px; /* Más espacio */
+    background-color: #fdfdfd; /* Fondo muy sutil */
+    border: 1px solid var(--border-color-light); /* Borde más sutil */
+    border-left: 4px solid var(--primary-light); /* Borde izquierdo más grueso */
+    border-radius: var(--border-radius-sm);
+    transition: border-left-color 0.2s ease, background-color 0.2s ease;
+}
+.ingredient-item:hover {
+    border-left-color: var(--primary-color);
+    background-color: #f9f9f9;
+}
+.ingredient-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-right: 15px;
+}
+.ingredient-name-main {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1rem; /* Más grande */
+    line-height: 1.4;
+}
+.ingredient-preparation-note {
+    font-size: 0.85rem; /* Ligeramente más grande */
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.4;
+    margin-top: 4px; /* Más espacio */
+}
+.ingredient-quantity {
+    font-size: 0.95rem; /* Más grande */
+    color: var(--text-color);
+    white-space: nowrap;
+    font-weight: 500;
+    padding: 4px 10px; /* Más padding */
+    background-color: var(--secondary-light); /* Fondo consistente */
+    border-radius: var(--border-radius-sm); /* Usar variable */
+    margin-top: 2px;
+}
+
+.variant-modification-note {
+    margin: 20px 0; /* Más margen */
+    padding: 15px 20px; /* Más padding */
+    background-color: var(--warning-light-bg);
+    border: 1px solid var(--warning-color);
+    border-left-width: 5px; /* Borde izquierdo más grueso */
+    border-radius: var(--border-radius-sm);
+    font-size: 0.95rem; /* Más grande */
+}
+.variant-modification-note strong {
+    color: var(--warning-color); /* Usar directamente el color de warning, no text-warning */
+    font-weight: 600;
+}
+
+.variant-card-body ol {
+    padding-left: 30px; /* Más padding */
+    margin-bottom: 25px;
+    color: var(--text-muted);
+}
+.variant-card-body ol li {
+    margin-bottom: 12px; /* Más espacio */
+    line-height: 1.7; /* Mejor interlineado */
+}
+.variant-card-body ol li::marker {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.variant-nutritional-summary {
+    margin-top: 25px; /* Más espacio */
+    padding: 20px; /* Más padding */
+    background-color: var(--info-light-bg);
+    border: 1px solid var(--info-color);
+    border-radius: var(--border-radius-sm);
+}
+.variant-nutritional-summary h6 {
+    margin-top: 0;
+    margin-bottom: 15px; /* Más espacio */
+    color: var(--info-color);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem; /* Más grande */
+}
+.variant-nutritional-summary h6 i {
+    margin-right: 10px; /* Más espacio */
+    font-size: 1.35em; /* Icono más grande */
+}
+.variant-nutritional-summary .nutrition-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Ajustar minmax */
+    gap: 10px; /* Más gap */
+}
+.variant-nutritional-summary .nutrition-item {
+    font-size: 0.9rem; /* Más grande */
+    color: var(--text-color);
+}
+.variant-nutritional-summary .nutrition-item strong {
+    color: var(--info-color);
+    font-weight: 600; /* Asegurar que sea bold */
+}
+.variant-nutritional-summary small.calories-note {
+    font-size: 0.85rem; /* Más grande */
+    color: var(--text-muted);
+    display: block;
+    margin-top: 12px; /* Más espacio */
+    text-align: right;
+}
+
+/* ==========================================================================
+   Estilos específicos para la vista de SELECCIONAR RECETA
+   ========================================================================== */
+.select-recipe-view {
+    padding: 30px;
+    max-width: 1300px;
+    margin: 20px auto;
+    /* background-color: var(--card-bg); No necesita fondo propio, hereda de body o .content-area */
+    /* border-radius: var(--border-radius); */
+    /* box-shadow: var(--box-shadow-md); */
+}
+
+.select-recipe-header { /* Comparte estilo con .recipe-detail-header */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
+}
+.select-recipe-header .view-title {
+    margin-bottom: 0;
+}
+
+.select-recipe-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 35px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--box-shadow);
+    align-items: flex-end; /* Para alinear el botón de limpiar filtros */
+}
+.search-input-group {
+    flex-grow: 1; /* Para que ocupe el espacio disponible */
+    min-width: 250px; /* Ancho mínimo */
+    position: relative;
+}
+.search-input-group i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.2rem;
+}
+.search-input-group .form-control {
+    padding-left: 40px; /* Espacio para el icono */
+}
+.filter-group {
+    flex-grow: 1;
+    min-width: 200px; /* Ancho mínimo */
+}
+.filter-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--text-muted);
+}
+#clear-filters-btn {
+    align-self: flex-end; /* Se alinea con la parte inferior de los inputs/selects */
+}
+
+.recipe-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+    gap: 25px;
+}
+
+.recipe-item-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--border-color-light);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+}
+.recipe-item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-md);
+}
+
+.recipe-item-header {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--border-color-light);
+    background-color: var(--secondary-light);
+}
+.recipe-item-header h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin: 0 0 5px 0;
+}
+.recipe-item-header .recipe-category {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.recipe-item-body {
+    padding: 22px;
+    flex-grow: 1;
+}
+.recipe-description {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+    line-height: 1.6;
+    min-height: 50px; /* Para alinear botones si las descripciones varían mucho */
+}
+.available-variants h5 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+.available-variants .diet-tag {
+    margin-right: 6px;
+    margin-bottom: 6px;
+}
+
+.recipe-item-footer {
+    padding: 15px 22px;
+    border-top: 1px solid var(--border-color-light);
+    text-align: right; /* O flex con justify-content: flex-end */
+}
+
+.no-results-message {
+    grid-column: 1 / -1; /* Que ocupe todas las columnas del grid */
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-sm);
+    border: 1px dashed var(--border-color);
+    margin-top: 20px;
+}
+.no-results-message i {
+    font-size: 3rem;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    display: block;
+}
+.no-results-message p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 8px;
+}
+.no-results-message span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+
+/* ==========================================================================
+   Responsive Adjustments (Comunes y Específicos)
+   ========================================================================== */
+@media (max-width: 992px) {
+    .recipe-variants-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+    }
+    .recipe-list-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .recipe-detail-view, .select-recipe-view {
+        padding: 20px;
+        margin: 15px auto;
+    }
+    .recipe-variants-grid, .recipe-list-grid {
+        grid-template-columns: 1fr; /* Una columna */
+        gap: 20px;
+    }
+    .recipe-detail-header, .select-recipe-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .recipe-detail-header .btn, .select-recipe-header .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .view-title {
+        font-size: 1.6rem;
+    }
+    .select-recipe-controls {
+        flex-direction: column;
+        align-items: stretch; /* Para que los inputs ocupen todo el ancho */
+        padding: 15px;
+    }
+    #clear-filters-btn {
+        align-self: stretch; /* Ocupar todo el ancho */
+    }
+}
+
+@media (max-width: 480px) {
+    .recipe-detail-view, .select-recipe-view {
+        padding: 15px;
+    }
+    .view-title {
+        font-size: 1.4rem;
+    }
+    .variant-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px 20px;
+    }
+    .variant-title-group h4 {
+        font-size: 1.15rem;
+    }
+    .ingredient-quantity {
+        align-self: flex-start;
+    }
+    .variant-nutritional-summary .nutrition-details {
+        grid-template-columns: 1fr;
+    }
+    .recipe-item-header {
+        padding: 15px 20px;
+    }
+    .recipe-item-header h4 {
+        font-size: 1.1rem;
+    }
+    .recipe-item-body {
+        padding: 20px;
+    }
+    .recipe-item-footer {
+        padding: 15px 20px;
+        text-align: center;
+    }
+    .recipe-item-footer .btn {
+        width: 100%;
+    }
+    .select-recipe-controls {
+        gap: 15px;
+    }
+}
