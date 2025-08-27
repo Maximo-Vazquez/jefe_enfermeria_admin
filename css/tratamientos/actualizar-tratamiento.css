@@ -111,7 +111,9 @@
 /* Form Inputs/Selects/Textareas (reuse styles if defined globally) */
 .form-input,
 .form-select,
-.form-textarea {
+.form-textarea,
+.form-input-num,  /* Añadido para consistencia */
+.form-select-unit { /* Añadido para consistencia */
     width: 100%;
     padding: 10px 12px;
     font-size: 0.95rem;
@@ -124,12 +126,15 @@
 }
 .form-input:focus,
 .form-select:focus,
-.form-textarea:focus {
+.form-textarea:focus,
+.form-input-num:focus, /* Añadido para consistencia */
+.form-select-unit:focus { /* Añadido para consistencia */
     outline: none;
     border-color: var(--input-focus-border, #8a7ff0);
     box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.2);
 }
-.form-select {
+.form-select,
+.form-select-unit { /* Añadido para consistencia */
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%236c757d' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -152,6 +157,7 @@
 .medication-edit-table {
     width: 100%;
     min-width: 700px;
+    border-collapse: collapse; /* Mejor renderizado de bordes */
 }
 
 .medication-edit-table thead th {
@@ -178,13 +184,16 @@
 
 /* Style inputs/selects within the table */
 .medication-edit-table .form-input,
-.medication-edit-table .form-select {
+.medication-edit-table .form-select,
+.medication-edit-table .form-input-num,  /* Añadido para consistencia */
+.medication-edit-table .form-select-unit { /* Añadido para consistencia */
     padding: 6px 8px;
     font-size: 0.9rem;
     min-width: 100px;
     margin: 0;
 }
-.medication-edit-table .form-select {
+.medication-edit-table .form-select,
+.medication-edit-table .form-select-unit {
     background-position: right 8px center;
     padding-right: 25px;
 }
@@ -232,8 +241,7 @@
     border-top: 1px solid var(--border-color);
     margin-top: 25px;
 }
-/* Reuse .btn, .btn-primary, .btn-secondary */
-.form-actions .btn { /* Ensure button styles apply if not global */
+.form-actions .btn {
     padding: 10px 15px;
     border-radius: 6px;
     cursor: pointer;
@@ -243,7 +251,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    text-decoration: none; /* For the 'Volver' link styled as button */
+    text-decoration: none;
 }
 .form-actions .btn-primary {
     background-color: var(--primary-color);
@@ -259,10 +267,27 @@
     border: 1px solid var(--border-color);
 }
 .form-actions .btn-secondary:hover {
-    background-color: var(--table-row-hover-bg, #f1f1f1);
+    background-color: #f1f1f1;
     border-color: #bbb;
 }
 
+/* ======== NUEVOS ESTILOS AÑADIDOS ======== */
+/* Celda para Dosis combinada */
+.dosis-cell {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacio entre cantidad y unidad */
+}
+/* Input para la cantidad de la dosis */
+.form-input-num {
+    width: 70px; /* Ancho fijo para la cantidad */
+    flex-shrink: 0; /* Evita que se encoja */
+}
+/* Select para la unidad de la dosis */
+.form-select-unit {
+    flex-grow: 1; /* Ocupa el espacio restante */
+}
+/* ========================================= */
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -276,6 +301,6 @@
         min-width: initial;
     }
     .section-title {
-        font-size: 1.2rem; /* Slightly smaller title on mobile */
+        font-size: 1.2rem;
     }
 }

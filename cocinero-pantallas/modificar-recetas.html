@@ -1,267 +1,720 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Administracion</title>
-  <!-- Boxicons CSS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administración - Modificar Receta</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/sidebar.css" />
     <link rel="stylesheet" href="css/base.css" />
 
+    <style>
+        /* Archivo: css/cocina/receta-formulario.css */
 
-    <link rel="stylesheet" href="css/inventario/gestion-medicamentos.css" />
-  <style>
+        /* Variables de color y estilos base */
+        :root {
+            --primary-color: #6a5acd;
+            --primary-light: #e8e6f8;
+            --success-color: #28a745;
+            --success-light-bg: #eaf6ec;
+            --warning-color: #ffc107;
+            --warning-light-bg: #fff8e1;
+            --info-color: #17a2b8;
+            --info-light-bg: #e2f6f9;
+            --danger-color: #dc3545;
+            --danger-light-bg: #f8d7da;
 
-  </style>
+            --text-color: #333;
+            --text-muted: #6c757d;
+            --border-color: #dee2e6;
+            --background-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --input-bg: #ffffff;
+            --table-row-hover-bg: #f1f1f1;
 
+            --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --border-radius: 8px;
+            --border-radius-sm: 6px;
+        }
+
+        /* Estilos para la vista de Formulario de Receta */
+        .recipe-form-view {
+            padding: 25px;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .view-header.form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .view-header.form-header .view-title {
+            margin-bottom: 0;
+            font-size: 1.6rem;
+        }
+        .view-header.form-header .view-title i {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            vertical-align: middle;
+        }
+        .form-actions-main button, .form-actions-main a {
+            margin-left: 10px;
+        }
+
+        /* General Button Styles */
+        .btn, .btn-action, .btn-icon-text {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+            font-weight: 500;
+            text-decoration: none;
+            line-height: 1.5;
+        }
+        .btn i, .btn-action i, .btn-icon-text i {
+            font-size: 1.2em; /* Icono un poco más grande que el texto */
+        }
+        .btn-text-sm { /* Para ocultar texto en botones pequeños en pantallas pequeñas */
+            display: inline;
+        }
+
+        .btn-primary { background-color: var(--primary-color); color: white; }
+        .btn-primary:hover { background-color: #5847b0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        .btn-secondary { background-color: #6c757d; color: white; }
+        .btn-secondary:hover { background-color: #5a6268; }
+
+        .btn-success { background-color: var(--success-color); color: white; }
+        .btn-success:hover { background-color: #1e7e34; }
+
+        .btn-danger { background-color: var(--danger-color); color: white; }
+        .btn-danger:hover { background-color: #c82333; }
+
+        .btn-sm {
+            padding: 6px 10px !important; /* Ajustado para mejor apariencia con iconos */
+            font-size: 0.8rem !important;
+            gap: 5px;
+        }
+        .btn-sm i {
+            font-size: 1.1em !important;
+        }
+
+        .btn-outline-danger {
+            background-color: transparent;
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+        }
+        .btn-outline-danger:hover {
+            background-color: var(--danger-light-bg);
+            color: var(--danger-color); /* Mantener color del texto */
+        }
+        .btn-icon-text.btn-outline-danger i { /* Asegurar que el icono también tome el color */
+            color: var(--danger-color);
+        }
+        .btn-icon-text.btn-outline-danger:hover i {
+            color: var(--danger-color);
+        }
+
+        /* Estilos de Formulario */
+        .form-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius-sm);
+            background-color: #fdfdfd;
+        }
+        .form-section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-section-title i {
+            font-size: 1.3em;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px; 
+        }
+        .form-group label {
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            box-sizing: border-box;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Estilos para Variantes */
+        .variants-list-container {
+            margin-top: 15px;
+        }
+        .variant-form-item {
+            background-color: var(--card-bg);
+            border: 1px solid #d8dcdf;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 25px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .variant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        .variant-title-input {
+            font-size: 1.1rem;
+            font-weight: 600;
+            flex-grow: 1;
+            margin-right: 15px;
+            border: none;
+            border-bottom: 2px solid transparent; 
+            padding: 8px 0;
+            background-color: transparent;
+            color: var(--text-color);
+        }
+        .variant-title-input::placeholder {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .variant-title-input:focus {
+            outline: none;
+            border-bottom-color: var(--primary-color);
+            box-shadow: none; 
+        }
+
+        /* Estilos para Ingredientes dentro de una Variante */
+        .variant-ingredients-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #e0e0e0;
+        }
+        .variant-ingredients-header, .variant-instructions-header, .variant-nutrition-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .variant-ingredients-header h6, .variant-instructions-header h6, .variant-nutrition-header h6 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ingredient-form-item {
+            display: grid;
+            grid-template-columns: 3fr 1.5fr auto; 
+            gap: 15px;
+            align-items: flex-end; 
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #fcfcfc;
+            border: 1px solid #f0f0f0;
+            border-radius: var(--border-radius-sm);
+        }
+        .ingredient-form-item .form-group {
+            margin-bottom: 0; 
+        }
+        .quantity-input-group {
+            display: flex;
+            align-items: baseline; 
+            gap: 8px;
+        }
+        .quantity-input-group .form-control.quantity-input {
+            flex-grow: 1;
+            min-width: 80px;
+        }
+        .quantity-input-group .quantity-unit {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .ingredient-form-item .remove-ingredient-btn {
+            margin-bottom: 0; 
+            padding: 8px 10px !important; 
+        }
+
+        /* Estilos para Instrucciones */
+        .variant-instructions-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #e0e0e0;
+        }
+        .instruction-steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .instruction-step-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background-color: #fcfcfc;
+            border: 1px solid #f0f0f0;
+            border-radius: var(--border-radius-sm);
+        }
+        .instruction-step-item .step-number {
+            font-weight: 600;
+            color: var(--primary-color);
+            min-width: 20px; 
+        }
+        .instruction-step-item .step-text {
+            flex-grow: 1;
+        }
+        .instruction-step-item .remove-instruction-step-btn {
+            padding: 8px 10px !important; 
+        }
+
+        /* Nutrición */
+        .variant-nutrition-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #e0e0e0;
+        }
+        .variant-nutrition-section .form-grid { 
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        /* Botones de Añadir/Eliminar (general) */
+        .add-item-btn { 
+            margin-top: 15px;
+        }
+
+        /* Contenedor para los botones de acción finales del formulario */
+        .form-submission-actions {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: right;
+        }
+        .form-submission-actions .btn {
+            margin-left: 10px;
+        }
+        
+        /* Sección de peligro (eliminar receta) */
+        .danger-zone-section {
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid var(--danger-light-bg);
+            border-radius: var(--border-radius);
+            background-color: #fff9f9;
+        }
+        .danger-zone-section .form-section-title {
+            color: var(--danger-color);
+            border-bottom-color: var(--danger-light-bg);
+        }
+         .danger-zone-section p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .ingredient-form-item {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .ingredient-form-item .remove-ingredient-btn,
+            .instruction-step-item .remove-instruction-step-btn {
+                width: 100%;
+                justify-content: center;
+            }
+             .ingredient-form-item .form-group {
+                margin-bottom: 5px;
+            }
+            .quantity-input-group {
+                width: 100%;
+            }
+            .instruction-step-item {
+                flex-wrap: wrap;
+            }
+            .instruction-step-item .step-text {
+                min-width: calc(100% - 80px);
+            }
+            .form-grid {
+                grid-template-columns: 1fr; 
+            }
+            .view-header.form-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .view-header.form-header .form-actions-main {
+                width: 100%;
+                display: flex;
+                justify-content: flex-start; 
+            }
+            .view-header.form-header .form-actions-main button,
+            .view-header.form-header .form-actions-main a {
+                margin-left: 0;
+                margin-right: 10px;
+                flex-grow: 1; 
+            }
+             .view-header.form-header .form-actions-main > *:last-child {
+                margin-right: 0;
+            }
+             .form-submission-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .form-submission-actions .btn {
+                margin-left: 0;
+                width: 100%;
+            }
+            .variant-header {
+                flex-direction: column;
+                align-items: stretch; 
+                gap: 10px;
+            }
+            .variant-title-input {
+                margin-right: 0;
+            }
+            .variant-header .btn-sm {
+                align-self: flex-end;
+            }
+        }
+        @media (max-width: 480px) {
+            .recipe-form-view { padding: 15px; }
+            .form-section, .danger-zone-section { padding: 15px; }
+            .variant-form-item { padding: 15px; }
+            .ingredient-form-item { padding: 10px; }
+            .instruction-step-item { padding: 8px; }
+            .variant-title-input { font-size: 1rem; }
+            .view-header.form-header .view-title { font-size: 1.4rem; }
+            .view-header.form-header .view-title i { font-size: 1.6rem; }
+            .form-section-title { font-size: 1.15rem; }
+            .btn, .btn-action, .btn-icon-text { font-size: 0.85rem; padding: 7px 12px; }
+            .btn i, .btn-action i, .btn-icon-text i { font-size: 1.1em; }
+            .btn-text-sm { display: none; }
+            .btn-sm { gap: 0; }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- En vez de incluir directamente -->
-    <!-- sidebar.html -->
-
-
+    <div class="container">
         <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div style="display: flex; align-items: center;">
-            <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+            <div class="sidebar-header">
+                <div style="display: flex; align-items: center;">
+                    <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+                </div>
             </div>
-        </div>
-        <div class="sidebar-menu ">
-            
-            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
-            <i class='bx bx-layer'></i>
-            <span>Inventario de Medicamentos</span>
-            </div>
-            <div class="submenu">
-            <a href="IN-ver-invetario.html" class="submenu-item">
-                <span>Ver Inventario</span>
-            </a>
-            <a href="IN-registrar-medicamento.html" class="submenu-item">
-                <span>Registrar Nuevo Medicamento</span>
-            </a>
-            <a href="IN-exportar.html" class="submenu-item">
-                <span>Exportar Stock</span>
-            </a>
-            </div>
-            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
-                <i class='bx bx-bar-chart'></i>
-                <span>Tratamientos Médicos</span>
+            <div class="sidebar-menu ">
+                <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                    <i class='bx bx-layer'></i>
+                    <span>Inventario de Medicamentos</span>
                 </div>
                 <div class="submenu">
-                <a href="TR-tratamiento.html" class="submenu-item">
-                    <span>Tratamientos por Residente</span>
-                </a>
-            </div>
-            <!-- Sección de Pedidos y Ventas -->
-            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
-                <i class='bx bx-bar-chart'></i>
-                <span>Informes</span>
-            </div>
-            <div class="submenu">
-                <a href="#" class="submenu-item">
-                    <span>Informe de Uso Semanal</span>
-                </a>
-                <a href="#" class="submenu-item">
-                    <span>Medicamentos Administrados</span>
-                </a>
-                <a href="INFO-alertas-stock.html" class="submenu-item">
-                    <span>Alertas de stock Bajo</span>
-                </a>
-            </div>
-        </div>
-
-
-        </div>
-        <script>
-        function toggleSubmenu(element) {
-            const submenu = element.nextElementSibling;
-            submenu.classList.toggle('expanded');
-            element.classList.toggle('expanded');
-        }
-        
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('active');
-        }
-        
-        document.addEventListener('click', function(event) {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (
-            window.innerWidth <= 768 &&
-            !sidebar.contains(event.target) &&
-            !menuToggle.contains(event.target) &&
-            sidebar.classList.contains('open')
-            ) {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('active');
-            }
-        });
-        
-        window.addEventListener('resize', function() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            
-            if (window.innerWidth > 768) {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('active');
-            }
-        });
-        </script>
-
-
-    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-    <div class="main-content">
-        <div class="app-header">
-            <div class="header-info-group">
-              <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
-                <i class='bx bx-menu'></i>
-              </button>
-          
-          
-          
-              <div class="page-title-nav"> Administracion</div>
-              <span class="role-badge-nav">Cocineros</span>
-            </div>
-            <!-- Acciones de la barra de navegación superior -->
-            <div class="header-action-list">
-                <!-- ========  Cerrar sesión (POST)  ======== -->
-                <form id="logout-form" action=""  method="post" style="display:inline;">
-
-                  <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
-                    <i class='bx bx-log-out'></i>
-                    <span>Cerrar sesión</span>
-                  </button>
-                </form>
-      
-
-              </div>
-        </div>
-          
-        <!-- Contenido Principal -->
-        <div class="content-area">
-                    <div class="content-area">
-            <div class="medication-management-container">
-                <div class="page-header">
-                    <h2 class="view-title">
-                        <i class='bx bxs-capsule-alt'></i>
-                        Modificar receta: <span id="medication-name-title">Salmón al Horno con Espárragos y Quinoa</span>
-                    </h2>
-                    <a href="listado-recetas.html" class="btn btn-outline-secondary back-to-inventory">
-                        <i class='bx bx-arrow-back'></i> Volver al Inventario
+                    <a href="IN-ver-invetario.html" class="submenu-item">
+                        <span>Ver Inventario</span>
+                    </a>
+                    <a href="IN-registrar-medicamento.html" class="submenu-item">
+                        <span>Registrar Nuevo Medicamento</span>
+                    </a>
+                    <a href="IN-exportar.html" class="submenu-item">
+                        <span>Exportar Stock</span>
                     </a>
                 </div>
+                <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                    <i class='bx bx-bar-chart'></i>
+                    <span>Tratamientos Médicos</span>
+                </div>
+                <div class="submenu">
+                    <a href="TR-tratamiento.html" class="submenu-item">
+                        <span>Tratamientos por Residente</span>
+                    </a>
+                </div>
+                <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                    <i class='bx bx-bar-chart'></i>
+                    <span>Informes</span>
+                </div>
+                <div class="submenu">
+                    <a href="#" class="submenu-item">
+                        <span>Informe de Uso Semanal</span>
+                    </a>
+                    <a href="#" class="submenu-item">
+                        <span>Medicamentos Administrados</span>
+                    </a>
+                    <a href="INFO-alertas-stock.html" class="submenu-item">
+                        <span>Alertas de stock Bajo</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <script>
+            function toggleSubmenu(element) {
+                const submenu = element.nextElementSibling;
+                submenu.classList.toggle('expanded');
+                element.classList.toggle('expanded');
+            }
+            function toggleSidebar() {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('overlay');
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('active');
+            }
+            document.addEventListener('click', function(event) {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('overlay');
+                const menuToggle = document.querySelector('.sidebar-toggle-btn');
+                if (
+                window.innerWidth <= 768 &&
+                !sidebar.contains(event.target) &&
+                menuToggle && !menuToggle.contains(event.target) &&
+                sidebar.classList.contains('open')
+                ) {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+                }
+            });
+            window.addEventListener('resize', function() {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('overlay');
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('active');
+                }
+            });
+        </script>
 
-                <div class="management-grid">
-                    <!-- Sección 1: Detalles del Medicamento (Vencimiento General Removido) -->
-                    <div class="form-section card">
-                        <h3 class="section-title"><i class='bx bx-edit-alt'></i> Detalles de la receta</h3>
-                        <form id="edit-medication-form">
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="med-nombre"><i class='bx bx-rename'></i> Nombre</label>
-                                    <input type="text" id="med-nombre" name="nombre" class="form-input" value="Salmón al Horno con Espárragos y Quinoa" required>
+        <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+        <div class="main-content">
+            <div class="app-header">
+                <div class="header-info-group">
+                    <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+                        <i class='bx bx-menu'></i>
+                    </button>
+                    <div class="page-title-nav"> Administracion</div>
+                    <span class="role-badge-nav">Cocineros</span>
+                </div>
+                <div class="header-action-list">
+                    <form id="logout-form" action="" method="post" style="display:inline;">
+                        <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
+                            <i class='bx bx-log-out'></i>
+                            <span>Cerrar sesión</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="content-area">
+                <form class="recipe-form-view" id="recipeForm">
+                    <div class="view-header form-header">
+                        <h2 class="view-title">
+                            <i class='bx bxs-edit-alt'></i>
+                            <span id="form-title">Modificar Receta</span>
+                        </h2>
+                        <div class="form-actions-main">
+                            <a href="listado-recetas.html" class="btn btn-secondary">
+                                <i class='bx bx-x'></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary" id="saveRecipeBtn">
+                                <i class='bx bx-save'></i> Guardar Cambios
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-section" id="general-recipe-info">
+                        <h3 class="form-section-title"><i class='bx bx-food-menu'></i> Información General</h3>
+                        <div class="form-group">
+                            <label for="recipeName">Nombre de la Receta</label>
+                            <input type="text" id="recipeName" name="recipeName" class="form-control" value="Salmón al Horno con Espárragos y Quinoa" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipeDescription">Descripción / Resumen</label>
+                            <textarea id="recipeDescription" name="recipeDescription" class="form-control">Este plato principal es una opción saludable y deliciosa, perfecta para almuerzos o cenas. Combina las bondades del salmón, rico en Omega-3, con la fibra de los espárragos y la energía de la quinoa.</textarea>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="prepTime">Tiempo de Preparación</label>
+                                <input type="text" id="prepTime" name="prepTime" class="form-control" value="15 minutos">
+                            </div>
+                            <div class="form-group">
+                                <label for="cookTime">Tiempo de Cocción</label>
+                                <input type="text" id="cookTime" name="cookTime" class="form-control" value="20 minutos">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section" id="recipe-variants-section">
+                        <h3 class="form-section-title"><i class='bx bxs-dish'></i> Variantes de la Receta</h3>
+                        <div id="variantsListContainer" class="variants-list-container">
+                            <div class="variant-form-item" data-variant-index="0">
+                                <div class="variant-header">
+                                    <input type="text" name="variants[0][title]" class="variant-title-input" value="Estándar">
+                                    <button type="button" class="btn btn-sm btn-outline-danger remove-variant-btn" title="Eliminar Variante">
+                                        <i class='bx bx-trash'></i> <span class="btn-text-sm">Eliminar Variante</span>
+                                    </button>
                                 </div>
-                                <div class="form-group form-group-full">
-                                    <label for="med-descripcion"><i class='bx bx-detail'></i>Resúmen de la receta</label>
-                                    <textarea id="med-descripcion" name="descripcion" class="form-textarea" rows="3">
-Este plato principal es una opción saludable y deliciosa, perfecta para almuerzos o cenas. Combina las bondades del salmón, rico en Omega-3, con la fibra de los espárragos y la energía de la quinoa.
-
-Tiempo estimado de preparación: 15 minutos
-
-Tiempo estimado de cocción: 15-20 minutos
-
-Total de platos para esta receta (sumando variantes): 25
-                                    </textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="med-graduacion-valor"><i class='bx bx-ruler'></i>Seleccionar variante</label>
-                                    <div class="input-group-inline">
-                                        <select id="med-graduacion-unidad" name="graduacion_unidad" class="form-select" required>
-                                            <option value="Estandar" selected>Estandar</option>
-                                            <option value="Bajo en sodio">Bajo en sodio</option>
-                                            <option value="Textura suave">Textura suave</option>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="variantDietType_0">Tipo de Dieta Asociada</label>
+                                        <select id="variantDietType_0" name="variants[0][dietType]" class="form-control">
+                                            <option value="standard" selected>Estándar</option>
+                                            <option value="diabetic">Diabético</option>
+                                            <option value="low-sodium">Bajo en Sodio</option>
                                         </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="variantPlates_0">Platos</label>
+                                        <input type="number" id="variantPlates_0" name="variants[0][plates]" class="form-control" value="18">
+                                    </div>
                                 </div>
-                                <div class="variant-card editable">
-                                    <div class="variant-card-header">
-                                    <h5><i class='bx bx-food-menu'></i>Cambiar nombre:</h5>
-                                    <!-- Nuevo input para nombre de la variante -->
-                                    <input type="text" value="Estándar" class="form-input" style="margin-bottom: 8px; font-weight: bold;" placeholder="Nombre de la variante" />
+
+                                <div class="variant-ingredients-section">
+                                    <div class="variant-ingredients-header">
+                                        <h6><i class='bx bx-list-ul'></i> Ingredientes de la Variante</h6>
+                                        <button type="button" class="btn btn-sm btn-success add-ingredient-btn">
+                                            <i class='bx bx-plus-circle'></i> <span class="btn-text-sm">Añadir Ingrediente</span>
+                                        </button>
                                     </div>
-                                    <div class="variant-card-header">
-                                        <input type="number" value="18" class="form-input" style="width: 100px;" /> Platos
+                                    <div class="variant-ingredients-list">
+                                        <div class="ingredient-form-item" data-ingredient-index="0">
+                                            <div class="form-group">
+                                                <label>Ingrediente</label>
+                                                <input type="text" name="variants[0][ingredients][0][name]" class="form-control" value="Salmón Fresco">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Cantidad</label>
+                                                <div class="quantity-input-group">
+                                                    <input type="number" name="variants[0][ingredients][0][quantity]" class="form-control quantity-input" value="150">
+                                                    <span class="quantity-unit">gr</span>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-sm btn-icon-text btn-outline-danger remove-ingredient-btn"><i class='bx bx-x-circle'></i></button>
+                                        </div>
+                                        <div class="ingredient-form-item" data-ingredient-index="1">
+                                            <div class="form-group">
+                                                <label>Ingrediente</label>
+                                                <input type="text" name="variants[0][ingredients][1][name]" class="form-control" value="Espárragos Trigueros">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Cantidad</label>
+                                                <div class="quantity-input-group">
+                                                    <input type="number" name="variants[0][ingredients][1][quantity]" class="form-control quantity-input" value="100">
+                                                    <span class="quantity-unit">gr</span>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-sm btn-icon-text btn-outline-danger remove-ingredient-btn"><i class='bx bx-x-circle'></i></button>
+                                        </div>
                                     </div>
+                                </div>
 
-                                    <div class="variant-card-body">
-                                        <h5><i class='bx bx-food-menu'></i> Ingredientes Específicos:</h5>
-                                        <div class="ingredients-list">
-                                            <!-- Repetir por cada ingrediente -->
-                                            <div class="ingredient-item">
-                                                <input type="text" value="Salmón" class="form-input" />
-                                                <input type="text" value="150g/porción" class="form-input" />
-                                            </div>
-                                            <div class="ingredient-item">
-                                                <input type="text" value="Espárragos Trigueros" class="form-input" />
-                                                <input type="text" value="100g/porción" class="form-input" />
-                                            </div>
-                                            <!-- Agregar más ingredientes según sea necesario -->
+                                <div class="variant-instructions-section">
+                                    <div class="variant-instructions-header">
+                                        <h6><i class='bx bx-restaurant'></i> Instrucciones</h6>
+                                        <button type="button" class="btn btn-sm btn-success"><i class='bx bx-plus-circle'></i> <span class="btn-text-sm">Añadir Paso</span></button>
+                                    </div>
+                                    <div class="instruction-steps-list">
+                                        <div class="instruction-step-item" data-step-index="0">
+                                            <span class="step-number">1.</span>
+                                            <input type="text" class="form-control step-text" value="Precalentar el horno a 200°C (390°F).">
+                                            <button type="button" class="btn btn-sm btn-icon-text btn-outline-danger"><i class='bx bx-trash'></i></button>
                                         </div>
-
-                                        <h5><i class='bx bx-restaurant'></i> Instrucciones de Preparación:</h5>
-                                        <ol id="preparacion-editable">
-                                            <li><textarea class="form-textarea" rows="2">Precalentar el horno a 200°C (390°F).</textarea></li>
-                                            <li><textarea class="form-textarea" rows="2">Lavar bien la quinoa...</textarea></li>
-                                            <!-- Más pasos aquí -->
-                                        </ol>
-
-                                        <div class="variant-nutritional-summary">
-                                            <h6><i class='bx bx-dna'></i> Información Nutricional (Estimada por Porción):</h6>
-                                            <div class="nutrition-details">
-                                                <div><label>Calorías: <input type="text" value="450 kcal" /></label></div>
-                                                <div><label>Proteínas: <input type="text" value="35 g" /></label></div>
-                                                <div><label>Grasas Totales: <input type="text" value="22 g" /></label></div>
-                                                <div><label>Grasas Saturadas: <input type="text" value="4 g" /></label></div>
-                                                <div><label>Carbohidratos: <input type="text" value="28 g" /></label></div>
-                                                <div><label>Fibra: <input type="text" value="5 g" /></label></div>
-                                                <div><label>Azúcares: <input type="text" value="3 g" /></label></div>
-                                                <div><label>Sodio: <input type="text" value="300 mg" /></label></div>
-                                            </div>
-                                            <small class="calories-note"><em>Valores aproximados.</em></small>
+                                        <div class="instruction-step-item" data-step-index="1">
+                                            <span class="step-number">2.</span>
+                                            <input type="text" class="form-control step-text" value="Lavar bien la quinoa...">
+                                            <button type="button" class="btn btn-sm btn-icon-text btn-outline-danger"><i class='bx bx-trash'></i></button>
                                         </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="variant-nutrition-section">
+                                     <div class="variant-nutrition-header">
+                                        <h6><i class='bx bx-dna'></i> Información Nutricional (Estimada por Porción)</h6>
+                                    </div>
+                                    <div class="form-grid">
+                                        <div class="form-group"><label>Calorías</label><input type="text" class="form-control" value="450 kcal"></div>
+                                        <div class="form-group"><label>Proteínas</label><input type="text" class="form-control" value="35 g"></div>
+                                        <div class="form-group"><label>Grasas Totales</label><input type="text" class="form-control" value="22 g"></div>
+                                        <div class="form-group"><label>Carbohidratos</label><input type="text" class="form-control" value="28 g"></div>
+                                        <div class="form-group"><label>Fibra</label><input type="text" class="form-control" value="5 g"></div>
+                                        <div class="form-group"><label>Sodio</label><input type="text" class="form-control" value="300 mg"></div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                        <button type="button" class="btn btn-success add-item-btn" id="addVariantBtn">
+                            <i class='bx bx-plus'></i> Añadir Nueva Variante
+                        </button>
                     </div>
-                <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Guardar Cambios</button>
-                <button type="button" class="btn btn-secondary" onclick="document.getElementById('edit-medication-form').reset();">
-                            <i class='bx bx-undo'></i> Deshacer Cambios
-                </button>
-                <!-- Sección 4: Acciones Adicionales (Solo Eliminar) -->
-                <div class="additional-actions-section card">
-                    <h3 class="section-title"><i class='bx bx-trash'></i> Eliminar Receta</h3>
-                    <div class="action-buttons-group">
-                        <button class="btn btn-danger full-width-mobile"><i class='bx bx-trash-alt'></i> Eliminar Permanentemente esta receta</button>
+
+                    <div class="form-submission-actions">
+                         <a href="listado-recetas.html" class="btn btn-secondary">
+                            <i class='bx bx-x'></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class='bx bx-save'></i> Guardar Cambios
+                        </button>
                     </div>
-                    <p class="action-note"><strong>Eliminar:</strong> Borra permanentemente la receta. Esta acción es irreversible y solo debe realizarse si la receta ya no se utilizará.</p>
+                </form>
+
+                <div class="danger-zone-section">
+                    <h3 class="form-section-title"><i class='bx bx-error-circle'></i> Zona de Peligro</h3>
+                    <p>Esta acción es irreversible y borrará permanentemente la receta del sistema.</p>
+                    <button class="btn btn-danger">
+                        <i class='bx bx-trash-alt'></i> Eliminar Permanentemente esta receta
+                    </button>
                 </div>
-
-            </div> <!-- Cierre de .medication-management-container -->
-
-
-        </div> <!-- Cierre de .content-area -->
+            </div>
         </div>
     </div>
-  </div>
-  
 </body>
-
 </html>
