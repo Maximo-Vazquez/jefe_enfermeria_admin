@@ -1,0 +1,281 @@
+/* Re-use variables and base styles */
+:root {
+    --primary-color: #6a5acd;
+    --primary-light: #e8e6f8;
+    --danger-color: #dc3545;
+    --danger-light-bg: #f8d7da;
+    --text-color: #333;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --background-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --border-radius: 8px;
+    --input-bg: #ffffff;
+}
+
+/* View Container */
+.update-treatment-view {
+    padding: 20px;
+}
+
+/* Title Style */
+.view-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.view-title i {
+    color: var(--primary-color);
+    font-size: 1.9rem;
+}
+
+/* Form Container Style */
+.form-container {
+    background-color: var(--card-bg);
+    padding: 25px 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 25px;
+}
+
+/* Section Titles within containers */
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 25px; /* Increased space */
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 8px;
+}
+.section-title i {
+    color: var(--primary-color);
+}
+/* Style for the resident's name in the title */
+.highlighted-resident-name {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+
+/* Sub Section Title */
+.sub-section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-top: 25px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.sub-section-title i {
+    color: var(--text-muted);
+}
+
+/* Form Grid (reuse styles if defined globally) */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 25px;
+    margin-bottom: 20px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+.form-group.form-group-full {
+    grid-column: 1 / -1;
+}
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.form-group label i {
+    font-size: 1.1rem;
+}
+
+/* Form Inputs/Selects/Textareas (reuse styles if defined globally) */
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--input-focus-border, #8a7ff0);
+    box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.2);
+}
+.form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%236c757d' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 1em;
+    padding-right: 35px;
+}
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+
+/* Medication List Table Styling */
+.medication-list-section .table-container {
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+.medication-edit-table {
+    width: 100%;
+    min-width: 700px;
+}
+
+.medication-edit-table thead th {
+    background-color: var(--table-header-bg, #f1f3f5);
+    color: var(--text-muted);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--border-color);
+    white-space: nowrap;
+}
+.medication-edit-table thead th i {
+    margin-right: 6px;
+}
+
+.medication-edit-table tbody td {
+    padding: 8px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border-color);
+}
+.medication-edit-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Style inputs/selects within the table */
+.medication-edit-table .form-input,
+.medication-edit-table .form-select {
+    padding: 6px 8px;
+    font-size: 0.9rem;
+    min-width: 100px;
+    margin: 0;
+}
+.medication-edit-table .form-select {
+    background-position: right 8px center;
+    padding-right: 25px;
+}
+.medication-edit-table input[type="date"] {
+    min-width: 140px;
+}
+
+/* Style the Remove Button */
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: var(--text-muted);
+    font-size: 1.3rem;
+    line-height: 1;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-remove-med:hover {
+    color: var(--danger-color);
+}
+
+/* Style Add Medication Button */
+.btn-add-med {
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    padding: 8px 15px;
+}
+.btn-add-med i {
+    font-size: 1.1em;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 25px;
+}
+/* Reuse .btn, .btn-primary, .btn-secondary */
+.form-actions .btn { /* Ensure button styles apply if not global */
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none; /* For the 'Volver' link styled as button */
+}
+.form-actions .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+}
+.form-actions .btn-primary:hover {
+    background-color: darkslateblue;
+}
+.form-actions .btn-secondary {
+    background-color: var(--card-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+.form-actions .btn-secondary:hover {
+    background-color: var(--table-row-hover-bg, #f1f1f1);
+    border-color: #bbb;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .form-container {
+        padding: 20px;
+    }
+    .medication-edit-table {
+        min-width: initial;
+    }
+    .section-title {
+        font-size: 1.2rem; /* Slightly smaller title on mobile */
+    }
+}

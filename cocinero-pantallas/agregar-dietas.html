@@ -6,9 +6,12 @@
   <title>Administracion</title>
   <!-- Boxicons CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/nav.css" />
-    <link rel="stylesheet" href="css/sidebar.css" />
-    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+
+    <link rel="stylesheet" href="css/cargar-recetas.css">
+
   <style>
 
   </style>
@@ -19,11 +22,9 @@
     <!-- En vez de incluir directamente -->
     <!-- sidebar.html -->
 
-
         <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div style="display: flex; align-items: center;">
-            <img src="img/logo.png" alt="CS2 Investment" class="logo" />
             <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
             </div>
         </div>
@@ -31,42 +32,36 @@
             
             <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
             <i class='bx bx-layer'></i>
-            <span>Inventario de Medicamentos</span>
+            <span>Listados</span>
             </div>
             <div class="submenu">
-            <a href="IN-ver-invetario.html" class="submenu-item">
-                <span>Ver Inventario</span>
+            <a href="listado-dietas.html" class="submenu-item">
+                <span>Dietas</span>
             </a>
-            <a href="IN-registrar-medicamento.html" class="submenu-item">
-                <span>Registrar Nuevo Medicamento</span>
+            <a href="listado-recetas.html" class="submenu-item">
+                <span>Recetas</span>
             </a>
-            <a href="IN-exportar.html" class="submenu-item">
-                <span>Exportar Stock</span>
+            <a href="listado-ingredientes.html" class="submenu-item">
+                <span>Ingredientes</span>
             </a>
             </div>
             <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
                 <i class='bx bx-bar-chart'></i>
-                <span>Tratamientos Médicos</span>
+                <span>Menús</span>
                 </div>
                 <div class="submenu">
-                <a href="TR-tratamiento.html" class="submenu-item">
-                    <span>Tratamientos por Residente</span>
+                <a href="menu-diario.html" class="submenu-item">
+                    <span>Menú Diario</span>
                 </a>
             </div>
             <!-- Sección de Pedidos y Ventas -->
             <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
                 <i class='bx bx-bar-chart'></i>
-                <span>Informes</span>
+                <span>Planificación</span>
             </div>
             <div class="submenu">
-                <a href="#" class="submenu-item">
-                    <span>Informe de Uso Semanal</span>
-                </a>
-                <a href="#" class="submenu-item">
-                    <span>Medicamentos Administrados</span>
-                </a>
-                <a href="INFO-alertas-stock.html" class="submenu-item">
-                    <span>Alertas de stock Bajo</span>
+                <a href="planificacion-menu.html" class="submenu-item">
+                    <span>Planificación Menú</span>
                 </a>
             </div>
         </div>
@@ -126,7 +121,7 @@
           
           
               <div class="page-title-nav"> Administracion</div>
-              <span class="role-badge-nav">Jefe Enfermeria</span>
+              <span class="role-badge-nav">Cocineros</span>
             </div>
             <!-- Acciones de la barra de navegación superior -->
             <div class="header-action-list">
@@ -143,9 +138,38 @@
               </div>
         </div>
           
-        <!-- Contenido Principal -->
-        <div class="content-area">
-        </div>
+    <div class="content-area">
+        <form class="recipe-form-view" id="recipeForm">
+            <div class="view-header form-header">
+                <h2 class="view-title">
+                    <i class='bx bxs-edit-alt'></i>
+                    <span id="form-title">Cargar nueva dieta</span>
+                </h2>
+                <div class="form-actions-main">
+                    <button type="button" class="btn btn-secondary" id="cancelRecipeBtn">
+                        <i class='bx bx-x'></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="saveRecipeBtn">
+                        <i class='bx bx-save'></i> Guardar Dieta
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sección de Información General de la Receta -->
+            <div class="form-section" id="general-recipe-info">
+                <h3 class="form-section-title"><i class='bx bx-food-menu'></i> Información General</h3>
+                <div class="form-group">
+                    <label for="recipeName">Nombre de la dieta</label>
+                    <input type="text" id="recipeName" name="recipeName" class="form-control" placeholder="Ej: Salmón al Horno con Espárragos" required>
+                </div>
+                <div class="form-group">
+                    <label for="recipeDescription">Descripción</label>
+                    <textarea id="recipeDescription" name="recipeDescription" class="form-control" placeholder="Breve descripción del plato, sus características principales..."></textarea>
+                </div>
+        </form>
+    </div>
+
+
     </div>
   </div>
   

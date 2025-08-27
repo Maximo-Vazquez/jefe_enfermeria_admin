@@ -27,7 +27,6 @@
         <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div style="display: flex; align-items: center;">
-            <img src="img/logo.png" alt="CS2 Investment" class="logo" />
             <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
             </div>
         </div>
@@ -35,41 +34,36 @@
             
             <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
             <i class='bx bx-layer'></i>
-            <span>Inventario de Medicamentos</span>
+            <span>Listados</span>
             </div>
             <div class="submenu">
-            <a href="IN-ver-invetario.html" class="submenu-item">
-                <span>Ver Inventario</span>
+            <a href="listado-dietas.html" class="submenu-item">
+                <span>Dietas</span>
             </a>
-            <a href="IN-registrar-medicamento.html" class="submenu-item">
-                <span>Registrar Nuevo Medicamento</span>
+            <a href="listado-recetas.html" class="submenu-item">
+                <span>Recetas</span>
             </a>
-            <a href="IN-exportar.html" class="submenu-item">
-                <span>Exportar Stock</span>
+            <a href="listado-ingredientes.html" class="submenu-item">
+                <span>Ingredientes</span>
             </a>
             </div>
             <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
                 <i class='bx bx-bar-chart'></i>
-                <span>Tratamientos Médicos</span>
+                <span>Menús</span>
                 </div>
                 <div class="submenu">
-                <a href="TR-tratamiento.html" class="submenu-item">
-                    <span>Tratamientos por Residente</span>
+                <a href="menu-diario.html" class="submenu-item">
+                    <span>Menú Diario</span>
+                </a>
             </div>
             <!-- Sección de Pedidos y Ventas -->
             <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
                 <i class='bx bx-bar-chart'></i>
-                <span>Informes</span>
+                <span>Planificación</span>
             </div>
             <div class="submenu">
-                <a href="#" class="submenu-item">
-                    <span>Informe de Uso Semanal</span>
-                </a>
-                <a href="#" class="submenu-item">
-                    <span>Medicamentos Administrados</span>
-                </a>
-                <a href="INFO-alertas-stock.html" class="submenu-item">
-                    <span>Alertas de stock Bajo</span>
+                <a href="planifcacion-menu.html" class="submenu-item">
+                    <span>Planificación Menú</span>
                 </a>
             </div>
         </div>
@@ -127,7 +121,7 @@
                 </button>
         
             <div class="page-title-nav"> Administracion</div>
-                <span class="role-badge-nav">Jefe Enfermeria</span>
+                <span class="role-badge-nav">Cocineros</span>
             </div>
             <!-- Acciones de la barra de navegación superior -->
             <div class="header-action-list">
@@ -146,18 +140,26 @@
         <div class="content-area">
             <div class="inventory-view">
                 <!-- Title added to match the reference image style -->
-                <h2 class="view-title">Registro de Inventario</h2>
+                <h2 class="view-title">Listado de Dietas</h2>
             
                 <!-- Filter/Search Bar - Styled to look similar to the reference filter -->
                 <div class="controls-bar">
                     <div class="search-filter-container">
                         <div class="search-container">
                             <i class='bx bx-search search-icon'></i>
-                            <input type="search" placeholder="Buscar medicamento..." class="search-input">
+                            <input type="search" placeholder="Buscar ingredientes..." class="search-input">
                         </div>
                         <button class="filter-toggle-btn" onclick="toggleFilterDrawer()">
                             <i class='bx bx-filter-alt'></i>
                             <span>Filtros</span>
+                        </button>
+                        <!-- Botón nuevo Agregar Dieta -->
+                        <button class="add-recipe-btn"
+                            onclick="window.location.href='agregar-dietas.html'"
+                            style="display: flex; align-items: center; gap: 5px; background-color: #1a73e8; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
+                            <i class='bx bx-plus'></i>
+                            <span>Agregar Dieta</span>
+                        </button>
                         </button>
                     </div>
 
@@ -169,73 +171,63 @@
                             <thead>
                                 <tr>
                                     <!-- Added icons to headers like reference -->
-                                    <th><i class='bx bx-capsule'></i> Nombre</th>
-                                    <th><i class='bx bx-capsule'></i> Graduacion</th>
-                                    <th><i class='bx bx-barcode'></i> Código</th>
-                                    <th><i class='bx bx-package'></i> Stock</th>
-
-                                    <th><i class='bx bx-map-pin'></i> Ubicación</th>
-                                    <th><i class='bx bx-category-alt'></i> Categoría</th>
-                                    <th><i class='bx bx-check-shield'></i> Estado stock</th>
+                                    <th><i class='bx bx-bowl-hot'></i> Nombre</th>
+                                    <th><i class='bx bx-package'></i> Descripción</th>
                                     <th><i class='bx bx-cog'></i> Acciones</th> <!-- Added Actions Column -->
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Paracetamol</td>
-                                    <td>500mg</td>
-                                    <td>51515155</td>
-                                    <td>150</td>
-
-                                    <td>Estante A1</td>
-                                    <td>Analgésicos</td>
-                                    <td><span class="status-badge status-active"><i class='bx bxs-check-circle'></i> Activo</span></td>
+                                    <td>Celíacos</td>
+                                    <td>Dieta libre de gluten para personas con enfermedad celíaca. Excluye trigo, cebada y centeno.</td>
                                     <td>
-                                        <button class="btn-action btn-details"><i class='bx bx-info-circle'></i> Detalles</button>
+                                        <button class="btn-action btn-details" onclick="window.location.href='modificar-dietas.html'">
+                                            <i class='bx bx-edit'></i> Modificar
+                                        </button>
                                     </td>
                                 </tr>
-                                <tr class="low-stock"> <!-- Keep class for potential specific styling if needed -->
-                                    <td>Ibuprofeno</td>
-                                    <td>400mg</td>
-                                    <td>532532553</td>
+
+                                <tr>
+                                    <td>Diabéticos</td>
+                                    <td>Dieta controlada en carbohidratos y azúcares simples. Favorece alimentos con bajo índice glucémico.</td>
                                     <td>
-                                       <span class="low-stock-indicator" title="Stock bajo"><i class='bx bxs-error-circle'></i></span> 8
-                                    </td>
-
-                                    <td>Estante B2</td>
-                                    <td>Antiinflamatorios</td>
-                                    <!-- Changed status to reflect low stock -->
-                                    <td><span class="status-badge status-low-stock"><i class='bx bxs-error-alt'></i> Stock Bajo</span></td>
-                                     <td>
-                                        <button class="btn-action btn-details"><i class='bx bx-info-circle'></i> Detalles</button>
+                                        <button class="btn-action btn-details" onclick="window.location.href='detalle-dietas.html'">
+                                            <i class='bx bx-edit'></i> Modificar
+                                        </button>
                                     </td>
                                 </tr>
-                                <tr class="expired"> <!-- Keep class for potential specific styling if needed -->
-                                    <td>Amoxicilina</td>
-                                    <td>500mg</td>
-                                    <td>6545654654</td>
-                                    <td>25</td>
 
-                                    <td>Estante C3</td>
-                                    <td>Antibióticos</td>
-                                    <td><span class="status-badge status-expired"><i class='bx bxs-calendar-x'></i> Sin stock</span></td>
-                                     <td>
-                                        <button class="btn-action btn-details"><i class='bx bx-info-circle'></i> Detalles</button>
+                                <tr>
+                                    <td>Vegetariana</td>
+                                    <td>Elimina carnes y pescados. Se basa en vegetales, frutas, legumbres y derivados lácteos o huevos.</td>
+                                    <td>
+                                        <button class="btn-action btn-details" onclick="window.location.href='detalle-dietas.html'">
+                                            <i class='bx bx-edit'></i> Modificar
+                                        </button>
                                     </td>
                                 </tr>
-                                 <tr>
-                                    <td>Loratadina </td>
-                                    <td>10mg</td>
-                                    <td>523432333222111</td>
-                                    <td>75</td>
-                                    <td>Estante A1</td>
-                                    <td>Antihistamínicos</td>
-                                    <td><span class="status-badge status-active"><i class='bx bxs-check-circle'></i> Activo</span></td>
-                                     <td>
-                                        <button class="btn-action btn-details"><i class='bx bx-info-circle'></i> Detalles</button>
-                                    </td>
 
-                               </tbody>
+                                <tr>
+                                    <td>Hipocalórica</td>
+                                    <td>Diseñada para perder peso. Reduce la ingesta calórica total priorizando nutrientes esenciales.</td>
+                                    <td>
+                                        <button class="btn-action btn-details" onclick="window.location.href='detalle-dietas.html'">
+                                            <i class='bx bx-edit'></i> Modificar
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Sin lactosa</td>
+                                    <td>Dieta para personas con intolerancia a la lactosa. Elimina productos lácteos o usa versiones sin lactosa.</td>
+                                    <td>
+                                        <button class="btn-action btn-details" onclick="window.location.href='detalle-dietas.html'">
+                                            <i class='bx bx-edit'></i> Modificar
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
                         </table>
                     </div>
             
@@ -277,26 +269,26 @@
                         </div>
                         <div class="filter-section">
                             <h4>Rango de Vencimiento</h4>
-                             <label for="vencimiento-start">Desde:</label>
-                             <input type="date" id="vencimiento-start" class="date-filter">
-                             <label for="vencimiento-end">Hasta:</label>
-                             <input type="date" id="vencimiento-end" class="date-filter">
+                            <label for="vencimiento-start">Desde:</label>
+                            <input type="date" id="vencimiento-start" class="date-filter">
+                            <label for="vencimiento-end">Hasta:</label>
+                            <input type="date" id="vencimiento-end" class="date-filter">
                         </div>
-                         <div class="filter-section">
-                             <h4>Estado</h4>
-                             <div class="chip-group">
-                                 <span class="chip">Activo</span>
-                                 <span class="chip">Stock Bajo</span>
-                                 <span class="chip">Expirado</span>
-                             </div>
-                         </div>
+                        <div class="filter-section">
+                            <h4>Estado</h4>
+                            <div class="chip-group">
+                                <span class="chip">Activo</span>
+                                <span class="chip">Stock Bajo</span>
+                                <span class="chip">Expirado</span>
+                            </div>
+                        </div>
                     </div>
-                     <div class="filter-actions">
-                         <button class="btn btn-primary">Aplicar Filtros</button>
-                         <button class="btn btn-secondary">Limpiar</button>
-                     </div>
+                    <div class="filter-actions">
+                        <button class="btn btn-primary">Aplicar Filtros</button>
+                        <button class="btn btn-secondary">Limpiar</button>
+                    </div>
                 </div>
-                 <div class="filter-overlay" id="filterOverlay" onclick="toggleFilterDrawer()"></div>
+                <div class="filter-overlay" id="filterOverlay" onclick="toggleFilterDrawer()"></div>
             
             
 
@@ -324,8 +316,8 @@
             </script>
         </div>
     </div>
-  </div>
-  
+</div>
+
 </body>
 
 </html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administracion</title>
+  <!-- Boxicons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/base.css" />
+
+
+    <link rel="stylesheet" href="css/inventario/gestion-medicamentos.css" />
+  <style>
+
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <!-- En vez de incluir directamente -->
+    <!-- sidebar.html -->
+
+
+        <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; align-items: center;">
+            <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+            </div>
+        </div>
+        <div class="sidebar-menu ">
+            
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+            <i class='bx bx-layer'></i>
+            <span>Inventario de Medicamentos</span>
+            </div>
+            <div class="submenu">
+            <a href="IN-ver-invetario.html" class="submenu-item">
+                <span>Ver Inventario</span>
+            </a>
+            <a href="IN-registrar-medicamento.html" class="submenu-item">
+                <span>Registrar Nuevo Medicamento</span>
+            </a>
+            <a href="IN-exportar.html" class="submenu-item">
+                <span>Exportar Stock</span>
+            </a>
+            </div>
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Tratamientos Médicos</span>
+                </div>
+                <div class="submenu">
+                <a href="TR-tratamiento.html" class="submenu-item">
+                    <span>Tratamientos por Residente</span>
+                </a>
+            </div>
+            <!-- Sección de Pedidos y Ventas -->
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Informes</span>
+            </div>
+            <div class="submenu">
+                <a href="#" class="submenu-item">
+                    <span>Informe de Uso Semanal</span>
+                </a>
+                <a href="#" class="submenu-item">
+                    <span>Medicamentos Administrados</span>
+                </a>
+                <a href="INFO-alertas-stock.html" class="submenu-item">
+                    <span>Alertas de stock Bajo</span>
+                </a>
+            </div>
+        </div>
+
+
+        </div>
+        <script>
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            submenu.classList.toggle('expanded');
+            element.classList.toggle('expanded');
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (
+            window.innerWidth <= 768 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target) &&
+            sidebar.classList.contains('open')
+            ) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            if (window.innerWidth > 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        </script>
+
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="main-content">
+        <div class="app-header">
+            <div class="header-info-group">
+              <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+                <i class='bx bx-menu'></i>
+              </button>
+          
+          
+          
+              <div class="page-title-nav"> Administracion</div>
+              <span class="role-badge-nav">Cocineros</span>
+            </div>
+            <!-- Acciones de la barra de navegación superior -->
+            <div class="header-action-list">
+                <!-- ========  Cerrar sesión (POST)  ======== -->
+                <form id="logout-form" action=""  method="post" style="display:inline;">
+
+                  <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <i class='bx bx-log-out'></i>
+                    <span>Cerrar sesión</span>
+                  </button>
+                </form>
+      
+
+              </div>
+        </div>
+          
+        <!-- Contenido Principal -->
+        <div class="content-area">
+                    <div class="content-area">
+            <div class="medication-management-container">
+                <div class="page-header">
+                    <h2 class="view-title">
+                        <i class='bx bxs-capsule-alt'></i>
+                        Modificar receta: <span id="medication-name-title">Salmón al Horno con Espárragos y Quinoa</span>
+                    </h2>
+                    <a href="listado-recetas.html" class="btn btn-outline-secondary back-to-inventory">
+                        <i class='bx bx-arrow-back'></i> Volver al Inventario
+                    </a>
+                </div>
+
+                <div class="management-grid">
+                    <!-- Sección 1: Detalles del Medicamento (Vencimiento General Removido) -->
+                    <div class="form-section card">
+                        <h3 class="section-title"><i class='bx bx-edit-alt'></i> Detalles de la receta</h3>
+                        <form id="edit-medication-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="med-nombre"><i class='bx bx-rename'></i> Nombre</label>
+                                    <input type="text" id="med-nombre" name="nombre" class="form-input" value="Salmón al Horno con Espárragos y Quinoa" required>
+                                </div>
+                                <div class="form-group form-group-full">
+                                    <label for="med-descripcion"><i class='bx bx-detail'></i>Resúmen de la receta</label>
+                                    <textarea id="med-descripcion" name="descripcion" class="form-textarea" rows="3">
+Este plato principal es una opción saludable y deliciosa, perfecta para almuerzos o cenas. Combina las bondades del salmón, rico en Omega-3, con la fibra de los espárragos y la energía de la quinoa.
+
+Tiempo estimado de preparación: 15 minutos
+
+Tiempo estimado de cocción: 15-20 minutos
+
+Total de platos para esta receta (sumando variantes): 25
+                                    </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="med-graduacion-valor"><i class='bx bx-ruler'></i>Seleccionar variante</label>
+                                    <div class="input-group-inline">
+                                        <select id="med-graduacion-unidad" name="graduacion_unidad" class="form-select" required>
+                                            <option value="Estandar" selected>Estandar</option>
+                                            <option value="Bajo en sodio">Bajo en sodio</option>
+                                            <option value="Textura suave">Textura suave</option>
+                                        </select>
+                                </div>
+                                <div class="variant-card editable">
+                                    <div class="variant-card-header">
+                                    <h5><i class='bx bx-food-menu'></i>Cambiar nombre:</h5>
+                                    <!-- Nuevo input para nombre de la variante -->
+                                    <input type="text" value="Estándar" class="form-input" style="margin-bottom: 8px; font-weight: bold;" placeholder="Nombre de la variante" />
+                                    </div>
+                                    <div class="variant-card-header">
+                                        <input type="number" value="18" class="form-input" style="width: 100px;" /> Platos
+                                    </div>
+
+                                    <div class="variant-card-body">
+                                        <h5><i class='bx bx-food-menu'></i> Ingredientes Específicos:</h5>
+                                        <div class="ingredients-list">
+                                            <!-- Repetir por cada ingrediente -->
+                                            <div class="ingredient-item">
+                                                <input type="text" value="Salmón" class="form-input" />
+                                                <input type="text" value="150g/porción" class="form-input" />
+                                            </div>
+                                            <div class="ingredient-item">
+                                                <input type="text" value="Espárragos Trigueros" class="form-input" />
+                                                <input type="text" value="100g/porción" class="form-input" />
+                                            </div>
+                                            <!-- Agregar más ingredientes según sea necesario -->
+                                        </div>
+
+                                        <h5><i class='bx bx-restaurant'></i> Instrucciones de Preparación:</h5>
+                                        <ol id="preparacion-editable">
+                                            <li><textarea class="form-textarea" rows="2">Precalentar el horno a 200°C (390°F).</textarea></li>
+                                            <li><textarea class="form-textarea" rows="2">Lavar bien la quinoa...</textarea></li>
+                                            <!-- Más pasos aquí -->
+                                        </ol>
+
+                                        <div class="variant-nutritional-summary">
+                                            <h6><i class='bx bx-dna'></i> Información Nutricional (Estimada por Porción):</h6>
+                                            <div class="nutrition-details">
+                                                <div><label>Calorías: <input type="text" value="450 kcal" /></label></div>
+                                                <div><label>Proteínas: <input type="text" value="35 g" /></label></div>
+                                                <div><label>Grasas Totales: <input type="text" value="22 g" /></label></div>
+                                                <div><label>Grasas Saturadas: <input type="text" value="4 g" /></label></div>
+                                                <div><label>Carbohidratos: <input type="text" value="28 g" /></label></div>
+                                                <div><label>Fibra: <input type="text" value="5 g" /></label></div>
+                                                <div><label>Azúcares: <input type="text" value="3 g" /></label></div>
+                                                <div><label>Sodio: <input type="text" value="300 mg" /></label></div>
+                                            </div>
+                                            <small class="calories-note"><em>Valores aproximados.</em></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Guardar Cambios</button>
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('edit-medication-form').reset();">
+                            <i class='bx bx-undo'></i> Deshacer Cambios
+                </button>
+                <!-- Sección 4: Acciones Adicionales (Solo Eliminar) -->
+                <div class="additional-actions-section card">
+                    <h3 class="section-title"><i class='bx bx-trash'></i> Eliminar Receta</h3>
+                    <div class="action-buttons-group">
+                        <button class="btn btn-danger full-width-mobile"><i class='bx bx-trash-alt'></i> Eliminar Permanentemente esta receta</button>
+                    </div>
+                    <p class="action-note"><strong>Eliminar:</strong> Borra permanentemente la receta. Esta acción es irreversible y solo debe realizarse si la receta ya no se utilizará.</p>
+                </div>
+
+            </div> <!-- Cierre de .medication-management-container -->
+
+
+        </div> <!-- Cierre de .content-area -->
+        </div>
+    </div>
+  </div>
+  
+</body>
+
+</html>

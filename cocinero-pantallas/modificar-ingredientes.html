@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modificar ingrediente</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/inventario/gestion-medicamentos.css" />
+</head>
+<body>
+  <div class="container">
+        <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; align-items: center;">
+            <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
+            </div>
+        </div>
+        <div class="sidebar-menu ">
+            
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+            <i class='bx bx-layer'></i>
+            <span>Listados</span>
+            </div>
+            <div class="submenu">
+            <a href="listado-dietas.html" class="submenu-item">
+                <span>Dietas</span>
+            </a>
+            <a href="listado-recetas.html" class="submenu-item">
+                <span>Recetas</span>
+            </a>
+            <a href="listado-ingredientes.html" class="submenu-item">
+                <span>Ingredientes</span>
+            </a>
+            </div>
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Menús</span>
+                </div>
+                <div class="submenu">
+                <a href="menu-diario.html" class="submenu-item">
+                    <span>Menú Diario</span>
+                </a>
+            </div>
+            <!-- Sección de Pedidos y Ventas -->
+            <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
+                <i class='bx bx-bar-chart'></i>
+                <span>Planificación</span>
+            </div>
+            <div class="submenu">
+                <a href="planificacion-menu.html" class="submenu-item">
+                    <span>Planificación Menú</span>
+                </a>
+            </div>
+        </div>
+
+
+        </div>
+        <script>
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            submenu.classList.toggle('expanded');
+            element.classList.toggle('expanded');
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (
+            window.innerWidth <= 768 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target) &&
+            sidebar.classList.contains('open')
+            ) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            if (window.innerWidth > 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            }
+        });
+        </script>
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="main-content">
+      <div class="app-header">
+        <div class="header-info-group">
+          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+            <i class='bx bx-menu'></i>
+          </button>
+          <div class="page-title-nav">Administración</div>
+          <span class="role-badge-nav">Cocinero</span>
+        </div>
+        <div class="header-action-list">
+          <form id="logout-form" method="post">
+            <button type="submit" class="action-btn logout-btn">
+              <i class='bx bx-log-out'></i><span>Cerrar sesión</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="content-area">
+        <div class="medication-management-container">
+          <div class="page-header">
+            <h2 class="view-title">
+              <i class='bx bx-edit'></i> Modificar ingrediente: <span id="ingredient-name-title">Tomate</span>
+            </h2>
+            <a href="listado-ingredientes.html" class="btn btn-outline-secondary back-to-inventory">
+              <i class='bx bx-arrow-back'></i> Volver al Listado de ingredientes
+            </a>
+          </div>
+
+          <div class="management-grid">
+            <div class="form-section card">
+              <h3 class="section-title"><i class='bx bx-edit-alt'></i> Detalles del ingrediente</h3>
+              <form id="edit-ingredient-form">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="ing-nombre"><i class='bx bx-rename'></i> Nombre</label>
+                    <input type="text" id="ing-nombre" name="nombre" class="form-input" value="Tomate" required>
+                  </div>
+                  <div class="form-group form-group-full">
+                    <label for="ing-descripcion"><i class='bx bx-detail'></i> Descripción</label>
+                    <textarea id="ing-descripcion" name="descripcion" class="form-textarea" rows="3">Fruta versátil, rica en licopeno y vitamina C, ideal para ensaladas y salsas.</textarea>
+                  </div>
+                </div>
+
+                <div class="action-buttons-group" style="margin-top:20px;">
+                  <button type="submit" class="btn btn-primary">
+                    <i class='bx bx-save'></i> Guardar cambios
+                  </button>
+                  <button type="button" class="btn btn-secondary" onclick="document.getElementById('edit-ingredient-form').reset();">
+                    <i class='bx bx-undo'></i> Deshacer cambios
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="additional-actions-section card">
+              <h3 class="section-title"><i class='bx bx-trash'></i> Eliminar ingrediente</h3>
+              <div class="action-buttons-group">
+                <button class="btn btn-danger full-width-mobile">
+                  <i class='bx bx-trash-alt'></i> Eliminar permanentemente
+                </button>
+              </div>
+              <p class="action-note">
+                <strong>Atención:</strong> Esta acción no se puede deshacer.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

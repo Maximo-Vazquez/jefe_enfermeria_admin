@@ -23,7 +23,6 @@
         <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div style="display: flex; align-items: center;">
-            <img src="img/logo.png" alt="CS2 Investment" class="logo" />
             <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
             </div>
         </div>
@@ -31,42 +30,36 @@
             
             <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
             <i class='bx bx-layer'></i>
-            <span>Inventario de Medicamentos</span>
+            <span>Listados</span>
             </div>
             <div class="submenu">
-            <a href="IN-ver-invetario.html" class="submenu-item">
-                <span>Ver Inventario</span>
+            <a href="listado-dietas.html" class="submenu-item">
+                <span>Dietas</span>
             </a>
-            <a href="IN-registrar-medicamento.html" class="submenu-item">
-                <span>Registrar Nuevo Medicamento</span>
+            <a href="listado-recetas.html" class="submenu-item">
+                <span>Recetas</span>
             </a>
-            <a href="IN-exportar.html" class="submenu-item">
-                <span>Exportar Stock</span>
+            <a href="listado-ingredientes.html" class="submenu-item">
+                <span>Ingredientes</span>
             </a>
             </div>
             <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
                 <i class='bx bx-bar-chart'></i>
-                <span>Tratamientos Médicos</span>
+                <span>Menús</span>
                 </div>
                 <div class="submenu">
-                <a href="TR-tratamiento.html" class="submenu-item">
-                    <span>Tratamientos por Residente</span>
+                <a href="menu-diario.html" class="submenu-item">
+                    <span>Menú Diario</span>
                 </a>
             </div>
             <!-- Sección de Pedidos y Ventas -->
             <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
                 <i class='bx bx-bar-chart'></i>
-                <span>Informes</span>
+                <span>Planificación</span>
             </div>
             <div class="submenu">
-                <a href="#" class="submenu-item">
-                    <span>Informe de Uso Semanal</span>
-                </a>
-                <a href="#" class="submenu-item">
-                    <span>Medicamentos Administrados</span>
-                </a>
-                <a href="INFO-alertas-stock.html" class="submenu-item">
-                    <span>Alertas de stock Bajo</span>
+                <a href="planificacion-menu.html" class="submenu-item">
+                    <span>Planificación Menú</span>
                 </a>
             </div>
         </div>
@@ -126,7 +119,7 @@
           
           
               <div class="page-title-nav"> Administracion</div>
-              <span class="role-badge-nav">Jefe Enfermeria</span>
+              <span class="role-badge-nav">Cocineros</span>
             </div>
             <!-- Acciones de la barra de navegación superior -->
             <div class="header-action-list">
@@ -145,6 +138,11 @@
           
         <!-- Contenido Principal -->
         <div class="content-area">
+          <div class="welcome-banner" style="display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 40px; text-align: center;">
+            <i class='bx bx-bowl-hot' style="font-size: 80px; color: #ff9800; margin-bottom: 20px;"></i>
+            <h1 style="font-size: 32px; color: #333;">¡Bienvenido, Cocinero!</h1>
+            <p style="font-size: 18px; color: #666;">Listo para preparar las mejores dietas del día</p>
+          </div>
         </div>
     </div>
   </div>

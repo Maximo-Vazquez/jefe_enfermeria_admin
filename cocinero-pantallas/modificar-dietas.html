@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="css/base.css" />
 
 
-    <link rel="stylesheet" href="css/inventario/exportar.css" />
+    <link rel="stylesheet" href="css/inventario/gestion-medicamentos.css" />
+  <style>
+
+  </style>
 
 </head>
 <body>
@@ -23,7 +26,6 @@
         <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div style="display: flex; align-items: center;">
-            <img src="img/logo.png" alt="CS2 Investment" class="logo" />
             <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
             </div>
         </div>
@@ -126,7 +128,7 @@
           
           
               <div class="page-title-nav"> Administracion</div>
-              <span class="role-badge-nav">Jefe Enfermeria</span>
+              <span class="role-badge-nav">Cocineros</span>
             </div>
             <!-- Acciones de la barra de navegación superior -->
             <div class="header-action-list">
@@ -145,79 +147,50 @@
           
         <!-- Contenido Principal -->
         <div class="content-area">
-            <div class="contenedor-exportar panel"> <!-- Usamos 'panel' para un estilo consistente si lo tienes -->
-                <h3 class="titulo-seccion">
-                    <i class='bx bxs-file-export'></i> Exportar Inventario
-                </h3>
-            
-                <form id="form-exportar-inventario" action="/ruta/para/exportar" method="GET"> <!-- GET es común para descargas/exportaciones si los filtros van en URL -->
-            
-                    <div class="opciones-exportacion">
-            
-                        <!-- 1. Selección de Formato (Obligatorio) -->
-                        <div class="grupo-campo">
-                            <label for="exportar-formato"><i class='bx bx-extension'></i> Formato de Archivo</label>
-                            <select id="exportar-formato" name="formato" class="campo-select" required>
-                                <option value="" disabled selected>Seleccione formato...</option>
-                                <option value="pdf">PDF (.pdf)</option>
-                                <option value="excel">Excel (.xlsx)</option>
-                                <!-- Podrías añadir CSV si es relevante -->
-                                <!-- <option value="csv">CSV (.csv)</option> -->
-                            </select>
-                        </div>
-            
-                        <!-- 2. Filtro por Categoría (Opcional) -->
-                        <div class="grupo-campo">
-                            <label for="exportar-categoria"><i class='bx bx-category-alt'></i> Filtrar por Categoría (Opcional)</label>
-                            <select id="exportar-categoria" name="categoria_filtro" class="campo-select">
-                                <option value="todos" selected>Todas las categorías</option>
-                                <!-- Aquí deberías cargar dinámicamente tus categorías reales -->
-                                <option value="analgesicos">Analgésicos</option>
-                                <option value="antibioticos">Antibióticos</option>
-                                <option value="vitaminas">Vitaminas</option>
-                                <option value="otros">Otros</option>
-                            </select>
-                        </div>
-            
-                         <!-- 3. Filtro por Ubicación (Opcional) -->
-                        <div class="grupo-campo">
-                            <label for="exportar-ubicacion"><i class='bx bx-map-pin'></i> Filtrar por Ubicación (Opcional)</label>
-                            <select id="exportar-ubicacion" name="ubicacion_filtro" class="campo-select">
-                                <option value="todas" selected>Todas las ubicaciones</option>
-                                <!-- Aquí deberías cargar dinámicamente tus ubicaciones reales -->
-                                <option value="estante_a1">Estante A1</option>
-                                <option value="estante_b1">Estante B1</option>
-                                <option value="nevera_1">Nevera 1</option>
-                            </select>
-                        </div>
-            
-                         <!-- 4. Filtro por Estado (Opcional) -->
-                         <div class="grupo-campo">
-                            <label for="exportar-estado"><i class='bx bx-check-circle'></i> Filtrar por Estado (Opcional)</label>
-                            <select id="exportar-estado" name="estado_filtro" class="campo-select">
-                                <option value="todos" selected>Todos (Activos y Vencidos)</option>
-                                <option value="activo">Solo Activos</option>
-                                <option value="proximo_vencer">Próximos a Vencer (ej: 3 meses)</option>
-                                <option value="vencido">Solo Vencidos</option>
-                            </select>
-                        </div>
-            
-                    </div> <!-- Fin opciones-exportacion -->
-            
-                    <div class="acciones-formulario">
-                        <button type="submit" class="boton boton-primario" id="boton-exportar">
-                            <i class='bx bx-download'></i> Generar y Descargar
-                        </button>
-                        <!-- Podrías añadir un botón de limpiar filtros si quieres -->
-                        <!-- <button type="reset" class="boton boton-secundario">Limpiar Filtros</button> -->
+                    <div class="content-area">
+            <div class="medication-management-container">
+                <div class="page-header">
+                    <h2 class="view-title">
+                        <i class='bx bxs-capsule-alt'></i>
+                        Modificar dieta: <span id="medication-name-title">Celíacos</span>
+                    </h2>
+                    <a href="listado-dietas.html" class="btn btn-outline-secondary back-to-inventory">
+                        <i class='bx bx-arrow-back'></i> Volver al listado de dietas
+                    </a>
+                </div>
+
+                <div class="management-grid">
+                    <!-- Sección 1: Detalles del Medicamento (Vencimiento General Removido) -->
+                    <div class="form-section card">
+                        <h3 class="section-title"><i class='bx bx-edit-alt'></i> Detalles de la dieta</h3>
+                        <form id="edit-medication-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="med-nombre"><i class='bx bx-rename'></i> Nombre</label>
+                                    <input type="text" id="med-nombre" name="nombre" class="form-input" value="Celíacos" required>
+                                </div>
+                                <div class="form-group form-group-full">
+                                    <label for="med-descripcion"><i class='bx bx-detail'></i>Descripción de la dieta</label>
+                                    <textarea id="med-descripcion" name="descripcion" class="form-textarea" rows="3">Comida energética. Proporciona carbohidratos de absorción lenta y proteínas si incluye carne.</textarea>
+                                </div>
+                <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Guardar Cambios</button>
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('edit-medication-form').reset();">
+                            <i class='bx bx-undo'></i> Deshacer Cambios
+                </button>
+                <!-- Sección 4: Acciones Adicionales (Solo Eliminar) -->
+                <div class="additional-actions-section card">
+                    <h3 class="section-title"><i class='bx bx-trash'></i> Eliminar Dieta</h3>
+                    <div class="action-buttons-group">
+                        <button class="btn btn-danger full-width-mobile"><i class='bx bx-trash-alt'></i> Eliminar Permanentemente esta dieta</button>
                     </div>
-            
-                </form>
-            </div>
+                    <p class="action-note"><strong>Eliminar:</strong> Borra permanentemente la dieta. Esta acción es irreversible y solo debe realizarse si la dieta ya no se utilizará.</p>
+                </div>
+
+            </div> <!-- Cierre de .medication-management-container -->
+
+
+        </div> <!-- Cierre de .content-area -->
         </div>
-        <!--====================================================================================================-->
-        <!--====================================================================================================-->
-        <!--====================================================================================================-->
     </div>
   </div>
   

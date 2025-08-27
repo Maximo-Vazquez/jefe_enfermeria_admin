@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/sidebar.css" />
     <link rel="stylesheet" href="css/base.css" />
+  <style>
 
-
-    <link rel="stylesheet" href="css/inventario/exportar.css" />
+  </style>
 
 </head>
 <body>
@@ -23,7 +23,6 @@
         <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div style="display: flex; align-items: center;">
-            <img src="img/logo.png" alt="CS2 Investment" class="logo" />
             <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
             </div>
         </div>
@@ -145,79 +144,12 @@
           
         <!-- Contenido Principal -->
         <div class="content-area">
-            <div class="contenedor-exportar panel"> <!-- Usamos 'panel' para un estilo consistente si lo tienes -->
-                <h3 class="titulo-seccion">
-                    <i class='bx bxs-file-export'></i> Exportar Inventario
-                </h3>
-            
-                <form id="form-exportar-inventario" action="/ruta/para/exportar" method="GET"> <!-- GET es común para descargas/exportaciones si los filtros van en URL -->
-            
-                    <div class="opciones-exportacion">
-            
-                        <!-- 1. Selección de Formato (Obligatorio) -->
-                        <div class="grupo-campo">
-                            <label for="exportar-formato"><i class='bx bx-extension'></i> Formato de Archivo</label>
-                            <select id="exportar-formato" name="formato" class="campo-select" required>
-                                <option value="" disabled selected>Seleccione formato...</option>
-                                <option value="pdf">PDF (.pdf)</option>
-                                <option value="excel">Excel (.xlsx)</option>
-                                <!-- Podrías añadir CSV si es relevante -->
-                                <!-- <option value="csv">CSV (.csv)</option> -->
-                            </select>
-                        </div>
-            
-                        <!-- 2. Filtro por Categoría (Opcional) -->
-                        <div class="grupo-campo">
-                            <label for="exportar-categoria"><i class='bx bx-category-alt'></i> Filtrar por Categoría (Opcional)</label>
-                            <select id="exportar-categoria" name="categoria_filtro" class="campo-select">
-                                <option value="todos" selected>Todas las categorías</option>
-                                <!-- Aquí deberías cargar dinámicamente tus categorías reales -->
-                                <option value="analgesicos">Analgésicos</option>
-                                <option value="antibioticos">Antibióticos</option>
-                                <option value="vitaminas">Vitaminas</option>
-                                <option value="otros">Otros</option>
-                            </select>
-                        </div>
-            
-                         <!-- 3. Filtro por Ubicación (Opcional) -->
-                        <div class="grupo-campo">
-                            <label for="exportar-ubicacion"><i class='bx bx-map-pin'></i> Filtrar por Ubicación (Opcional)</label>
-                            <select id="exportar-ubicacion" name="ubicacion_filtro" class="campo-select">
-                                <option value="todas" selected>Todas las ubicaciones</option>
-                                <!-- Aquí deberías cargar dinámicamente tus ubicaciones reales -->
-                                <option value="estante_a1">Estante A1</option>
-                                <option value="estante_b1">Estante B1</option>
-                                <option value="nevera_1">Nevera 1</option>
-                            </select>
-                        </div>
-            
-                         <!-- 4. Filtro por Estado (Opcional) -->
-                         <div class="grupo-campo">
-                            <label for="exportar-estado"><i class='bx bx-check-circle'></i> Filtrar por Estado (Opcional)</label>
-                            <select id="exportar-estado" name="estado_filtro" class="campo-select">
-                                <option value="todos" selected>Todos (Activos y Vencidos)</option>
-                                <option value="activo">Solo Activos</option>
-                                <option value="proximo_vencer">Próximos a Vencer (ej: 3 meses)</option>
-                                <option value="vencido">Solo Vencidos</option>
-                            </select>
-                        </div>
-            
-                    </div> <!-- Fin opciones-exportacion -->
-            
-                    <div class="acciones-formulario">
-                        <button type="submit" class="boton boton-primario" id="boton-exportar">
-                            <i class='bx bx-download'></i> Generar y Descargar
-                        </button>
-                        <!-- Podrías añadir un botón de limpiar filtros si quieres -->
-                        <!-- <button type="reset" class="boton boton-secundario">Limpiar Filtros</button> -->
-                    </div>
-            
-                </form>
-            </div>
+        <div class="welcome-banner" style="display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 40px; text-align: center;">
+            <i class='bx bxs-first-aid' style="font-size: 80px; color: #ff9800; margin-bottom: 20px;"></i>
+            <h1 style="font-size: 32px; color: #333;">¡Bienvenida, jefe de Enfermeria!</h1>
+            <p style="font-size: 18px; color: #666;">Lista para un maravilloso dia!</p>
         </div>
-        <!--====================================================================================================-->
-        <!--====================================================================================================-->
-        <!--====================================================================================================-->
+        </div>
     </div>
   </div>
   
