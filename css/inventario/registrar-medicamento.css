@@ -1,78 +1,106 @@
 /* Re-use variables if not already defined globally */
 :root {
-    --primary-color: #6a5acd; /* Purple/Blue from reference buttons */
+    --primary-color: #6a5acd;
     --primary-light: #e8e6f8;
     --text-color: #333;
     --text-muted: #6c757d;
     --border-color: #dee2e6;
-    --background-color: #f8f9fa; /* Light background */
+    --background-color: #f8f9fa;
     --card-bg: #ffffff;
     --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     --border-radius: 8px;
     --input-bg: #ffffff;
-    --input-focus-border: #8a7ff0; /* Lighter purple for focus */
+    --input-focus-border: #8a7ff0;
 }
 
-/* General Form Container Styling (Card-like) */
+/* General Form Container Styling */
 .form-container {
     background-color: var(--card-bg);
-    padding: 25px 30px; /* More padding for forms */
+    padding: 25px 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    margin: 20px; /* Consistent margin */
+    margin: 20px;
 }
 
-/* Title Style */
-.view-title {
-    font-size: 1.6rem; /* Slightly smaller for form title */
+/* Title Style - Scoped to form-container */
+.form-container .view-title {
+    font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 25px;
     color: var(--text-color);
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between icon and text */
+    gap: 10px;
 }
-.view-title i {
-    color: var(--primary-color); /* Match icon color to primary */
+.form-container .view-title i {
+    color: var(--primary-color);
     font-size: 1.8rem;
 }
 
 
-/* Form Grid Layout */
+/* ==================================================================== */
+/* =========== INICIO DE MODIFICACIONES DE LA GRILLA (LAYOUT) =========== */
+/* ==================================================================== */
+
+/* PASO 1: Usamos una grilla de 12 columnas para máxima flexibilidad. */
 .form-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Default to 2 columns */
-    gap: 20px 25px; /* Row gap, Column gap */
-    margin-bottom: 30px; /* Space before action buttons */
+    grid-template-columns: repeat(12, 1fr); /* 12 columnas */
+    gap: 20px 25px;
+    margin-bottom: 30px;
 }
 
-/* Form Group Styling */
-.form-group {
+.form-grid .form-group {
     display: flex;
     flex-direction: column;
 }
 
-/* Make Description span full width */
+/* PASO 2: Asignamos el ancho (span) a cada campo según su contenido. */
+
+/* Fila 1: Nombre (más ancho) + Graduación */
+.form-grid .form-group:nth-child(1) { grid-column: span 7; } /* Nombre */
+.form-grid .form-group:nth-child(2) { grid-column: span 5; } /* Graduación */
+
+/* Fila 2: Código + Categoría */
+.form-grid .form-group:nth-child(3) { grid-column: span 6; } /* Código */
+.form-grid .form-group:nth-child(4) { grid-column: span 6; } /* Categoría */
+
+/* Fila 3: Cantidad (chico) + Unidad (chico/medio) + Vencimiento (medio) */
+.form-grid .form-group:nth-child(5) { grid-column: span 3; } /* Cantidad */
+.form-grid .form-group:nth-child(6) { grid-column: span 4; } /* Unidad Presentación */
+.form-grid .form-group:nth-child(7) { grid-column: span 5; } /* Vencimiento */
+
+/* Fila 4: Tres campos de selección juntos para ahorrar espacio */
+.form-grid .form-group:nth-child(8) { grid-column: span 4; } /* Ubicación */
+.form-grid .form-group:nth-child(9) { grid-column: span 4; } /* Proveedor */
+.form-grid .form-group:nth-child(10) { grid-column: span 4; } /* Laboratorio */
+
+
+/* Fila 5: Descripción sigue ocupando el ancho completo */
 .form-group.form-group-full {
-    grid-column: 1 / -1; /* Span all columns */
+    grid-column: 1 / -1; /* Esto funciona con cualquier número de columnas */
 }
+
+/* ================================================================== */
+/* =========== FIN DE MODIFICACIONES DE LA GRILLA (LAYOUT) ============ */
+/* ================================================================== */
+
 
 /* Label Styling */
 .form-group label {
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--text-muted);
-    margin-bottom: 8px; /* Space between label and input */
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
-    gap: 6px; /* Space between icon and label text */
+    gap: 6px;
 }
 .form-group label i {
-    font-size: 1.1rem; /* Icon size in labels */
+    font-size: 1.1rem;
 }
 
-
-/* General Input Styling (Text, Number, Date, Select, Textarea) */
+/* General Input Styling */
 .form-input,
 .form-select,
 .form-textarea {
@@ -84,7 +112,7 @@
     background-color: var(--input-bg);
     color: var(--text-color);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    box-sizing: border-box; /* Include padding/border in element's total width/height */
+    box-sizing: border-box;
 }
 
 .form-input::placeholder,
@@ -98,51 +126,45 @@
 .form-textarea:focus {
     outline: none;
     border-color: var(--input-focus-border);
-    box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.2); /* Subtle glow matching primary color */
+    box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.2);
 }
 
 /* Select Specific Styling */
 .form-select {
-    appearance: none; /* Remove default arrow */
-    -webkit-appearance: none; /* Safari */
-    -moz-appearance: none; /* Firefox */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%236c757d' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E"); /* Custom arrow */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%236c757d' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 1em;
-    padding-right: 35px; /* Make space for the arrow */
+    padding-right: 35px;
 }
 .form-select:required:invalid {
-     color: var(--text-muted); /* Style placeholder option */
+    color: var(--text-muted);
 }
 
 /* Textarea Specific Styling */
 .form-textarea {
-    resize: vertical; /* Allow vertical resize only */
+    resize: vertical;
     min-height: 80px;
 }
 
-/* --- NUEVOS ESTILOS PARA GRADUACIÓN/DOSIS INLINE --- */
-
-/* Estilo para agrupar el valor numérico y la unidad de la graduación */
 .input-group-inline {
     display: flex;
-    gap: 10px; /* Espacio entre el número y la unidad */
-    align-items: stretch; /* Asegura que ambos tengan la misma altura */
+    gap: 10px;
+    align-items: stretch;
 }
 
-/* Ajustes para los inputs dentro del grupo inline */
 .input-group-inline .form-input,
 .input-group-inline .form-select {
-    width: auto; /* Quitamos el width: 100% que podrían heredar */
-    flex-grow: 1; /* Permite que crezcan para llenar el espacio */
-    margin-bottom: 0; /* Evita doble margen si el form-group tiene uno */
+    width: auto;
+    flex-grow: 1;
+    margin-bottom: 0;
 }
 
-/* Damos más espacio al campo numérico y menos al selector de unidad */
 .input-group-inline .form-input[type="number"] {
-    flex-basis: 65%; /* Ocupa aproximadamente el 65% del espacio */
-    /* Opcional: Ocultar flechas de incremento/decremento en input number */
+    flex-basis: 65%;
     -moz-appearance: textfield;
 }
 .input-group-inline .form-input[type="number"]::-webkit-outer-spin-button,
@@ -152,28 +174,25 @@
 }
 
 .input-group-inline .form-select {
-    flex-basis: 35%; /* Ocupa aproximadamente el 35% del espacio */
-    min-width: 80px; /* Asegura un ancho mínimo para que se lea la unidad */
-    padding-right: 30px; /* Un poco menos de padding para el icono de flecha */
-    background-position: right 8px center; /* Ajusta posición del icono de flecha */
+    flex-basis: 35%;
+    min-width: 80px;
+    padding-right: 30px;
+    background-position: right 8px center;
 }
-
-/* --- FIN DE NUEVOS ESTILOS --- */
-
 
 /* Form Actions (Button container) */
 .form-actions {
     display: flex;
-    justify-content: flex-end; /* Align buttons to the right */
+    justify-content: flex-end;
     gap: 12px;
     padding-top: 20px;
-    border-top: 1px solid var(--border-color); /* Separator line */
-    margin-top: 10px; /* Align with grid bottom margin */
+    border-top: 1px solid var(--border-color);
+    margin-top: 10px;
 }
 
-/* Asumiendo estilos de botones genéricos (si no los tienes, añádelos) */
-.btn {
-    display: inline-flex; /* Para alinear icono y texto */
+/* Scoped button styles */
+.form-actions .btn {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 10px 18px;
@@ -183,81 +202,54 @@
     border: 1px solid transparent;
     cursor: pointer;
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-    text-decoration: none; /* Para enlaces que parecen botones */
-    white-space: nowrap; /* Evita que el texto del botón se rompa */
+    text-decoration: none;
+    white-space: nowrap;
 }
 
-.btn i {
+.form-actions .btn i {
     margin-right: 6px;
     font-size: 1.1em;
-    /* vertical-align: middle; No es necesario con flex */
 }
 
-.btn-primary {
+.form-actions .btn-primary {
     background-color: var(--primary-color);
     color: #ffffff;
     border-color: var(--primary-color);
 }
-.btn-primary:hover {
-    background-color: #584ab3; /* Slightly darker purple */
+.form-actions .btn-primary:hover {
+    background-color: #584ab3;
     border-color: #584ab3;
 }
 
-.btn-secondary {
-    background-color: #6c757d; /* Grey */
+.form-actions .btn-secondary {
+    background-color: #6c757d;
     color: #ffffff;
     border-color: #6c757d;
 }
-.btn-secondary:hover {
+.form-actions .btn-secondary:hover {
     background-color: #5a6268;
     border-color: #545b62;
 }
-/* Puedes añadir :focus styles también */
-.btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.3); /* Similar al focus del input */
-}
-.btn-secondary:focus {
-     box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.4); /* Sombra gris */
-}
-
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
+    /* En tablets, podemos pasar a 2 columnas para que no se apriete tanto */
     .form-grid {
-        grid-template-columns: 1fr; /* Stack columns on smaller screens */
-        gap: 15px; /* Reduce gap */
+        grid-template-columns: repeat(2, 1fr);
     }
+    /* Hacemos que todos los campos ocupen una columna de la grilla de 2 */
+    .form-grid .form-group {
+        grid-column: span 1;
+    }
+}
 
-    .form-container {
-        padding: 20px;
-    }
 
-    .view-title {
-        font-size: 1.4rem;
-        margin-bottom: 20px;
+@media (max-width: 768px) {
+    /* En móviles, apilamos todo en 1 columna */
+    .form-grid {
+        grid-template-columns: 1fr;
     }
-
-    /* Asegurarse que el grupo inline se mantenga en una fila si hay espacio */
-    /* Si quieres que se apile también en móvil, añade reglas aquí */
-    /* Por ejemplo:
-    .input-group-inline {
-        flex-direction: column;
-        gap: 5px;
-    }
-    .input-group-inline .form-input,
-    .input-group-inline .form-select {
-        flex-basis: auto;
-        width: 100%;
-        min-width: none;
-    }
-    */
-
-    .form-actions {
-        flex-direction: column; /* Stack buttons vertically */
-        gap: 10px;
-    }
-    .form-actions button {
-        width: 100%; /* Make buttons full width */
+    .form-grid .form-group {
+        grid-column: span 1;
     }
 }
