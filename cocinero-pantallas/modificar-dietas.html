@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administracion</title>
-  <!-- Boxicons CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/sidebar.css" />
     <link rel="stylesheet" href="css/base.css" />
@@ -19,11 +18,7 @@
 </head>
 <body>
   <div class="container">
-    <!-- En vez de incluir directamente -->
-    <!-- sidebar.html -->
-
-
-        <div class="sidebar" id="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div style="display: flex; align-items: center;">
             <span style="font-size: 20px; font-weight: 600; margin-left: 10px; color: #1a73e8;">ElderCare</span>
@@ -55,7 +50,6 @@
                     <span>Tratamientos por Residente</span>
                 </a>
             </div>
-            <!-- Sección de Pedidos y Ventas -->
             <div class="menu-item has-submenu" onclick="toggleSubmenu(this)">
                 <i class='bx bx-bar-chart'></i>
                 <span>Informes</span>
@@ -130,9 +124,7 @@
               <div class="page-title-nav"> Administracion</div>
               <span class="role-badge-nav">Cocineros</span>
             </div>
-            <!-- Acciones de la barra de navegación superior -->
             <div class="header-action-list">
-                <!-- ========  Cerrar sesión (POST)  ======== -->
                 <form id="logout-form" action=""  method="post" style="display:inline;">
 
                   <button type="submit" class="action-btn logout-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
@@ -140,19 +132,17 @@
                     <span>Cerrar sesión</span>
                   </button>
                 </form>
-      
+    
 
-              </div>
+            </div>
         </div>
-          
-        <!-- Contenido Principal -->
+        
         <div class="content-area">
-                    <div class="content-area">
+                      <div class="content-area">
             <div class="medication-management-container">
                 <div class="page-header">
                     <h2 class="view-title">
-                        <i class='bx bxs-capsule-alt'></i>
-                        Modificar dieta: <span id="medication-name-title">Celíacos</span>
+                        <i class='bx bxs-capsule-alt'></i> Modificar dieta: <span id="medication-name-title">Celíacos</span>
                     </h2>
                     <a href="listado-dietas.html" class="btn btn-outline-secondary back-to-inventory">
                         <i class='bx bx-arrow-back'></i> Volver al listado de dietas
@@ -160,7 +150,6 @@
                 </div>
 
                 <div class="management-grid">
-                    <!-- Sección 1: Detalles del Medicamento (Vencimiento General Removido) -->
                     <div class="form-section card">
                         <h3 class="section-title"><i class='bx bx-edit-alt'></i> Detalles de la dieta</h3>
                         <form id="edit-medication-form">
@@ -173,24 +162,25 @@
                                     <label for="med-descripcion"><i class='bx bx-detail'></i>Descripción de la dieta</label>
                                     <textarea id="med-descripcion" name="descripcion" class="form-textarea" rows="3">Comida energética. Proporciona carbohidratos de absorción lenta y proteínas si incluye carne.</textarea>
                                 </div>
-                <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Guardar Cambios</button>
-                <button type="button" class="btn btn-secondary" onclick="document.getElementById('edit-medication-form').reset();">
-                            <i class='bx bx-undo'></i> Deshacer Cambios
-                </button>
-                <!-- Sección 4: Acciones Adicionales (Solo Eliminar) -->
-                <div class="additional-actions-section card">
-                    <h3 class="section-title"><i class='bx bx-trash'></i> Eliminar Dieta</h3>
-                    <div class="action-buttons-group">
-                        <button class="btn btn-danger full-width-mobile"><i class='bx bx-trash-alt'></i> Eliminar Permanentemente esta dieta</button>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('edit-medication-form').reset();">
+                                    <i class='bx bx-undo'></i> Deshacer Cambios
+                                </button>
+                                <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Guardar Cambios</button>
+                            </div>
+                        </form>
                     </div>
-                    <p class="action-note"><strong>Eliminar:</strong> Borra permanentemente la dieta. Esta acción es irreversible y solo debe realizarse si la dieta ya no se utilizará.</p>
-                </div>
 
-            </div> <!-- Cierre de .medication-management-container -->
-
-
-        </div> <!-- Cierre de .content-area -->
-        </div>
+                    <div class="additional-actions-section card">
+                        <h3 class="section-title"><i class='bx bx-trash'></i> Eliminar Dieta</h3>
+                        <div class="action-buttons-group">
+                            <button class="btn btn-danger"><i class='bx bx-trash-alt'></i> Eliminar Permanentemente esta dieta</button>
+                        </div>
+                        <p class="action-note"><strong>Eliminar:</strong> Borra permanentemente la dieta. Esta acción es irreversible y solo debe realizarse si la dieta ya no se utilizará.</p>
+                    </div>
+                </div> </div> </div> </div>
     </div>
   </div>
   

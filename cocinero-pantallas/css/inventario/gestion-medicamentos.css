@@ -154,17 +154,13 @@ body {
     min-height: 80px;
 }
 
-.ingredient-item {
+/* CORRECTED: Removed duplicated nested class */
 .ingredient-item {
   display: flex;
   gap: 12px; /* espacio horizontal entre ellos */
   align-items: center;
   margin-bottom: 8px; /* espacio entre filas */
 }
-
-}
-
-
 
 /* Input Group Inline (for Dosis/Graduación) */
 .input-group-inline {
@@ -303,8 +299,8 @@ body {
 /* Styles for Medication Management Page Specifics */
 .medication-management-container {
     /*padding: 20px;
-    max-width: 1300px;
-    margin: 0 auto;*/
+     max-width: 1300px;
+     margin: 0 auto;*/
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -699,15 +695,17 @@ body {
     .additional-actions-section .action-buttons-group {
         flex-direction: column;
     }
-    .btn-danger.full-width-mobile,
-    .additional-actions-section .action-buttons-group .btn { /* Ensure buttons in this group are full width */
+    /* This rule makes buttons in the "delete" section full-width on mobile */
+    .additional-actions-section .action-buttons-group .btn { 
         width: 100%;
     }
     
-    .form-actions { /* General form actions stacking */
+    /* General form actions stacking */
+    .form-actions { 
         flex-direction: column;
         gap: 10px;
     }
+    /* This makes the save/cancel buttons full-width on mobile for easier tapping */
     .form-actions .btn {
         width: 100%;
     }
